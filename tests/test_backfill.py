@@ -324,6 +324,33 @@ class GuardTests(unittest.TestCase):
         shifted = reference.assign(date=reference.date + pd.offsets.BDay(1))  # one-session misalignment
         self.assertFalse(cross_check(shifted, reference)["ok"])
 
+    def test_failed_cross_check_falls_back_to_yahoo_and_is_recorded(self):
+        from backfill import prices
+
+        days = pd.bdate_range("2013-01-02", periods=300)
+        rng = np.random.default_rng(2)
+
+        def series(n=len(days)):
+            close = 100 * np.cumprod(1 + rng.normal(0, 0.01, n))
+            return pd.DataFrame(dict(date=days[:n], open=close, high=close * 1.01, low=close * 0.99, close=close,
+                                     adj_close=close, volume=1000.0, dividends=0.0, splits=0.0))[COLUMNS]
+
+        yahoo = {s: series() for s in ["GOOD", "GAPPY", "SPY", "^GSPC"]}
+        webull = {"GOOD": yahoo["GOOD"], "SPY": yahoo["SPY"], "GAPPY": yahoo["GAPPY"].iloc[::4].reset_index(drop=True)}
+        events = pd.DataFrame(dict(ticker=["GOOD", "GAPPY"], country="US", benchmark="SPY"))
+        with tempfile.TemporaryDirectory() as tmp, \
+                patch.object(prices, "webull_client", return_value=object()), \
+                patch.object(prices, "fetch_webull", side_effect=lambda c, s, a, b: webull[s]), \
+                patch.object(prices, "fetch_yahoo", side_effect=lambda s, a, b: yahoo[s]):
+            manifest = prices.fetch_cache(events, Path(tmp) / "cache", start="2013-01-01", end="2014-03-01")
+        entries = manifest["symbols"]
+        self.assertEqual(entries["GOOD"]["vendor"], "webull")
+        self.assertTrue(entries["GOOD"]["cross_check"]["ok"])
+        self.assertEqual(entries["GAPPY"]["vendor"], "yfinance")
+        self.assertIn("failed cross-check", entries["GAPPY"]["fallback_reason"])
+        self.assertEqual(entries["^GSPC"]["vendor"], "yfinance")  # indices are never Webull
+        self.assertEqual(manifest["failures"], [])
+
     def test_holdout_is_always_primary_and_other_variants_are_only_disclosed(self):
         from backfill.selection import choose
 

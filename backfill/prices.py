@@ -194,8 +194,9 @@ def fetch_cache(events, directory, *, start="2013-01-01", end="2024-10-01", excl
 
     An exclusion is an operator-supplied reason, never an automatic response to
     bad subsequent returns or missing exit prices. Failing downloads abort.
-    A failed Webull/Yahoo cross-check is recorded as a failure, so no backtest
-    can run on a series that disagrees with the reference until it is reviewed.
+    A Webull series that fails the Yahoo cross-check (missing sessions or
+    mismatched daily moves) is replaced by the Yahoo series, with the check
+    and reason recorded in the manifest.
     """
     import yfinance as yf
 
@@ -244,12 +245,17 @@ def fetch_cache(events, directory, *, start="2013-01-01", end="2024-10-01", excl
                 except Exception as exc:
                     fallback_reason = str(exc)[:300]
             if source == "webull":
+                reference = None
                 try:
-                    check = cross_check(bars, fetch_yahoo(symbol, start, end))
+                    reference = fetch_yahoo(symbol, start, end)
+                    check = cross_check(bars, reference)
                 except Exception as exc:
                     check = dict(ok=None, note=f"no Yahoo reference: {str(exc)[:200]}")
                 if check.get("ok") is False:
-                    raise ValueError(f"Webull series disagrees with Yahoo reference: {check}")
+                    # A Webull series with missing sessions or mismatched moves is replaced by the
+                    # reference, and the reason is recorded; it is never silently used or dropped.
+                    bars, source = reference, "yfinance"
+                    fallback_reason = f"Webull series failed cross-check: {check}"
             else:
                 bars = fetch_yahoo(symbol, start, end)
             dates = pd.to_datetime(bars.date)
