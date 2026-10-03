@@ -1,6 +1,6 @@
 """Step 3: parse archived FDA Drug Shortages main pages into a status panel and shortage events.
 
-Reads data/raw/main/{timestamp}.html. Each page has two lists we use:
+Reads data/raw/main/{YYYY}/{timestamp}.html. Each page has two lists we use:
   - status table: Current / Resolved shortages (first table with st=c or st=r detail links)
   - discontinuations table (first other table with st=d detail links)
 The therapeutic-category tabs repeat the same products and are never parsed.
@@ -169,7 +169,7 @@ def parse_rows(table, snapshot_date, from_status_table: bool, warnings: list):
 def parse_all(final: bool):
     rows, pages, warnings = [], [], []
     n_test = 0
-    files = sorted(RAW.glob("*.html"))
+    files = sorted(RAW.rglob("*.html"), key=lambda f: f.name)  # data/raw/main/{YYYY}/
     held_out = 0
     for f in files:
         snapshot_date = pd.to_datetime(f.stem[:8], format="%Y%m%d")
