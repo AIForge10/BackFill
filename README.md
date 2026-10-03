@@ -25,15 +25,23 @@ against their market index. The hypothesis, pre-registered before any
 backtest, is in [`HYPOTHESIS.md`](HYPOTHESIS.md).
 
 ```bash
-uv sync && uv run python examples/backtest/main.py
+uv sync
+uv run python run_all.py --prepare-only
+uv run python -m unittest discover -s tests -v
 ```
 
 > [!WARNING]
 > Everything dated on or after **2024-10-01** is the out-of-sample
-> holdout. The backtest runner refuses those dates unless
-> `WEBULL_ALLOW_OOS=true`, and the pipeline scripts skip them unless you
-> pass `--final`. That run happens once, at the end, and only Aaryan
-> runs it.
+> holdout. The new offline research runner requires a clean `freeze-oos`
+> tag, frozen selection and one-attempt lock for `--final`. That run happens
+> once, at the end, and only Aaryan runs it. The Webull example retains its
+> separate original environment-based guard.
+
+The primary research entry point is now a small **pandas lot engine**. Read
+[`docs/BACKFILL.md`](docs/BACKFILL.md) for the module boundaries, precise rules,
+remaining methodological limitations and offline workflow. Acquire prices
+explicitly with `src/06_prices.py`; `run_all.py` never accesses a vendor.
+The Webull/backtrader examples are preserved as the sponsor demonstration.
 
 ## Why use Backfill?
 
@@ -57,7 +65,7 @@ Wayback CDX  →  fetch (1 req/s)  →  parse main list  →  shortage_events.cs
                                   →  parse detail pages →  suppliers.csv
                                      (04_parse_details)    (6,384 company rows)
                                                               ↓
-company_ticker_map.csv  →  events → positions (05, next)  →  backtest runner
+company_ticker_map.csv  →  evidence + attrition (05)  →  cached-price lot engine
 ```
 
 ---
@@ -66,6 +74,8 @@ company_ticker_map.csv  →  events → positions (05, next)  →  backtest runn
 
 - **[`HYPOTHESIS.md`](HYPOTHESIS.md)** — the pre-registered claim,
   definitions, test rules and in-sample/out-of-sample split.
+- **[`docs/BACKFILL.md`](docs/BACKFILL.md)** — the new primary strategy,
+  cached-price pandas engine, synthetic tests, audits and extension points.
 - **[`docs/USAGE_EN.md`](docs/USAGE_EN.md)** — the Webull backtest kit:
   credentials, every `.env` setting, report output.
 
@@ -80,14 +90,20 @@ Gator_Hacks/
 │   ├── 01_wayback_index.py  CDX index + coverage table (gaps across years)
 │   ├── 02_fetch.py          polite resumable download (--years, --shard, --only-needed)
 │   ├── 03_parse_main.py     list pages → main_status.csv, shortage_events.csv
-│   └── 04_parse_details.py  detail pages → suppliers.csv (rule-tagged availability)
+│   ├── 04_parse_details.py  detail pages → suppliers.csv (rule-tagged availability)
+│   ├── 05_events.py         point-in-time evidence ledger + attrition
+│   └── 06_prices.py         explicit price acquisition (Webull for US, yfinance fallback) + immutable manifest
+├── strategies/backfill.py  pure primary signal selection
+├── backfill/               settings, evidence, cache, lot engine, analysis, guards
+├── tests/                  synthetic accounting and point-in-time regression cases
+├── run_all.py              offline research orchestration
 ├── data/
 │   ├── company_ticker_map.csv   supplier regex → listed parent, listing windows
 │   ├── processed/           derived FDA tables, committed (indexes, events, suppliers)
 │   └── raw/{main,detail}/YYYY/   Wayback HTML cache by year, gitignored
 ├── examples/
 │   ├── backtest/main.py     backtest runner (Webull data, holdout lock, run log)
-│   └── strategies/          one file per strategy; branches work only here
+│   └── strategies/          preserved sponsor/demo specifications
 ├── webull_bt/               Webull data feed + broker library for backtrader
 ├── results/                 variants_log.csv (every run) + one folder per run
 ├── research/                quick tests run before pre-registration (disclosed)
@@ -132,7 +148,7 @@ cp examples/backtest/.env.example examples/backtest/.env
 
 **Never commit this file.** It's covered by `**/.env` in `.gitignore`.
 
-### 3. Run a backtest (in-sample)
+### 3. Run the sponsor demo (in-sample)
 
 ```bash
 uv run python examples/backtest/main.py
@@ -146,8 +162,9 @@ note discloses every variant tried.
 
 The derived FDA tables in `data/processed/` are committed. They come from
 public-domain US government pages, so you don't need to rebuild them.
-The raw HTML is not committed, and prices are never stored: they come
-from Webull when the backtest runs. To rebuild from scratch, run these
+The raw HTML and price caches are not committed. The primary engine reads
+an explicitly acquired immutable cache; only the separate sponsor demo uses
+live Webull fetching. To rebuild the FDA data from scratch, run these
 in order. Raw pages go to `data/raw/{main,detail}/YYYY/`, one folder per
 capture year, so a team can fetch different years in parallel and merge
 by copying folders. `--workers 8` keeps several requests in flight while
@@ -185,13 +202,18 @@ All fetches are resumable: re-running skips files already on disk, and
   rows are unmapped, for example West-Ward (now Hikma), Akorn, AuroMedics
   and AbbVie. Extending `data/company_ticker_map.csv` is the cheapest way
   to grow the sample.
-- **Webull data is US-only.** Winners listed abroad (FRE.DE, HIK.L,
-  SDZ.SW, .NS names) need yfinance prices, or the test is restricted to
-  US-listed names and the restriction disclosed.
-- **Events → positions (`src/05_events.py`) isn't built yet.** The
-  strategy reads `data/events.csv` (`event_date, drug, ticker, side`),
-  which doesn't exist yet.
-- **The strategy kit doesn't match the pre-registration yet.**
+- **The primary test covers US listings only.** Webull, the sponsor data
+  source, serves US listings, so the primary has 25 events and 27 winner
+  positions. Non-US winners (FRE.DE, HIK.L, .NS names) are the declared
+  `all_markets` variant, priced from yfinance.
+- **Delisted owners may have no prices.** MYL (Mylan, before Viatris) and HSP
+  (Hospira, before Pfizer) are 7 of the 27 US winner positions, and Yahoo has
+  no history for either. Unless Webull serves them, they're excluded and
+  disclosed (`06_prices.py --exclude`), never silently remapped.
+- **The initial controls are FDA-page nonlisted generic makers.** They
+  are not verified nonmanufacturers. Strict product-absence evidence and
+  matching remain extensions; the current comparison discloses this limitation.
+- **The separate sponsor strategy doesn't match the primary.**
   `examples/strategies/shortage_events.py` defaults to a 40-day hold,
   shorts disrupted companies, hedges everything with XLV and uses 15 bp
   costs. `HYPOTHESIS.md` specifies 60 days, long winners only, a
