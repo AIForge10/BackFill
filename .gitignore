@@ -32,3 +32,5 @@ data/raw/
 PLAN.md
 HANDOFF.md
 *.ipynb_checkpoints
+# Built by src/ from public archives; rebuild instead of committing
+data/processed/
