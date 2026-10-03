@@ -83,8 +83,8 @@ Gator_Hacks/
 │   └── 04_parse_details.py  detail pages → suppliers.csv (rule-tagged availability)
 ├── data/
 │   ├── company_ticker_map.csv   supplier regex → listed parent, listing windows
-│   ├── processed/           built by src/ (indexes, events, suppliers, logs), gitignored
-│   └── raw/                 Wayback HTML cache, gitignored (~140 MB)
+│   ├── processed/           derived FDA tables, committed (indexes, events, suppliers)
+│   └── raw/{main,detail}/YYYY/   Wayback HTML cache by year, gitignored
 ├── examples/
 │   ├── backtest/main.py     backtest runner (Webull data, holdout lock, run log)
 │   └── strategies/          one file per strategy; branches work only here
@@ -144,15 +144,19 @@ note discloses every variant tried.
 
 ## Building the data
 
-No data is committed. The FDA pages are rebuilt from the Wayback Machine,
-and prices come from Webull when the backtest runs. Run these once, in
-order, before the first backtest. The full build takes about 4 hours
-because Wayback is fetched at about 1 request per second.
+The derived FDA tables in `data/processed/` are committed. They come from
+public-domain US government pages, so you don't need to rebuild them.
+The raw HTML is not committed, and prices are never stored: they come
+from Webull when the backtest runs. To rebuild from scratch, run these
+in order. Raw pages go to `data/raw/{main,detail}/YYYY/`, one folder per
+capture year, so a team can fetch different years in parallel and merge
+by copying folders. `--workers 8` keeps several requests in flight while
+staying at 1 request per second.
 
 | Command | What it does |
 |---|---|
 | `uv run python src/01_wayback_index.py` | Lists every capture; writes `index_*.csv` and `coverage_main.csv` |
-| `uv run python src/02_fetch.py --which main --years 2014-2024` | One main-page snapshot per ISO week |
+| `uv run python src/02_fetch.py --which main --years 2014-2024 --workers 8` | One main-page snapshot per ISO week |
 | `uv run python src/03_parse_main.py` | Status panel and shortage events with flags |
 | `uv run python src/02_fetch.py --only-needed` | For each event, the detail capture on or before `public_date + 7d`, plus a backup |
 | `uv run python src/04_parse_details.py` | Company × presentation rows with `availability` |
@@ -173,9 +177,10 @@ All fetches are resumable: re-running skips files already on disk, and
   have an "Available" supplier the seed ticker map can trade. 2017–2018
   contribute almost nothing because the archive barely crawled detail
   pages then.
-- **Reproduction needs the Wayback Machine online.** The archive was
-  "Temporarily Offline" once during development. If that happens, wait
-  and re-run: every fetch is resumable.
+- **A rebuild from scratch needs the Wayback Machine online.** The
+  committed tables avoid this for normal use. The archive was
+  "Temporarily Offline" once during development; if it happens, wait and
+  re-run, because every fetch is resumable.
 - **The ticker map is incomplete.** 117 companies with 801 "Available"
   rows are unmapped, for example West-Ward (now Hikma), Akorn, AuroMedics
   and AbbVie. Extending `data/company_ticker_map.csv` is the cheapest way
