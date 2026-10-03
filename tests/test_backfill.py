@@ -18,7 +18,7 @@ from backfill.events import build_candidates, map_company
 from backfill.guardrails import require_oos_freeze, reserve_holdout
 from backfill.prices import COLUMNS, load_cache, normalize_yahoo, sha256, symbol_path
 from backfill.settings import Settings
-from strategies.backfill import select
+from strategies.primary import select
 
 
 def bars(days, closes):

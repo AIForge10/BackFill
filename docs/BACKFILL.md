@@ -11,7 +11,7 @@ variant, to be enabled later.
 
 | File | Responsibility |
 |---|---|
-| `strategies/backfill.py` | Which candidates become lot requests; equal-event weights |
+| `strategies/primary.py` | Which candidates become lot requests; equal-event weights |
 | `backfill/settings.py` | Explicit hold, beta, costs, exposure limits and risk settings |
 | `config.py` | Shared dates, broad-market references/proxies and original caps |
 | `data/company_ticker_map.csv` | Effective-dated supplier-to-owner mapping |
