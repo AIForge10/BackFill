@@ -26,7 +26,7 @@ dependencies = [
 requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
-# Only the reusable library is packaged; example strategies and entry points
-# under examples/ are runnable scripts, not distributed modules.
+# Research modules are separate from the unchanged sponsor examples.
 [tool.setuptools]
-packages = ["webull_bt"]
+packages = ["webull_bt", "backfill", "strategies"]
+py-modules = ["config"]
