@@ -9,12 +9,15 @@ NEW_SHORTAGE_GAP_DAYS = 180       # product must be absent this long to count as
 COST_BPS_PER_SIDE = {"US": 10, "UK": 15, "DE": 15, "CH": 15, "IN": 25}
 HEDGE_COST_BPS = 2
 
-BENCHMARK = {"US": "XLV", "UK": "^FTSE", "DE": "^GDAXI", "CH": "^SSMI", "IN": "^CNXPHARMA"}
+# Broad local markets follow HYPOTHESIS.md. ETF proxies include distributions
+# in adjusted-close returns; index levels separately define local sessions.
+MARKET_INDEX = {"US": "^GSPC", "UK": "^FTSE", "DE": "^GDAXI", "CH": "^SSMI", "IN": "^NSEI"}
+BENCHMARK = {"US": "SPY", "UK": "ISF.L", "DE": "EXS1.DE", "CH": "CSSMI.SW", "IN": "NIFTYBEES.NS"}
 
 MAX_WEIGHT_PER_NAME = 0.08
 MAX_WEIGHT_PER_COUNTRY = 0.30
 MAX_GROSS = 1.5
-MAX_ADV_PARTICIPATION = 0.05
+MAX_ADV_PARTICIPATION = 0.01
 
 WAYBACK_SLEEP_SEC = 1.0
 

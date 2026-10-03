@@ -230,11 +230,12 @@ def is_combo(ai_keys) -> bool:
 def rename_suspects(ev: pd.DataFrame, status: pd.DataFrame) -> dict:
     """event_id -> earlier coarse_key whose word set is a subset/superset of the event's, Current in the prior
     NEW_SHORTAGE_GAP_DAYS. Combination products (either side) are never flagged."""
-    cur = status[status["status"] == "Current"]
-    names = cur.groupby("coarse_key")["ai_key"].agg(set)
-    cur = cur[["snapshot_date", "coarse_key"]].drop_duplicates()
+    named_current = status[status["status"] == "Current"]
+    cur = named_current[["snapshot_date", "coarse_key"]].drop_duplicates()
     out = {}
     for _, e in ev[~ev["left_censored"]].drop_duplicates("event_id").iterrows():
+        # A future rename/combination name cannot change today's eligibility.
+        names = named_current[named_current["snapshot_date"] <= e["public_date"]].groupby("coarse_key")["ai_key"].agg(set)
         if is_combo(names[e["coarse_key"]]):
             continue
         w = set(e["coarse_key"].split())

@@ -1,16 +1,22 @@
 company_pattern,ticker,exchange,country,benchmark,listed_from,listed_to,is_generic_maker,notes
 ^amphastar|international medication systems,AMPH,NASDAQ,US,XLV,2014-06-25,,1,IMS is Amphastar subsidiary
-^teva|^actavis|^cephalon,TEVA,NYSE,US,XLV,2014-01-01,,1,Actavis generics acquired 2016; check pre-2016 Actavis rows
-^mylan|viatris,VTRS,NASDAQ,US,XLV,2014-01-01,,1,Yahoo maps MYL history to VTRS; verify Webull
+^teva|^cephalon,TEVA,NYSE,US,SPY,2014-01-01,,1,
+^actavis,UNVERIFIED,,,,2014-01-01,2016-08-01,1,Pre-Teva owner must be researched; excluded rather than backmapped
+^actavis,TEVA,NYSE,US,SPY,2016-08-02,,1,Teva completed Actavis Generics acquisition August 2 2016
+^mylan,MYL,NASDAQ,US,SPY,2014-01-01,2020-11-15,1,Historical Mylan security; no automatic VTRS price alias
+^mylan|viatris,VTRS,NASDAQ,US,SPY,2020-11-16,,1,Viatris formed November 16 2020
 ^amneal,AMRX,NYSE,US,XLV,2018-05-07,,1,
 ^baxter,BAX,NYSE,US,XLV,2014-01-01,,1,
 ^vantive,BAX,NYSE,US,XLV,2014-01-01,2025-01-31,1,Baxter kidney care sold Jan 2025; after that PRIVATE
 icu medical,ICUI,NASDAQ,US,XLV,2014-01-01,,1,Otsuka ICU Medical is a JV; decide and note
-^hospira|^pfizer,PFE,NYSE,US,XLV,2014-01-01,,0,Diversified; small exposure
+^pfizer,PFE,NYSE,US,SPY,2014-01-01,,0,Diversified; small exposure
+^hospira,HSP,NYSE,US,SPY,2014-01-01,2015-09-02,1,Historical Hospira security; delisted prices require verified source
+^hospira,PFE,NYSE,US,SPY,2015-09-03,,0,Pfizer completed acquisition September 3 2015
 reddy,RDY,NYSE,US,XLV,2014-01-01,,1,ADR
 ^hikma,HIK.L,LSE,UK,^FTSE,2014-01-01,,1,
 fresenius kabi,FRE.DE,XETRA,DE,^GDAXI,2014-01-01,,1,Parent Fresenius SE
-^sandoz,SDZ.SW,SIX,CH,^SSMI,2023-10-04,,1,Before Oct 2023 part of Novartis: drop
+^sandoz,NOVN.SW,SIX,CH,^SSMI,2014-01-01,2023-10-03,0,Sandoz owned by Novartis before spin-off; parent exposure
+^sandoz,SDZ.SW,SIX,CH,^SSMI,2023-10-04,,1,Sandoz independent listing; require its own beta history
 ^sun pharm|^taro,SUNPHARMA.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,
 ^eugia|^aurobindo,AUROPHARMA.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,
 ^lupin,LUPIN.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,
