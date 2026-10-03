@@ -11,7 +11,7 @@ Changes from the Webull starter (Gator Quant Hacks, Systematic Trading track):
   - Extra metrics the track requires: annualized return, volatility, Sharpe,
     max drawdown and turnover, computed from the daily equity curve.
   - Every run saves results/<label>/metrics.json and equity.csv, and appends
-    one row to variants_log.csv so the number of variants tested is recorded.
+    one row to results/variants_log.csv so the number of variants tested is recorded.
 """
  
 from __future__ import annotations
@@ -336,7 +336,7 @@ def _save_run(label: str, extra: dict, equity: pd.Series, config: dict) -> None:
     equity.rename("equity").to_csv(out_dir / "equity.csv", index_label="date")
     logger.info("[Backtest] saved results to %s", out_dir)
  
-    log_path = PROJECT_ROOT / "variants_log.csv"
+    log_path = PROJECT_ROOT / "results" / "variants_log.csv"
     header = ["run_id", "date", "description", "events_file", "symbols", "hold_days",
               "cost_bp", "period", "total_return_pct", "sharpe", "max_drawdown_pct",
               "turnover", "notes"]
