@@ -25,3 +25,12 @@ webull_data_sdk.log.*
 # macOS 目录元数据
 .DS_Store
 **/.DS_Store
+# Backfill pipeline
+# Wayback HTML cache (rebuilt by src/02_fetch.py); never commit
+data/raw/
+# personal working plan
+PLAN.md
+HANDOFF.md
+*.ipynb_checkpoints
+# Built by src/ from public archives; rebuild instead of committing
+data/processed/

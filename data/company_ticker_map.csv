@@ -1,0 +1,32 @@
+company_pattern,ticker,exchange,country,benchmark,listed_from,listed_to,is_generic_maker,notes
+^amphastar|international medication systems,AMPH,NASDAQ,US,XLV,2014-06-25,,1,IMS is Amphastar subsidiary
+^teva|^actavis|^cephalon,TEVA,NYSE,US,XLV,2014-01-01,,1,Actavis generics acquired 2016; check pre-2016 Actavis rows
+^mylan|viatris,VTRS,NASDAQ,US,XLV,2014-01-01,,1,Yahoo maps MYL history to VTRS; verify Webull
+^amneal,AMRX,NYSE,US,XLV,2018-05-07,,1,
+^baxter,BAX,NYSE,US,XLV,2014-01-01,,1,
+^vantive,BAX,NYSE,US,XLV,2014-01-01,2025-01-31,1,Baxter kidney care sold Jan 2025; after that PRIVATE
+icu medical,ICUI,NASDAQ,US,XLV,2014-01-01,,1,Otsuka ICU Medical is a JV; decide and note
+^hospira|^pfizer,PFE,NYSE,US,XLV,2014-01-01,,0,Diversified; small exposure
+reddy,RDY,NYSE,US,XLV,2014-01-01,,1,ADR
+^hikma,HIK.L,LSE,UK,^FTSE,2014-01-01,,1,
+fresenius kabi,FRE.DE,XETRA,DE,^GDAXI,2014-01-01,,1,Parent Fresenius SE
+^sandoz,SDZ.SW,SIX,CH,^SSMI,2023-10-04,,1,Before Oct 2023 part of Novartis: drop
+^sun pharm|^taro,SUNPHARMA.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,
+^eugia|^aurobindo,AUROPHARMA.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,
+^lupin,LUPIN.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,
+^torrent,TORNTPHARM.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,
+^gland,GLAND.NS,NSE,IN,^CNXPHARMA,2020-11-20,,1,
+^granules,GRANULES.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,
+^alembic,APLLTD.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,
+^caplin,CAPLIPOINT.NS,NSE,IN,^CNXPHARMA,2014-06-23,,1,
+^piramal,PPLPHARMA.NS,NSE,IN,^CNXPHARMA,2022-10-19,,1,
+^zydus|^cadila,ZYDUSLIFE.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,verify ticker
+^cipla,CIPLA.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,
+^strides,STAR.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,verify ticker
+^b\. braun,PRIVATE,,,,,,1,
+^sagent,PRIVATE,,,,,,1,owned by Nichi-Iko
+^apotex,PRIVATE,,,,,,1,
+^meitheal,PRIVATE,,,,,,1,
+^american regent,PRIVATE,,,,,,1,Daiichi Sankyo subsidiary; decide
+^par |^par pharm|^par health|^endo,PRIVATE,,,,,,1,Endo bankrupt 2022; check listing windows if used
+^lannett,PRIVATE,,,,,,1,delisted 2023
