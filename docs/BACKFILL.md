@@ -66,8 +66,10 @@ US stocks and ETFs come from the Webull OpenAPI, using the credentials in
 is recorded with its reason. Webull daily bars are forward-adjusted ("previous
 weight" in the SDK). Whether that includes dividends is undocumented, so every
 Webull series is cross-checked against Yahoo's adjusted close:
-- **Date overlap and return correlation** must both be at least 0.95, or acquisition
-  fails for review.
+- **Date overlap and return correlation** must both be at least 0.95. Otherwise the
+  symbol falls back to Yahoo, and the failed check is recorded as the reason. On
+  2026-10-03 this applied to TEVA (Webull had 650 of about 2,950 sessions) and RDY
+  (return correlation 0.21).
 - **`annualized_log_return_gap`** shows the dividend treatment. A gap near the
   dividend yield means Webull omits dividends.
 
