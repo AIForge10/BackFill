@@ -1,0 +1,32 @@
+{
+  "config": {
+    "strategy": "dual_ma",
+    "symbols": [
+      "AMPH",
+      "TEVA",
+      "VTRS",
+      "AMRX",
+      "BAX",
+      "ICUI",
+      "XLV"
+    ],
+    "params": {},
+    "events_file": "data/events.csv",
+    "cost_bp": 15.0,
+    "fromdate": "2014-01-02T09:30:00-05:00",
+    "todate": "2024-09-30T16:00:00-04:00",
+    "oos_run": false,
+    "total_return_pct": -1.66
+  },
+  "metrics": {
+    "period_start": "2014-01-03",
+    "period_end": "2024-09-30",
+    "years": 10.74,
+    "ann_return_pct": -0.16,
+    "ann_vol_pct": 0.51,
+    "sharpe_daily": -0.305,
+    "max_drawdown_pct": -2.75,
+    "turnover_x_per_year": 0.36,
+    "worst_day_pct": -0.75
+  }
+}

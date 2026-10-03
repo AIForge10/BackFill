@@ -1,0 +1,2 @@
+run_id,date,description,events_file,symbols,hold_days,cost_bp,period,total_return_pct,sharpe,max_drawdown_pct,turnover,notes
+connection_test,2026-10-03 06:33,dual_ma,data/events.csv,AMPH TEVA VTRS AMRX BAX ICUI XLV,,15.0,2014-01-03 to 2024-09-30,-1.66,-0.305,-2.75,0.36,in-sample
