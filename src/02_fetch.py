@@ -13,7 +13,12 @@ Usage:
 
 --workers N keeps N requests in flight (Wayback answers in ~9 s, so one at a time reaches only ~0.1/s);
 request starts are still capped at --rps per process (default and maximum: 1/config.WAYBACK_SLEEP_SEC).
-Teammates on the same network share one IP: divide --rps between them (e.g. 0.25 each for four).
+The Wayback Machine limits each IP to roughly 10-15 page requests/minute and refuses connections for a few
+minutes when exceeded, so --rps 0.15 is a safe fixed rate. --adaptive starts there, speeds up slowly while every
+request succeeds, and halves the rate on any refusal or error (never above --rps).
+--per-week keeps one detail capture per product per ISO week (the latest; weeks already on disk are skipped),
+about 40% fewer requests, and orders the work: captures near a shortage event first, then the rest,
+holdout-dated captures last.
 
 --only-needed: for each event in shortage_events.csv (all its product names), match detail captures by
 normalized AI= and fetch the latest capture on/before public_date + 7 days, plus the next capture after it
@@ -58,11 +63,44 @@ def out_path(kind: str, ts: str, original: str) -> Path:
     return RAW / "detail" / ts[:4] / f"{ts}_{h}.html"
 
 
-def needed_detail(idx: pd.DataFrame, window_days: int = 7) -> pd.DataFrame:
-    """Detail captures needed per event; prints coverage by year. Holdout-dated captures are counted, not shown."""
+def _parse_main():
+    """src/03_parse_main.py as a module, for its AI= normalization (shared with the event parser)."""
     spec = importlib.util.spec_from_file_location("parse_main", ROOT / "src" / "03_parse_main.py")
     pm = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(pm)  # same AI= normalization as the main-page parser
+    spec.loader.exec_module(pm)
+    return pm
+
+
+def per_week(idx: pd.DataFrame, before_days: int = 30, after_days: int = 60) -> pd.DataFrame:
+    """One detail capture per (product, ISO week), skipping weeks already on disk, ordered by value:
+    captures within [public_date - before_days, public_date + after_days] of an event first, then the rest
+    chronologically, holdout-dated captures last."""
+    pm = _parse_main()
+    idx = idx.copy()
+    idx["ai_key"] = idx["original"].map(pm.ai_key)
+    idx["date"] = pd.to_datetime(idx["timestamp"].str[:8], format="%Y%m%d")
+    iso = idx["date"].dt.isocalendar()
+    idx["wk"] = iso["year"].astype(str) + "-" + iso["week"].astype(str).str.zfill(2)
+    idx["have"] = [out_path("detail", t, o).exists() for t, o in zip(idx["timestamp"], idx["original"])]
+    done = idx.groupby(["ai_key", "wk"])["have"].transform("any")
+    picks = idx[~done].sort_values("timestamp").groupby(["ai_key", "wk"]).tail(1)
+
+    ev = pd.read_csv(PROC / "shortage_events.csv", keep_default_na=False, parse_dates=["public_date"])
+    win = ev[["ai_key", "public_date"]].merge(picks[["ai_key", "date"]].reset_index(), on="ai_key")
+    near = win[(win["date"] >= win["public_date"] - pd.Timedelta(days=before_days))
+               & (win["date"] <= win["public_date"] + pd.Timedelta(days=after_days))]["index"]
+    picks = picks.assign(near=picks.index.isin(near),
+                         holdout=picks["date"] >= pd.Timestamp(config.OOS_START))
+    picks = picks.sort_values(["holdout", "near", "timestamp"], ascending=[True, False, True])
+    print(f"--per-week: {len(idx):,} captures -> {len(picks):,} product-weeks to fetch "
+          f"({int(done.sum()):,} captures in weeks already on disk); near events: {int(picks['near'].sum()):,}, "
+          f"holdout-dated: {int(picks['holdout'].sum()):,}")
+    return picks
+
+
+def needed_detail(idx: pd.DataFrame, window_days: int = 7) -> pd.DataFrame:
+    """Detail captures needed per event; prints coverage by year. Holdout-dated captures are counted, not shown."""
+    pm = _parse_main()  # same AI= normalization as the main-page parser
 
     ev = pd.read_csv(PROC / "shortage_events.csv", keep_default_na=False, parse_dates=["public_date"])
     idx = idx.copy()
@@ -115,10 +153,20 @@ def needed_detail(idx: pd.DataFrame, window_days: int = 7) -> pd.DataFrame:
 
 
 class RateLimiter:
-    """At most `rps` request starts per second across all worker threads; backoff pauses everyone."""
+    """At most `rps` request starts per second across all worker threads; backoff pauses everyone.
 
-    def __init__(self, rps: float):
-        self.interval = 1.0 / rps
+    adaptive=True: start at min(rps, SAFE_RPS) and add ADAPT_STEP after every ADAPT_STREAK successes (never above
+    rps). Rate-limit signals (HTTP 429, connection refused) halve the rate; slowness (timeouts, 5xx) only trims it
+    by 15%, since that is the archive being busy rather than us being too fast. Never below ADAPT_FLOOR."""
+    SAFE_RPS, ADAPT_STEP, ADAPT_STREAK, ADAPT_FLOOR = 0.15, 0.01, 10, 0.05
+    CUT = {"429": 0.5, "refused": 0.5, "timeout": 0.85, "5xx": 0.85, "other": 0.85}
+
+    def __init__(self, rps: float, adaptive: bool = False):
+        self.max_rps = rps
+        self.rps = min(rps, self.SAFE_RPS) if adaptive else rps
+        self.adaptive = adaptive
+        self.ok_streak = 0
+        self.fails = {k: 0 for k in self.CUT}
         self.lock = threading.Lock()
         self.next_t = 0.0
 
@@ -126,12 +174,25 @@ class RateLimiter:
         with self.lock:
             now = time.monotonic()
             t = max(now, self.next_t)
-            self.next_t = t + self.interval
+            self.next_t = t + 1.0 / self.rps
         time.sleep(max(0.0, t - now))
 
-    def backoff(self, seconds: float):
+    def success(self):
+        if not self.adaptive:
+            return
         with self.lock:
+            self.ok_streak += 1
+            if self.ok_streak >= self.ADAPT_STREAK:
+                self.rps = min(self.max_rps, self.rps + self.ADAPT_STEP)
+                self.ok_streak = 0
+
+    def backoff(self, seconds: float, kind: str = "other"):
+        with self.lock:
+            self.fails[kind] = self.fails.get(kind, 0) + 1
             self.next_t = max(self.next_t, time.monotonic() + seconds)
+            if self.adaptive:
+                self.rps = max(self.ADAPT_FLOOR, self.rps * self.CUT.get(kind, 0.85))
+                self.ok_streak = 0
 
 
 def fetch(ts: str, original: str, dest: Path, log: list, limiter: RateLimiter | None = None):
@@ -142,9 +203,12 @@ def fetch(ts: str, original: str, dest: Path, log: list, limiter: RateLimiter | 
     for attempt in range(5):
         if limiter:
             limiter.wait()
+        kind = "other"
         try:
             r = requests.get(url, headers=HEADERS, timeout=60)
             if r.status_code == 200 and len(r.content) > 500:
+                if limiter:
+                    limiter.success()
                 dest.parent.mkdir(parents=True, exist_ok=True)
                 dest.write_bytes(r.content)
                 log.append((ts, original, "ok", len(r.content)))
@@ -152,10 +216,15 @@ def fetch(ts: str, original: str, dest: Path, log: list, limiter: RateLimiter | 
             if r.status_code in (404, 410):
                 log.append((ts, original, f"http_{r.status_code}", 0))
                 return
+            kind = "429" if r.status_code == 429 else "5xx" if r.status_code >= 500 else "other"
+        except requests.Timeout:
+            kind = "timeout"
+        except requests.ConnectionError as e:
+            kind = "refused" if "refused" in str(e).lower() else "other"
         except requests.RequestException:
             pass
         if limiter:
-            limiter.backoff(5 * (attempt + 1))  # 429/5xx/offline: pause all workers
+            limiter.backoff(5 * (attempt + 1), kind)  # pause all workers; adaptive rate cut depends on kind
         else:
             time.sleep(5 * (attempt + 1))
     log.append((ts, original, "failed", 0))
@@ -172,6 +241,10 @@ def main():
     ap.add_argument("--workers", type=int, default=1, help="requests in flight (default 1)")
     ap.add_argument("--rps", type=float, default=1.0 / config.WAYBACK_SLEEP_SEC,
                     help="max request starts per second for this process (cannot exceed the config limit)")
+    ap.add_argument("--adaptive", action="store_true",
+                    help="start at a safe rate, speed up while requests succeed, halve on refusals (max --rps)")
+    ap.add_argument("--per-week", action="store_true",
+                    help="detail only: one capture per product per ISO week, most useful first")
     args = ap.parse_args()
 
     max_rps = 1.0 / config.WAYBACK_SLEEP_SEC
@@ -202,10 +275,12 @@ def main():
             idx = needed_detail(idx)
         if years:
             idx = idx[idx["timestamp"].str[:4].isin(years)]
+        if args.per_week and kind == "detail":
+            idx = per_week(idx)
         if args.shard:
             idx = idx.iloc[k - 1::n]
         print(f"{kind}: {len(idx):,} captures to check")
-        log, limiter, done = [], RateLimiter(args.rps), [0]
+        log, limiter, done = [], RateLimiter(args.rps, adaptive=args.adaptive), [0]
         t0 = time.monotonic()
 
         def one(row):
@@ -214,7 +289,9 @@ def main():
                 done[0] += 1
                 if done[0] % 50 == 0:
                     rate = done[0] / max(time.monotonic() - t0, 1e-9) * 60
-                    print(f"  {done[0]:,}/{len(idx):,}  ({rate:.0f}/min)", flush=True)
+                    fails = " ".join(f"{k}={v}" for k, v in limiter.fails.items() if v) or "none"
+                    print(f"  {done[0]:,}/{len(idx):,}  ({rate:.0f}/min, rps {limiter.rps:.2f}, failures: {fails})",
+                          flush=True)
 
         with ThreadPoolExecutor(max_workers=args.workers) as pool:
             list(pool.map(one, idx.itertuples(index=False)))
