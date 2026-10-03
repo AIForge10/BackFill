@@ -93,7 +93,7 @@ Gator_Hacks/
 │   ├── 04_parse_details.py  detail pages → suppliers.csv (rule-tagged availability)
 │   ├── 05_events.py         point-in-time evidence ledger + attrition
 │   └── 06_prices.py         explicit price acquisition (Webull for US, yfinance fallback) + immutable manifest
-├── strategies/backfill.py  pure primary signal selection
+├── strategies/primary.py   pure primary signal selection
 ├── backfill/               settings, evidence, cache, lot engine, analysis, guards
 ├── tests/                  synthetic accounting and point-in-time regression cases
 ├── run_all.py              offline research orchestration

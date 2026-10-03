@@ -16,7 +16,7 @@ from backfill.guardrails import (fingerprint, finish_holdout, log_run, require_o
                                 reserve_holdout)
 from backfill.prices import load_cache, required_symbols, sha256
 from backfill.settings import Settings
-from strategies.backfill import select
+from strategies.primary import select
 
 ROOT = Path(__file__).resolve().parents[1]
 
