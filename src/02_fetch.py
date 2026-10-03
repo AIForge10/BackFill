@@ -1,7 +1,7 @@
-"""Step 2: download archived pages (resumable, polite: ~1 request/second).
+"""Step 2: download archived pages (resumable, polite: at most 1 request/second).
 
 Main page: one capture per ISO week. Detail pages: every unique capture (already de-duplicated by digest).
-Files go to data/raw/ (gitignored). Re-running skips anything already downloaded.
+Files go to data/raw/{main,detail}/{YYYY}/ (gitignored). Re-running skips anything already downloaded.
 
 Usage:
   python src/02_fetch.py --which main --years 2019          # thin slice first (--year also works)
@@ -9,6 +9,11 @@ Usage:
   python src/02_fetch.py --which detail --years 2019 --shard 1/4   # every 4th row, starting at row 1
   python src/02_fetch.py --which all                        # everything (run in background)
   python src/02_fetch.py --only-needed                      # detail pages needed by shortage_events.csv only
+  python src/02_fetch.py --which detail --years 2020,2022 --workers 8   # team split by years, faster
+
+--workers N keeps N requests in flight (Wayback answers in ~9 s, so one at a time reaches only ~0.1/s);
+request starts are still capped at --rps per process (default and maximum: 1/config.WAYBACK_SLEEP_SEC).
+Teammates on the same network share one IP: divide --rps between them (e.g. 0.25 each for four).
 
 --only-needed: for each event in shortage_events.csv (all its product names), match detail captures by
 normalized AI= and fetch the latest capture on/before public_date + 7 days, plus the next capture after it
@@ -18,7 +23,9 @@ import argparse
 import hashlib
 import importlib.util
 import sys
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 import pandas as pd
@@ -43,10 +50,12 @@ def pick_weekly(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def out_path(kind: str, ts: str, original: str) -> Path:
+    """data/raw/{main|detail}/{YYYY}/... : one folder per capture year, so team members can fetch
+    different years in parallel and merge by copying folders (file names never collide)."""
     if kind == "main":
-        return RAW / "main" / f"{ts}.html"
+        return RAW / "main" / ts[:4] / f"{ts}.html"
     h = hashlib.sha1(original.encode()).hexdigest()[:12]
-    return RAW / "detail" / f"{ts}_{h}.html"
+    return RAW / "detail" / ts[:4] / f"{ts}_{h}.html"
 
 
 def needed_detail(idx: pd.DataFrame, window_days: int = 7) -> pd.DataFrame:
@@ -105,12 +114,34 @@ def needed_detail(idx: pd.DataFrame, window_days: int = 7) -> pd.DataFrame:
     return need[["timestamp", "original"]]
 
 
-def fetch(ts: str, original: str, dest: Path, log: list):
+class RateLimiter:
+    """At most `rps` request starts per second across all worker threads; backoff pauses everyone."""
+
+    def __init__(self, rps: float):
+        self.interval = 1.0 / rps
+        self.lock = threading.Lock()
+        self.next_t = 0.0
+
+    def wait(self):
+        with self.lock:
+            now = time.monotonic()
+            t = max(now, self.next_t)
+            self.next_t = t + self.interval
+        time.sleep(max(0.0, t - now))
+
+    def backoff(self, seconds: float):
+        with self.lock:
+            self.next_t = max(self.next_t, time.monotonic() + seconds)
+
+
+def fetch(ts: str, original: str, dest: Path, log: list, limiter: RateLimiter | None = None):
     if dest.exists() and dest.stat().st_size > 500:
         log.append((ts, original, "ok", dest.stat().st_size))  # already on disk; keeps the log current
         return
     url = f"https://web.archive.org/web/{ts}id_/{original}"  # id_ = original HTML, no toolbar
     for attempt in range(5):
+        if limiter:
+            limiter.wait()
         try:
             r = requests.get(url, headers=HEADERS, timeout=60)
             if r.status_code == 200 and len(r.content) > 500:
@@ -123,7 +154,10 @@ def fetch(ts: str, original: str, dest: Path, log: list):
                 return
         except requests.RequestException:
             pass
-        time.sleep(5 * (attempt + 1))  # backoff on 429/5xx/offline
+        if limiter:
+            limiter.backoff(5 * (attempt + 1))  # 429/5xx/offline: pause all workers
+        else:
+            time.sleep(5 * (attempt + 1))
     log.append((ts, original, "failed", 0))
 
 
@@ -131,16 +165,27 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--which", choices=["main", "detail", "all"], default="main")
     ap.add_argument("--years", "--year", dest="years", default=None,
-                    help='one year ("2019") or an inclusive range ("2014-2019")')
+                    help='"2019", a range "2014-2019", or a list "2020,2022" (ranges allowed in the list)')
     ap.add_argument("--only-needed", action="store_true",
                     help="detail pages for shortage_events.csv only (implies --which detail)")
     ap.add_argument("--shard", default=None, help='"k/n": keep every n-th row of the filtered index, from row k (1-based)')
+    ap.add_argument("--workers", type=int, default=1, help="requests in flight (default 1)")
+    ap.add_argument("--rps", type=float, default=1.0 / config.WAYBACK_SLEEP_SEC,
+                    help="max request starts per second for this process (cannot exceed the config limit)")
     args = ap.parse_args()
+
+    max_rps = 1.0 / config.WAYBACK_SLEEP_SEC
+    if not 0 < args.rps <= max_rps:
+        ap.error(f"--rps must be in (0, {max_rps:g}] (config.WAYBACK_SLEEP_SEC)")
+    if args.workers < 1:
+        ap.error("--workers must be >= 1")
 
     years = None
     if args.years:
-        lo, _, hi = args.years.partition("-")
-        years = {str(y) for y in range(int(lo), int(hi or lo) + 1)}
+        years = set()
+        for part in args.years.split(","):
+            lo, _, hi = part.strip().partition("-")
+            years |= {str(y) for y in range(int(lo), int(hi or lo) + 1)}
     if args.shard:
         k, n = (int(x) for x in args.shard.split("/"))
         if not 1 <= k <= n:
@@ -160,15 +205,19 @@ def main():
         if args.shard:
             idx = idx.iloc[k - 1::n]
         print(f"{kind}: {len(idx):,} captures to check")
-        log = []
-        for i, row in enumerate(idx.itertuples(index=False), 1):
-            dest = out_path(kind, row.timestamp, row.original)
-            already = dest.exists() and dest.stat().st_size > 500
-            fetch(row.timestamp, row.original, dest, log)
-            if not already:
-                time.sleep(config.WAYBACK_SLEEP_SEC)
-            if i % 50 == 0:
-                print(f"  {i:,}/{len(idx):,}")
+        log, limiter, done = [], RateLimiter(args.rps), [0]
+        t0 = time.monotonic()
+
+        def one(row):
+            fetch(row.timestamp, row.original, out_path(kind, row.timestamp, row.original), log, limiter)
+            with limiter.lock:
+                done[0] += 1
+                if done[0] % 50 == 0:
+                    rate = done[0] / max(time.monotonic() - t0, 1e-9) * 60
+                    print(f"  {done[0]:,}/{len(idx):,}  ({rate:.0f}/min)", flush=True)
+
+        with ThreadPoolExecutor(max_workers=args.workers) as pool:
+            list(pool.map(one, idx.itertuples(index=False)))
         if log:
             lp = PROC / f"fetch_log_{kind}.csv"
             new = pd.DataFrame(log, columns=["timestamp", "original", "status", "bytes"])
