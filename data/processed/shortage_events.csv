@@ -1,0 +1,499 @@
+event_id,product,ai_key,coarse_key,public_date,prev_snapshot_gap_days,date_uncertain,left_censored,rename_window,spike_week,rename_suspect,rename_match,resolved_date
+1,Amikacin Injection,amikacin injection,amikacin,2014-06-22,,False,True,False,False,False,,2014-12-14
+2,Ammonium Chloride Injection,ammonium chloride injection,ammonium chloride,2014-06-22,,False,True,False,False,False,,
+3,Atropine Sulfate Injection,atropine sulfate injection,atropine sulfate,2014-06-22,,False,True,False,False,False,,
+4,Barium Sulfate for Suspension,barium sulfate for suspension,barium sulfate,2014-06-22,,False,True,False,False,False,,2015-05-02
+5,Bumetanide Injection,bumetanide injection,bumetanide,2014-06-22,,False,True,False,False,False,,2014-10-27
+6,"Bupivacaine Hydrochloride (Marcaine, Sensorcaine) Injection","bupivacaine hydrochloride (marcaine, sensorcaine) injection",bupivacaine hydrochloride,2014-06-22,,False,True,False,False,False,,2015-08-15
+7,Caffeine Anhydrous (125mg/mL); Sodium Benzoate (125mg/mL) Injection,caffeine anhydrous (125mg/ml); sodium benzoate (125mg/ml) injection,caffeine sodium benzoate,2014-06-22,,False,True,False,False,False,,2017-03-09
+8,Calcium Gluconate Injection,calcium gluconate injection,calcium gluconate,2014-06-22,,False,True,False,False,False,,2019-05-05
+9,Cefazolin Injection,cefazolin injection,cefazolin,2014-06-22,,False,True,False,False,False,,2016-05-06
+10,Chloramphenicol Sodium Succinate Injection,chloramphenicol sodium succinate injection,chloramphenicol sodium succinate,2014-06-22,,False,True,False,False,False,,2017-01-13
+11,Chromic Chloride Injection,chromic chloride injection,chromic chloride,2014-06-22,,False,True,False,False,False,,2014-10-27
+12,Cidofovir Injection,cidofovir injection,cidofovir,2014-06-22,,False,True,False,False,False,,2014-11-20
+13,Clindamycin Phosphate (Cleocin) Injection,clindamycin phosphate (cleocin) injection,clindamycin phosphate,2014-06-22,,False,True,False,False,False,,2015-02-21
+14,Copper Injection,copper injection,copper,2014-06-22,,False,True,False,False,False,,2014-10-27
+15,Cyanocobalamin (Vitamin B12) Injection,cyanocobalamin (vitamin b12) injection,cyanocobalamin,2014-06-22,,False,True,False,False,False,,2015-01-29
+16,Daunorubicin Hydrochloride Solution for Injection,daunorubicin hydrochloride solution for injection,daunorubicin hydrochloride,2014-06-22,,False,True,False,False,False,,2015-01-29
+17,Dexamethasone Sodium Phosphate Injection,dexamethasone sodium phosphate injection,dexamethasone sodium phosphate,2014-06-22,,False,True,False,False,False,,2017-04-14
+18,Dexmethylphenidate Hydrochloride (Focalin) Tablet,dexmethylphenidate hydrochloride (focalin) tablet,dexmethylphenidate hydrochloride,2014-06-22,,False,True,False,False,False,,2015-03-25
+19,Dextrose 5% Injection Bags,dextrose 5% injection bags,dextrose,2014-06-22,,False,True,False,False,False,,2016-11-19
+20,Disopyramide Phosphate (Norpace) CR,disopyramide phosphate (norpace) cr,disopyramide phosphate cr,2014-06-22,,False,True,False,False,False,,2014-07-12
+21,Doxorubicin (Adriamycin) Lyophilized Powder,doxorubicin (adriamycin) lyophilized powder,doxorubicin,2014-06-22,,False,True,False,False,False,,
+22,Ephedrine Sulfate Injection,ephedrine sulfate injection,ephedrine sulfate,2014-06-22,,False,True,False,False,False,,2015-09-05
+23,Epinephrine 1mg/mL (Preservative Free),epinephrine 1mg/ml (preservative free),epinephrine,2014-06-22,,False,True,False,False,False,,
+23,Epinephrine Injection,epinephrine injection,epinephrine,2014-06-22,,False,True,False,False,False,,2023-09-16
+24,Erythrocin Lactobionate Lyophilized Powder for Injection,erythrocin lactobionate lyophilized powder for injection,erythrocin lactobionate,2014-06-22,,False,True,False,False,False,,2015-01-29
+25,Ethiodol (Ethiodized Oil) Ampules,ethiodol (ethiodized oil) ampules,ethiodol,2014-06-22,,False,True,False,False,False,,2014-10-27
+26,Fentanyl Citrate (Sublimaze) Injection,fentanyl citrate (sublimaze) injection,fentanyl citrate,2014-06-22,,False,True,False,False,False,,
+27,Haloperidol Lactate Injection,haloperidol lactate injection,haloperidol lactate,2014-06-22,,False,True,False,False,False,,2016-03-06
+28,Heparin Sodium Injection,heparin sodium injection,heparin sodium,2014-06-22,,False,True,False,False,False,,2015-01-10
+29,Indigo Carmine Injection,indigo carmine injection,indigo carmine,2014-06-22,,False,True,False,False,False,,
+30,Leucovorin Calcium Lyophilized Powder for Injection,leucovorin calcium lyophilized powder for injection,leucovorin calcium,2014-06-22,,False,True,False,False,False,,
+31,Leuprolide Acetate Injection,leuprolide acetate injection,leuprolide acetate,2014-06-22,,False,True,False,False,False,,2016-11-19
+32,Lidocaine Hydrochloride (Xylocaine) Injection,lidocaine hydrochloride (xylocaine) injection,lidocaine hydrochloride,2014-06-22,,False,True,False,False,False,,
+33,Liotrix (Thyrolar) Tablets,liotrix (thyrolar) tablets,liotrix,2014-06-22,,False,True,False,False,False,,
+34,Lorazepam (Ativan) Injection,lorazepam (ativan) injection,lorazepam,2014-06-22,,False,True,False,False,False,,2014-07-12
+35,Magnesium Sulfate Injection,magnesium sulfate injection,magnesium sulfate,2014-06-22,,False,True,False,False,False,,2015-11-08
+36,Mecasermin [rDNA origin] (Increlex) Injection,mecasermin [rdna origin] (increlex) injection,mecasermin,2014-06-22,,False,True,False,False,False,,2017-11-09
+37,Methyldopate Hydrochloride Injection,methyldopate hydrochloride injection,methyldopate hydrochloride,2014-06-22,,False,True,False,False,False,,
+38,Methylin Chewable Tablets,methylin chewable tablets,methylin,2014-06-22,,False,True,False,False,False,,
+39,Methylphenidate Hydrochloride ER Capsules/Tablets,methylphenidate hydrochloride er capsules/tablets,methylphenidate hydrochloride,2014-06-22,,False,True,False,False,False,,2014-08-14
+39,Methylphenidate Hydrochloride Tablets,methylphenidate hydrochloride tablets,methylphenidate hydrochloride,2014-06-22,,False,True,False,False,False,,2014-11-20
+40,Methylprednisolone Sodium Succinate Injection,methylprednisolone sodium succinate injection,methylprednisolone sodium succinate,2014-06-22,,False,True,False,False,False,,2014-08-14
+41,"Morphine Sulfate (Astramorph PF, Duramorph, Infumorph) Injection (Preservative Free)","morphine sulfate (astramorph pf, duramorph, infumorph) injection (preservative free)",morphine sulfate,2014-06-22,,False,True,False,False,False,,2015-03-25
+42,Multi-Vitamin Infusion (Adult and Pediatric),multi-vitamin infusion (adult and pediatric),multi vitamin,2014-06-22,,False,True,False,False,False,,
+43,Nalbuphine Hydrochloride (Nubain) Injection,nalbuphine hydrochloride (nubain) injection,nalbuphine hydrochloride,2014-06-22,,False,True,False,False,False,,2015-06-21
+44,Nitroglycerin (Nitronal) Injection,nitroglycerin (nitronal) injection,nitroglycerin,2014-06-22,,False,True,False,False,False,,
+45,Nitroglycerin in 5% Dextrose Injection,nitroglycerin in 5% dextrose injection,nitroglycerin dextrose,2014-06-22,,False,True,False,False,False,,2015-02-07
+46,Ondansetron (Zofran) Injection,ondansetron (zofran) injection,ondansetron,2014-06-22,,False,True,False,False,False,,2014-10-27
+47,Pancuronium Bromide Injection,pancuronium bromide injection,pancuronium bromide,2014-06-22,,False,True,False,False,False,,2015-11-08
+48,Papaverine Hydrochloride Injection,papaverine hydrochloride injection,papaverine hydrochloride,2014-06-22,,False,True,False,False,False,,2015-06-21
+49,Phosphate (Glycophos) Injection,phosphate (glycophos) injection,phosphate,2014-06-22,,False,True,False,False,False,,2015-09-26
+50,Piperacillin and Tazobactam (Zosyn) Injection,piperacillin and tazobactam (zosyn) injection,piperacillin tazobactam,2014-06-22,,False,True,False,False,False,,2020-02-28
+51,"Potassium Acetate Injection, USP 2mEq/mL","potassium acetate injection, usp 2meq/ml",potassium acetate,2014-06-22,,False,True,False,False,False,,2014-07-12
+52,Potassium Chloride Injection,potassium chloride injection,potassium chloride,2014-06-22,,False,True,False,False,False,,2019-06-29
+53,Potassium Phosphate Injection,potassium phosphate injection,potassium phosphate,2014-06-22,,False,True,False,False,False,,2014-08-14
+54,Procainamide HCL Injection,procainamide hcl injection,procainamide hydrochloride,2014-06-22,,False,True,False,False,False,,2014-07-12
+55,Prochlorperazine Injection,prochlorperazine injection,prochlorperazine,2014-06-22,,False,True,False,False,False,,2014-10-27
+56,Reserpine Tablets,reserpine tablets,reserpine,2014-06-22,,False,True,False,False,False,,
+57,Rifampin for Injection,rifampin for injection,rifampin,2014-06-22,,False,True,False,False,False,,2014-10-27
+58,Secretin Synthetic Human (ChiRhoStim) Injection,secretin synthetic human (chirhostim) injection,secretin human,2014-06-22,,False,True,False,False,False,,2015-08-01
+59,Selenium Injection,selenium injection,selenium,2014-06-22,,False,True,False,False,False,,2015-06-21
+60,Sincalide (Kinevac) Lyophilized Powder for Injection,sincalide (kinevac) lyophilized powder for injection,sincalide,2014-06-22,,False,True,False,False,False,,2016-01-03
+61,Sodium Chloride 0.9% Injection Bags,sodium chloride 0.9% injection bags,sodium chloride,2014-06-22,,False,True,False,False,False,,2019-11-15
+61,Sodium Chloride 23.4% Injection,sodium chloride 23.4% injection,sodium chloride,2014-06-22,,False,True,False,False,False,,
+62,Sodium Phosphate Injection,sodium phosphate injection,sodium phosphate,2014-06-22,,False,True,False,False,False,,2015-06-21
+63,"Succinylcholine (Anectine, Quelicin) Injection","succinylcholine (anectine, quelicin) injection",succinylcholine,2014-06-22,,False,True,False,False,False,,2015-01-29
+64,Sufentanil Citrate (Sufenta) Injection,sufentanil citrate (sufenta) injection,sufentanil citrate,2014-06-22,,False,True,False,False,False,,2017-03-17
+65,Tesamorelin (Egrifta) Injection Kit,tesamorelin (egrifta) injection kit,tesamorelin,2014-06-22,,False,True,False,False,False,,2014-11-20
+66,Thiotepa (Thioplex) for Injection,thiotepa (thioplex) for injection,thiotepa,2014-06-22,,False,True,False,False,False,,2016-01-03
+67,Tiopronin (Thiola),tiopronin (thiola),tiopronin,2014-06-22,,False,True,False,False,False,,2016-04-16
+68,Tobramycin Solution for Injection,tobramycin solution for injection,tobramycin,2014-06-22,,False,True,False,False,False,,
+69,Trace Elements,trace elements,trace element,2014-06-22,,False,True,False,False,False,,2015-11-21
+70,"Verapamil Hydrochloride Injection, USP","verapamil hydrochloride injection, usp",verapamil hydrochloride,2014-06-22,,False,True,False,False,False,,2015-01-29
+71,Vitamin A Palmitate (Aquasol A),vitamin a palmitate (aquasol a),vitamin a palmitate,2014-06-22,,False,True,False,False,False,,
+72,Zinc Injection,zinc injection,zinc,2014-06-22,,False,True,False,False,False,,2015-02-07
+73,Methazolamide (Neptazane) Tablets,methazolamide (neptazane) tablets,methazolamide,2014-07-12,20,True,False,False,False,False,,2014-08-14
+74,Acetohydroxamic Acid (Lithostat) Tablets,acetohydroxamic acid (lithostat) tablets,acetohydroxamic acid,2014-08-14,33,True,False,False,False,False,,2017-03-17
+75,Cefotetan Disodium Injection,cefotetan disodium injection,cefotetan disodium,2014-08-14,33,True,False,False,False,False,,
+76,Dihydroergotamine Mesylate Injection,dihydroergotamine mesylate injection,dihydroergotamine mesylate,2014-08-14,33,True,False,False,False,False,,2015-01-29
+77,Fluorescein Sodium Injection,fluorescein sodium injection,fluorescein sodium,2014-08-14,33,True,False,False,False,False,,2015-06-21
+78,Memantine Hydrochloride (Namenda) XR Capsules,memantine hydrochloride (namenda) xr capsules,memantine hydrochloride,2014-08-14,33,True,False,False,False,False,,2016-03-06
+79,Peritoneal Dialysis Solutions,peritoneal dialysis solutions,peritoneal dialysis,2014-08-14,33,True,False,False,False,False,,2020-03-05
+80,Ranitidine Hydrochloride (Zantac) Injection,ranitidine hydrochloride (zantac) injection,ranitidine hydrochloride,2014-08-14,33,True,False,False,False,False,,2015-01-10
+81,Sulfamethoxazole and Trimethoprim (Bactrim) Oral Suspension,sulfamethoxazole and trimethoprim (bactrim) oral suspension,sulfamethoxazole trimethoprim,2014-08-14,33,True,False,False,False,False,,2015-03-07
+82,Technetium tc99m Exametazime Injection (Ceretec Kit),technetium tc99m exametazime injection (ceretec kit),technetium tc99m exametazime,2014-08-14,33,True,False,False,False,False,,2015-02-21
+83,Tenecteplase (TNKase) Injection,tenecteplase (tnkase) injection,tenecteplase,2014-08-14,33,True,False,False,False,False,,2014-10-27
+84,Azathioprine Tablet,azathioprine tablet,azathioprine,2014-10-27,74,True,False,False,False,False,,2016-03-06
+85,Clonidine HCL Injection (Duraclon),clonidine hcl injection (duraclon),clonidine hydrochloride,2014-10-27,74,True,False,False,False,False,,2015-03-07
+86,Famotidine Injection,famotidine injection,famotidine,2014-10-27,74,True,False,False,False,False,,2015-01-29
+87,Fortaz Injection,fortaz injection,fortaz,2014-10-27,74,True,False,False,False,False,,
+88,Irrigation Solutions,irrigation solutions,irrigation solutions,2014-10-27,74,True,False,False,False,False,,2015-06-21
+89,Phenylephrine Hydrochloride Ophthalmic Solution,phenylephrine hydrochloride ophthalmic solution,phenylephrine hydrochloride,2014-10-27,74,True,False,False,False,False,,2015-02-07
+90,Radium RA-223 Dichloride (Xofigo) Injection,radium ra-223 dichloride (xofigo) injection,radium ra dichloride,2014-10-27,74,True,False,False,False,False,,2015-05-02
+91,Technetium Tc99m Succimer Injection (DMSA),technetium tc99m succimer injection (dmsa),technetium tc99m succimer,2014-10-27,74,True,False,False,False,False,,2023-01-14
+92,Triamcinolone Hexacetonide Injectable Suspension (Aristospan),triamcinolone hexacetonide injectable suspension (aristospan),triamcinolone hexacetonide,2014-10-27,74,True,False,False,False,False,,
+93,Trimipramine Maleate (SURMONTIL) Capsules,trimipramine maleate (surmontil) capsules,trimipramine maleate,2014-10-27,74,True,False,False,False,False,,2017-02-24
+94,Sterile Water for Injection Solutions,sterile water for injection solutions,water,2014-10-27,74,True,False,False,False,False,,2015-06-21
+95,Disopyramide Phosphate (Norpace) Capsules,disopyramide phosphate (norpace) capsules,disopyramide phosphate,2014-11-20,24,True,False,False,False,True,disopyramide phosphate cr,2019-05-05
+96,Trypan Blue (Membraneblue),trypan blue (membraneblue),trypan blue,2014-11-20,24,True,False,False,False,False,,2015-06-21
+97,"Vancomycin Hydrochloride for Injection, USP","vancomycin hydrochloride for injection, usp",vancomycin hydrochloride,2014-11-20,24,True,False,False,False,False,,2016-09-30
+98,Phentolamine Mesylate Injection,phentolamine mesylate injection,phentolamine mesylate,2014-12-29,14,False,False,False,False,False,,2016-03-19
+99,Quazepam (Doral) Tablets,quazepam (doral) tablets,quazepam,2014-12-29,14,False,False,False,False,False,,
+100,L-Cysteine Hydrochloride Injection,l-cysteine hydrochloride injection,cysteine hydrochloride,2015-01-10,12,False,False,False,False,False,,
+101,Dimercaprol (Bal-in-Oil) Injection,dimercaprol (bal-in-oil) injection,dimercaprol,2015-01-10,12,False,False,False,False,False,,2015-06-21
+102,"Fluoxymesterone (Androxy) Tablets, USP","fluoxymesterone (androxy) tablets, usp",fluoxymesterone,2015-01-18,8,False,False,False,False,False,,2015-10-22
+103,Methylene Blue Injection,methylene blue injection,methylene blue,2015-01-29,11,False,False,False,False,False,,2015-06-21
+104,Nebivolol (BYSTOLIC) Tablets,nebivolol (bystolic) tablets,nebivolol,2015-01-29,11,False,False,False,False,False,,2016-03-06
+105,Ketorolac Tromethamine Injection,ketorolac tromethamine injection,ketorolac tromethamine,2015-02-07,9,False,False,False,False,False,,2016-01-03
+106,Cefotaxime Sodium (Claforan) Injection,cefotaxime sodium (claforan) injection,cefotaxime sodium,2015-02-21,14,False,False,False,False,False,,
+107,Fomepizole Injection,fomepizole injection,fomepizole,2015-03-21,8,False,False,False,False,False,,2017-02-16
+108,"Calcium Chloride Injection, USP","calcium chloride injection, usp",calcium chloride,2015-06-21,50,True,False,False,False,False,,2020-12-18
+109,Chloroquine Phosphate Tablets,chloroquine phosphate tablets,chloroquine phosphate,2015-06-21,50,True,False,False,False,True,phosphate,2016-03-25
+110,Gemifloxacin Mesylate (Factive) Tablets,gemifloxacin mesylate (factive) tablets,gemifloxacin mesylate,2015-06-21,50,True,False,False,False,False,,
+111,"Imipenem and Cilastatin for Injection, USP","imipenem and cilastatin for injection, usp",imipenem cilastatin,2015-06-21,50,True,False,False,False,False,,
+112,Nimodipine (Nymalize) Oral Solution,nimodipine (nymalize) oral solution,nimodipine,2015-06-21,50,True,False,False,False,False,,2017-03-09
+113,Aprepitant (Emend) Capsules,aprepitant (emend) capsules,aprepitant,2015-07-11,18,True,False,False,False,False,,2016-03-06
+114,Ethiodized Oil (Lipiodol) Injection,ethiodized oil (lipiodol) injection,ethiodized oil,2015-07-11,18,True,False,False,False,False,,2019-08-02
+115,Sacrosidase (Sucraid) Oral Solution,sacrosidase (sucraid) oral solution,sacrosidase,2015-07-11,18,True,False,False,False,False,,2019-06-15
+116,Cefepime Injection,cefepime injection,cefepime,2015-08-01,21,True,False,False,False,False,,2021-02-11
+117,Levetiracetam (Keppra) Injection,levetiracetam (keppra) injection,levetiracetam,2015-08-01,21,True,False,False,False,False,,2016-03-06
+118,"Meropenem for Injection, USP","meropenem for injection, usp",meropenem,2015-09-05,15,True,False,False,False,False,,2016-04-09
+119,Deferoxamine Mesylate for Injection (Desferal),deferoxamine mesylate for injection (desferal),deferoxamine mesylate,2015-09-13,8,False,False,False,False,False,,
+120,Metoprolol Injection,metoprolol injection,metoprolol,2015-09-13,8,False,False,False,False,False,,2016-03-19
+121,Mometasone Furoate Monohydrate (Nasonex),mometasone furoate monohydrate (nasonex),mometasone furoate,2015-09-26,13,False,False,False,False,False,,2015-10-22
+122,Mupirocin Calcium Nasal Ointment,mupirocin calcium nasal ointment,mupirocin calcium,2015-10-22,15,True,False,False,False,False,,
+123,Indigotindisulfonate Sodium (Indigo Carmine) Injection,indigotindisulfonate sodium (indigo carmine) injection,indigotindisulfonate sodium,2015-11-21,13,False,False,False,False,False,,2017-10-19
+124,Sumatriptan (Imitrex) Nasal Spray,sumatriptan (imitrex) nasal spray,sumatriptan,2015-11-21,13,False,False,False,False,False,,2017-02-16
+125,Eptifibatide (Integrilin) Injection,eptifibatide (integrilin) injection,eptifibatide,2016-01-03,37,True,False,False,False,False,,2016-05-06
+126,LifeCare PCA™ Sterile Empty Vial and Injector,lifecare pca™ sterile empty vial and injector,lifecare pca empty injector,2016-01-03,37,True,False,False,False,False,,2016-10-16
+127,"Morphine Sulfate Injection, USP, CII, (Preservative-Free)(For PCA Use Only)","morphine sulfate injection, usp, cii, (preservative-free)(for pca use only)",morphine sulfate cii,2016-01-03,37,True,False,False,False,False,,2016-10-16
+128,Tigecycline (Tygacil) Injection,tigecycline (tygacil) injection,tigecycline,2016-01-03,37,True,False,False,False,False,,2017-04-14
+129,Anagrelide Hydrochloride Capsules,anagrelide hydrochloride capsules,anagrelide hydrochloride,2016-01-06,3,False,False,False,False,False,,2016-12-05
+130,Desmopressin Acetate Injection,desmopressin acetate injection,desmopressin acetate,2016-01-13,7,False,False,False,False,False,,2016-10-07
+131,"Potassium Acetate Injection, USP","potassium acetate injection, usp",potassium acetate,2016-03-06,40,True,False,False,False,False,,2016-05-20
+132,"Sodium Acetate Injection, USP","sodium acetate injection, usp",sodium acetate,2016-03-06,40,True,False,False,False,False,,
+133,"Sodium Bicarbonate Injection, USP","sodium bicarbonate injection, usp",sodium bicarbonate,2016-03-06,40,True,False,False,False,False,,2016-11-19
+134,Tretinoin Capsules,tretinoin capsules,tretinoin,2016-03-06,40,True,False,False,False,False,,2016-09-30
+135,"Methylprednisolone Sodium Succinate for Injection, USP","methylprednisolone sodium succinate for injection, usp",methylprednisolone sodium succinate,2016-03-19,13,False,False,False,False,False,,2018-01-12
+136,Theophylline Extended Release Tablets and Capsules,theophylline extended release tablets and capsules,theophylline,2016-04-09,6,False,False,False,False,False,,2018-04-19
+137,Bleomycin Sulfate for Injection,bleomycin sulfate for injection,bleomycin sulfate,2016-04-22,6,False,False,False,False,False,,2017-12-02
+138,Penicillin G Benzathine (Bicillin L-A) Injection,penicillin g benzathine (bicillin l-a) injection,penicillin g benzathine,2016-05-06,8,False,False,False,False,False,,2018-05-26
+139,THAM Solution (Tromethamine Injection),tham solution (tromethamine injection),tham,2016-05-06,8,False,False,False,False,False,,
+140,Dihydroergotamine Mesylate Injection,dihydroergotamine mesylate injection,dihydroergotamine mesylate,2016-07-16,9,False,False,False,False,False,,2018-03-30
+141,"Ceftazidime and Avibactam (AVYCAZ) for Injection, 2.5g","ceftazidime and avibactam (avycaz) for injection, 2.5g",ceftazidime avibactam,2016-08-13,11,False,False,False,False,False,,2017-02-09
+142,"Estradiol Valerate Injection, USP","estradiol valerate injection, usp",estradiol valerate,2016-08-13,11,False,False,False,False,False,,2017-06-14
+143,Penicillin G Procaine Injection,penicillin g procaine injection,penicillin g procaine,2016-08-24,5,False,False,False,False,False,,2019-05-05
+144,Etoposide Phosphate (Etopophos) Injection,etoposide phosphate (etopophos) injection,etoposide phosphate,2016-09-16,7,False,False,False,True,False,,2019-06-15
+145,Penicillin G Benzathine and Penicillin G Procaine (Bicillin C-R) Injection,penicillin g benzathine and penicillin g procaine (bicillin c-r) injection,penicillin g benzathine penicillin g procaine,2016-09-16,7,False,False,False,True,False,,2018-12-04
+146,Scopolamine (Transderm Scop) Transdermal System Patch,scopolamine (transderm scop) transdermal system patch,scopolamine system,2016-09-16,7,False,False,False,True,False,,2017-11-03
+147,Water-Miscible Vitamin A Palmitate (Aquasol A Parenteral),water-miscible vitamin a palmitate (aquasol a parenteral),water miscible vitamin a palmitate,2016-09-16,7,False,False,False,True,False,,2016-10-21
+148,Ketoprofen Capsules,ketoprofen capsules,ketoprofen,2016-09-25,9,False,False,False,False,False,,2016-12-24
+149,"Procainamide Hydrochloride Injection, USP","procainamide hydrochloride injection, usp",procainamide hydrochloride,2016-09-30,5,False,False,False,False,False,,2020-12-31
+150,Asparaginase Erwinia Chrysanthemi (Erwinaze),asparaginase erwinia chrysanthemi (erwinaze),asparaginase erwinia chrysanthemi,2016-10-16,9,False,False,False,False,False,,
+151,Hydroxyamphetamine Hydrobromide/Tropicamide (Paremyd),hydroxyamphetamine hydrobromide/tropicamide (paremyd),hydroxyamphetamine hydrobromide tropicamide,2016-12-14,9,False,False,False,False,False,,2017-05-19
+152,"Ranitidine Injection, USP","ranitidine injection, usp",ranitidine,2016-12-14,9,False,False,False,False,False,,
+153,Alitretinoin (Panretin) Gel,alitretinoin (panretin) gel,alitretinoin,2017-01-20,7,False,False,False,False,False,,2017-04-07
+154,"Nitrous Oxide, Gas","nitrous oxide, gas",nitrous oxide gas,2017-01-20,7,False,False,False,False,False,,
+155,Sclerosol Intrapleural Aerosol,sclerosol intrapleural aerosol,sclerosol intrapleural,2017-02-16,7,False,False,False,False,False,,
+156,Sterile Talc Powder,sterile talc powder,talc,2017-02-16,7,False,False,False,False,False,,2019-06-15
+157,Labetalol Hydrochloride Injection,labetalol hydrochloride injection,labetalol hydrochloride,2017-03-03,7,False,False,False,False,False,,2020-12-18
+158,Sincalide (Kinevac) Lyophilized Powder for Injection,sincalide (kinevac) lyophilized powder for injection,sincalide,2017-03-03,7,False,False,False,False,False,,2023-07-15
+159,"Albuterol Sulfate Inhalation Solution (0.5%, 0.021%, and 0.042%)","albuterol sulfate inhalation solution (0.5%, 0.021%, and 0.042%)",albuterol sulfate,2017-03-09,6,False,False,False,False,False,,
+160,Belatacept (Nulojix) Lyophilized Powder for Injection,belatacept (nulojix) lyophilized powder for injection,belatacept,2017-03-09,6,False,False,False,False,False,,
+161,Promethazine (Phenergan) Injection,promethazine (phenergan) injection,promethazine,2017-03-23,6,False,False,False,False,False,,2022-12-03
+162,Rocuronium Bromide Injection,rocuronium bromide injection,rocuronium bromide,2017-03-23,6,False,False,False,False,False,,2018-12-04
+163,Potassium Phosphate Injection,potassium phosphate injection,potassium phosphate,2017-04-14,7,False,False,False,False,False,,2019-06-15
+164,Methotrexate Sodium Injection,methotrexate sodium injection,methotrexate sodium,2017-04-28,7,False,False,False,False,False,,2019-12-19
+165,"Tolmetin Sodium Tablets, USP","tolmetin sodium tablets, usp",tolmetin sodium,2017-05-19,7,False,False,False,False,False,,2018-01-26
+166,Lidocaine Hydrochloride (Xylocaine) Injection with Epinephrine,lidocaine hydrochloride (xylocaine) injection with epinephrine,lidocaine hydrochloride epinephrine,2017-06-09,8,False,False,False,False,False,,
+167,"Cromolyn Sodium Inhalation Solution, USP","cromolyn sodium inhalation solution, usp",cromolyn sodium,2017-06-24,10,False,False,False,False,False,,2018-06-21
+168,Pantoprazole (Protonix) Powder for Injection,pantoprazole (protonix) powder for injection,pantoprazole,2017-06-24,10,False,False,False,False,False,,2018-12-04
+169,Dexrazoxane (Zinecard) Injection,dexrazoxane (zinecard) injection,dexrazoxane,2017-07-07,7,False,False,False,False,False,,
+170,Molindone Hydrochloride Tablets,molindone hydrochloride tablets,molindone hydrochloride,2017-07-07,7,False,False,False,False,False,,2019-05-05
+171,Atenolol Tablets,atenolol tablets,atenolol,2017-07-27,6,False,False,False,False,False,,2019-05-05
+172,Sodium Phosphate Injection,sodium phosphate injection,sodium phosphate,2017-08-25,9,False,False,False,False,True,dexamethasone sodium phosphate,2019-08-10
+173,"Aminocaproic Acid Injection, USP","aminocaproic acid injection, usp",aminocaproic acid,2017-09-21,6,False,False,False,False,False,,2018-12-04
+174,Folic Acid Injection,folic acid injection,folic acid,2017-09-21,6,False,False,False,False,False,,2018-12-04
+175,Carbidopa and Levodopa Extended Release Tablets,carbidopa and levodopa extended release tablets,carbidopa levodopa,2017-09-28,7,False,False,False,False,False,,2019-07-16
+176,"Diazepam Injection, USP","diazepam injection, usp",diazepam,2017-09-28,7,False,False,False,False,False,,2019-12-19
+177,"Metronidazole Injection, USP","metronidazole injection, usp",metronidazole,2017-10-13,7,False,False,False,False,False,,2021-01-29
+178,Amino Acids,amino acids,amino acid,2017-11-03,15,True,False,False,False,False,,2019-10-04
+179,Guanfacine Hydrochloride Tablets,guanfacine hydrochloride tablets,guanfacine hydrochloride,2017-11-03,15,True,False,False,False,False,,
+180,"Hydromorphone Hydrochloride Injection, USP","hydromorphone hydrochloride injection, usp",hydromorphone hydrochloride,2017-11-03,15,True,False,False,False,False,,
+181,Lidocaine Hydrochloride (Xylocaine) and Dextrose Injection Solution-Premix Bags,lidocaine hydrochloride (xylocaine) and dextrose injection solution-premix bags,lidocaine hydrochloride dextrose,2017-11-03,15,True,False,False,False,False,,
+182,"Metoclopramide Injection, USP","metoclopramide injection, usp",metoclopramide,2017-11-03,15,True,False,False,False,False,,2019-11-02
+183,"Morphine Sulfate Injection, USP","morphine sulfate injection, usp",morphine sulfate,2017-11-03,15,True,False,False,False,False,,
+184,Dobutamine Hydrochloride Injection,dobutamine hydrochloride injection,dobutamine hydrochloride,2017-11-09,6,False,False,False,False,False,,
+185,Dopamine Hydrochloride Injection,dopamine hydrochloride injection,dopamine hydrochloride,2017-11-09,6,False,False,False,False,False,,
+186,Heparin Sodium and Sodium Chloride 0.9% Injection,heparin sodium and sodium chloride 0.9% injection,heparin sodium sodium chloride,2017-12-02,19,True,False,False,False,False,,
+187,"Bumetanide Injection, USP","bumetanide injection, usp",bumetanide,2017-12-16,9,False,False,False,False,False,,
+188,Amoxapine Tablets,amoxapine tablets,amoxapine,2018-01-12,27,True,False,False,False,False,,2018-12-04
+189,Betaine Hydrochloride (Cystadane) for Oral Solution,betaine hydrochloride (cystadane) for oral solution,betaine hydrochloride,2018-01-12,27,True,False,False,False,False,,2018-03-23
+190,Penicillamine (Depen) Titratable Tablets,penicillamine (depen) titratable tablets,penicillamine titratable,2018-01-12,27,True,False,False,False,False,,2019-10-04
+191,Phosphate Injection Products,phosphate injection products,phosphate product,2018-01-12,27,True,False,False,False,False,,
+192,"Progesterone Injection, USP","progesterone injection, usp",progesterone,2018-01-12,27,True,False,False,False,False,,2019-10-04
+193,Dorzolamide Hydrochloride Ophthalmic Solution,dorzolamide hydrochloride ophthalmic solution,dorzolamide hydrochloride,2018-01-26,7,False,False,False,True,False,,2021-05-13
+194,Dorzolamide Hydrochloride and Timolol Maleate (Cosopt) Ophthalmic Solution,dorzolamide hydrochloride and timolol maleate (cosopt) ophthalmic solution,dorzolamide hydrochloride timolol maleate,2018-01-26,7,False,False,False,True,False,,2021-05-13
+195,Etoposide Injection,etoposide injection,etoposide,2018-01-26,7,False,False,False,True,True,etoposide phosphate,2019-06-15
+196,Methylphenidate Hydrochloride (QUILLICHEW ER) Extended-Release Chewable Tablets,methylphenidate hydrochloride (quillichew er) extended-release chewable tablets,methylphenidate hydrochloride,2018-01-26,7,False,False,False,True,False,,2019-08-10
+196,Methylphenidate Hydrochloride (QUILLIVANT XR) for Extended-Release Oral Suspension,methylphenidate hydrochloride (quillivant xr) for extended-release oral suspension,methylphenidate hydrochloride,2018-01-26,7,False,False,False,True,False,,2020-10-11
+197,Sterile Water,sterile water,water,2018-01-26,7,False,False,False,True,False,,2019-08-10
+198,"Deferoxamine Mesylate for Injection, USP","deferoxamine mesylate for injection, usp",deferoxamine mesylate,2018-02-08,9,False,False,False,False,False,,2019-09-12
+199,Fluorescein Strips,fluorescein strips,fluorescein,2018-02-08,9,False,False,False,False,False,,2021-06-13
+200,Remifentanil (Ultiva) Lyophilized Powder for Solution Injection,remifentanil (ultiva) lyophilized powder for solution injection,remifentanil,2018-02-08,9,False,False,False,False,False,,2020-03-05
+201,Thioridazine Hydrochloride Tablets,thioridazine hydrochloride tablets,thioridazine hydrochloride,2018-02-08,9,False,False,False,False,False,,2020-01-17
+202,Ketamine Injection,ketamine injection,ketamine,2018-02-16,8,False,False,False,False,False,,
+203,"Bupivacaine Hydrochloride Injection, USP","bupivacaine hydrochloride injection, usp",bupivacaine hydrochloride,2018-02-23,7,False,False,False,False,False,,
+204,"Bupivacaine Hydrochloride and Epinephrine Injection, USP","bupivacaine hydrochloride and epinephrine injection, usp",bupivacaine hydrochloride epinephrine,2018-02-23,7,False,False,False,False,False,,
+205,Diltiazem Hydrochloride,diltiazem hydrochloride,diltiazem hydrochloride,2018-02-23,7,False,False,False,False,False,,
+206,Zolpidem Tartrate (Edluar) Sublingual Tablets,zolpidem tartrate (edluar) sublingual tablets,zolpidem tartrate sublingual,2018-03-18,9,False,False,False,False,False,,2018-12-04
+207,"Phenytoin Sodium Injection, USP","phenytoin sodium injection, usp",phenytoin sodium,2018-03-23,5,False,False,False,False,False,,2019-09-12
+208,Ropivacaine Hydrochloride injection,ropivacaine hydrochloride injection,ropivacaine hydrochloride,2018-03-23,5,False,False,False,False,False,,
+209,Ketorolac Tromethamine Injection,ketorolac tromethamine injection,ketorolac tromethamine,2018-03-30,7,False,False,False,False,False,,
+210,Abciximab (ReoPro) Injection,abciximab (reopro) injection,abciximab,2018-04-19,10,False,False,False,False,False,,
+211,Eflornithine Hydrochloride (Vaniqa) Cream,eflornithine hydrochloride (vaniqa) cream,eflornithine hydrochloride,2018-04-19,10,False,False,False,False,False,,2019-06-15
+212,Leuprolide Acetate Injection,leuprolide acetate injection,leuprolide acetate,2018-04-19,10,False,False,False,False,False,,2019-06-15
+213,Ondansetron Hydrochloride Injection,ondansetron hydrochloride injection,ondansetron hydrochloride,2018-04-19,10,False,False,False,False,False,,2022-04-28
+214,Methadone Hydrochloride Injection,methadone hydrochloride injection,methadone hydrochloride,2018-04-26,7,False,False,False,False,False,,2021-06-13
+215,"Lorazepam Injection, USP","lorazepam injection, usp",lorazepam,2018-05-03,7,False,False,False,False,False,,
+216,Magnesium Sulfate Injection,magnesium sulfate injection,magnesium sulfate,2018-05-03,7,False,False,False,False,False,,2019-05-05
+217,Azithromycin (Azasite) Ophthalmic Solution 1%,azithromycin (azasite) ophthalmic solution 1%,azithromycin,2018-05-26,19,True,False,False,False,False,,2019-09-12
+218,Belladonna and Opium Suppository,belladonna and opium suppository,belladonna opium,2018-05-26,19,True,False,False,False,False,,2019-05-05
+219,"Epinephrine Injection, Auto-Injector","epinephrine injection, auto-injector",epinephrine auto injector,2018-05-26,19,True,False,False,False,True,epinephrine,2022-12-16
+220,"Erythromycin Lactobionate for Injection, USP","erythromycin lactobionate for injection, usp",erythromycin lactobionate,2018-05-26,19,True,False,False,False,False,,2020-12-18
+221,Fluorescein Sodium and Benoxinate Hydrochloride Ophthalmic Solution,fluorescein sodium and benoxinate hydrochloride ophthalmic solution,fluorescein sodium benoxinate hydrochloride,2018-05-26,19,True,False,False,False,False,,2019-12-12
+222,Isocarboxazid Tablets,isocarboxazid tablets,isocarboxazid,2018-05-26,19,True,False,False,False,False,,2020-01-17
+223,"Aminophylline Injection, USP","aminophylline injection, usp",aminophylline,2018-07-26,20,True,False,False,False,False,,2020-12-18
+224,Thiothixene Capsules,thiothixene capsules,thiothixene,2018-08-01,6,False,False,False,False,False,,2022-10-14
+225,Ketoprofen Capsules,ketoprofen capsules,ketoprofen,2018-08-26,25,True,False,False,False,False,,2022-11-10
+226,Methocarbamol Tablets,methocarbamol tablets,methocarbamol,2018-08-26,25,True,False,False,False,False,,2019-12-19
+227,Valsartan Tablets,valsartan tablets,valsartan,2018-08-26,25,True,False,False,False,False,,2020-03-05
+228,Diphenhydramine Injection,diphenhydramine injection,diphenhydramine,2018-09-17,22,True,False,False,False,False,,2021-01-29
+229,Methyldopa Tablets,methyldopa tablets,methyldopa,2018-09-17,22,True,False,False,False,False,,
+230,Scopolamine Transdermal System,scopolamine transdermal system,scopolamine system,2018-09-17,22,True,False,False,False,False,,2019-12-12
+231,Bisoprolol Fumarate Tablets,bisoprolol fumarate tablets,bisoprolol fumarate,2018-12-04,68,True,False,False,False,False,,2019-06-15
+232,Buspirone HCl Tablets,buspirone hcl tablets,buspirone hydrochloride,2018-12-04,68,True,False,False,False,False,,2020-01-17
+233,Cefazolin Injection,cefazolin injection,cefazolin,2018-12-04,68,True,False,False,False,False,,2022-12-03
+234,Haloperidol Tablets,haloperidol tablets,haloperidol,2018-12-04,68,True,False,False,False,False,,2019-12-12
+235,Letermovir (Prevymis) Injection,letermovir (prevymis) injection,letermovir,2018-12-04,68,True,False,False,False,False,,2021-09-18
+236,Nelarabine (Arranon) Injection,nelarabine (arranon) injection,nelarabine,2018-12-04,68,True,False,False,False,False,,2020-01-17
+237,Trifluoperazine Hydrochloride Tablets,trifluoperazine hydrochloride tablets,trifluoperazine hydrochloride,2018-12-04,68,True,False,False,False,False,,2019-12-12
+238,Calcitriol Injection USP 1MCG /ML,calcitriol injection usp 1mcg /ml,calcitriol,2019-01-08,35,True,False,False,False,False,,
+239,"Cycloserine Capsules, USP","cycloserine capsules, usp",cycloserine,2019-01-08,35,True,False,False,False,False,,2019-05-05
+240,Fludrocortisone Acetate Tablets,fludrocortisone acetate tablets,fludrocortisone acetate,2019-01-08,35,True,False,False,False,False,,2019-08-10
+241,Timolol Maleate Tablets,timolol maleate tablets,timolol maleate,2019-01-08,35,True,False,False,False,False,,2021-01-23
+242,"Carisoprodol Tablets, USP","carisoprodol tablets, usp",carisoprodol,2019-05-05,117,True,False,False,False,False,,2020-05-23
+243,"Cefoxitin for Injection, USP","cefoxitin for injection, usp",cefoxitin,2019-05-05,117,True,False,False,False,False,,
+244,Dexamethasone Sodium Phosphate Injection,dexamethasone sodium phosphate injection,dexamethasone sodium phosphate,2019-05-05,117,True,False,False,False,True,sodium phosphate,
+245,Dicyclomine Oral Tablets/Capsules,dicyclomine oral tablets/capsules,dicyclomine,2019-05-05,117,True,False,False,False,False,,2021-01-23
+246,"Enalaprilat Injection, USP","enalaprilat injection, usp",enalaprilat,2019-05-05,117,True,False,False,False,False,,
+247,Eprosartan Mesylate Tablets,eprosartan mesylate tablets,eprosartan mesylate,2019-05-05,117,True,False,False,False,False,,
+248,Erythromycin Ophthalmic Ointment,erythromycin ophthalmic ointment,erythromycin,2019-05-05,117,True,False,False,False,True,erythromycin lactobionate,2021-05-21
+249,Flurazepam Hydrochloride Capsules,flurazepam hydrochloride capsules,flurazepam hydrochloride,2019-05-05,117,True,False,False,False,False,,2020-12-18
+250,Fluvoxamine ER Capsules,fluvoxamine er capsules,fluvoxamine,2019-05-05,117,True,False,False,False,False,,2022-12-16
+251,Hydroxyprogesterone Caproate Injection,hydroxyprogesterone caproate injection,hydroxyprogesterone caproate,2019-05-05,117,True,False,False,False,False,,2019-08-10
+252,Hydroxyzine Pamoate Oral Capsules,hydroxyzine pamoate oral capsules,hydroxyzine pamoate,2019-05-05,117,True,False,False,False,False,,2021-02-21
+253,Latanoprost Ophthalmic Solution 0.005%,latanoprost ophthalmic solution 0.005%,latanoprost,2019-05-05,117,True,False,False,False,False,,2020-04-11
+254,"Levetiracetam Immediate-Release Oral Tablets, USP","levetiracetam immediate-release oral tablets, usp",levetiracetam,2019-05-05,117,True,False,False,False,False,,2021-03-18
+255,"Metoprolol Tartrate Injection, USP","metoprolol tartrate injection, usp",metoprolol tartrate,2019-05-05,117,True,False,False,False,False,,2021-01-29
+256,Nystatin Oral Suspension,nystatin oral suspension,nystatin,2019-05-05,117,True,False,False,False,False,,2020-05-09
+257,Olmesartan Medoxomil Tablets,olmesartan medoxomil tablets,olmesartan medoxomil,2019-05-05,117,True,False,False,False,False,,2020-03-13
+258,"Physostigmine Salicylate Injection, USP","physostigmine salicylate injection, usp",physostigmine salicylate,2019-05-05,117,True,False,False,False,False,,
+259,Prednisolone Acetate 1% Ophthalmic Suspension,prednisolone acetate 1% ophthalmic suspension,prednisolone acetate,2019-05-05,117,True,False,False,False,False,,2019-11-02
+260,"Capreomycin Injection, USP","capreomycin injection, usp",capreomycin,2019-06-15,41,True,False,False,False,False,,
+261,Pantoprazole Sodium for Injection,pantoprazole sodium for injection,pantoprazole sodium,2019-06-15,41,True,False,False,False,False,,
+262,"Potassium Acetate Injection, USP","potassium acetate injection, usp",potassium acetate,2019-06-15,41,True,False,False,False,False,,
+263,Sildenafil Citrate (REVATIO),sildenafil citrate (revatio),sildenafil citrate,2019-06-15,41,True,False,False,False,False,,2019-11-02
+264,Tacrolimus Capsules,tacrolimus capsules,tacrolimus,2019-06-15,41,True,False,False,False,False,,2022-05-07
+265,"Primaquine Phosphate Tablet, EQ 15mg Base","primaquine phosphate tablet, eq 15mg base",primaquine phosphate,2019-07-23,7,False,False,False,False,False,,2019-12-12
+266,Vinblastine Sulfate Injection,vinblastine sulfate injection,vinblastine sulfate,2019-07-23,7,False,False,False,False,False,,2020-03-05
+267,Pentamidine Isethionate (Nebupent) For Inhalation Solution,pentamidine isethionate (nebupent) for inhalation solution,pentamidine isethionate,2019-08-10,8,False,False,False,False,False,,2019-09-17
+268,Alogliptin Tablets,alogliptin tablets,alogliptin,2019-08-17,7,False,False,False,False,False,,2020-10-11
+269,Parathyroid Hormone (Natpara) Injection,parathyroid hormone (natpara) injection,parathyroid hormone,2019-09-12,19,True,False,False,False,False,,
+270,Amphetamine Aspartate; Amphetamine Sulfate; Dextroamphetamine Saccharate; Dextroamphetamine Sulfate Tablets,amphetamine aspartate; amphetamine sulfate; dextroamphetamine saccharate; dextroamphetamine sulfate tablets,amphetamine aspartate amphetamine sulfate dextroamphetamine saccharate dextroamphetamine sulfate,2019-09-17,5,False,False,False,False,False,,2022-06-02
+271,Difluprednate (Durezol) Ophthalmic Emulsion,difluprednate (durezol) ophthalmic emulsion,difluprednate,2019-09-17,5,False,False,False,False,False,,2019-11-02
+272,"Triamcinolone Acetonide (Triesence) Injection, Suspension","triamcinolone acetonide (triesence) injection, suspension",triamcinolone acetonide,2019-09-17,5,False,False,False,False,False,,2021-01-23
+273,Disulfiram Tablets,disulfiram tablets,disulfiram,2019-10-04,17,True,False,False,False,False,,2020-08-28
+274,Echothiophate Iodide (Phospholine Iodide) Ophthalmic Solution,echothiophate iodide (phospholine iodide) ophthalmic solution,echothiophate iodide,2019-10-04,17,True,False,False,False,False,,
+275,Anagrelide Hydrochloride Capsules,anagrelide hydrochloride capsules,anagrelide hydrochloride,2019-11-02,29,True,False,False,False,False,,2021-07-24
+276,Bacitracin Ophthalmic Ointment,bacitracin ophthalmic ointment,bacitracin,2019-11-02,29,True,False,False,False,False,,2020-05-02
+277,Nalbuphine Hydrochloride Injection,nalbuphine hydrochloride injection,nalbuphine hydrochloride,2019-11-02,29,True,False,False,False,False,,2021-07-02
+278,Trifluridine Ophthalmic Solution,trifluridine ophthalmic solution,trifluridine,2019-11-02,29,True,False,False,False,False,,2021-01-23
+279,"Vincristine Sulfate Injection, USP (Preservative-Free)","vincristine sulfate injection, usp (preservative-free)",vincristine sulfate,2019-11-02,29,True,False,False,False,False,,2020-02-08
+280,"Oxytocin Injection, USP Synthetic","oxytocin injection, usp synthetic",oxytocin,2019-11-15,13,False,False,False,False,False,,
+281,Leuprolide Acetate (Lupron Depot; Lupron Depot Ped) Injection,leuprolide acetate (lupron depot; lupron depot ped) injection,leuprolide acetate,2019-12-12,27,True,False,False,False,False,,2020-01-17
+282,Loxapine Capsules,loxapine capsules,loxapine,2019-12-12,27,True,False,False,False,False,,2022-06-19
+283,Pioglitazone Hydrochloride and Metformin Hydrochloride Tablets,pioglitazone hydrochloride and metformin hydrochloride tablets,pioglitazone hydrochloride metformin hydrochloride,2020-02-13,5,False,False,False,False,False,,
+284,"AVYCAZ® (ceftazidime and avibactam) for Injection, 2 grams/0.5 grams","avycaz® (ceftazidime and avibactam) for injection, 2 grams/0.5 grams",avycaz gram gram,2020-02-28,11,False,False,False,False,False,,
+285,Pindolol Tablets,pindolol tablets,pindolol,2020-02-28,11,False,False,False,False,False,,2022-01-12
+286,Amoxapine Tablets,amoxapine tablets,amoxapine,2020-03-13,8,False,False,False,False,False,,
+287,Nizatidine Capsules,nizatidine capsules,nizatidine,2020-03-28,9,False,False,False,False,False,,
+288,Rifapentine Tablets,rifapentine tablets,rifapentine,2020-03-28,9,False,False,False,False,False,,
+289,Chloroquine Phosphate Tablets,chloroquine phosphate tablets,chloroquine phosphate,2020-04-04,7,False,False,False,True,False,,2020-05-09
+290,"Hydrocortisone Tablets, USP","hydrocortisone tablets, usp",hydrocortisone,2020-04-04,7,False,False,False,True,False,,
+291,Hydroxychloroquine Sulfate Tablets,hydroxychloroquine sulfate tablets,hydroxychloroquine sulfate,2020-04-04,7,False,False,False,True,False,,2020-07-04
+292,"Midazolam Injection, USP","midazolam injection, usp",midazolam,2020-04-04,7,False,False,False,True,False,,
+293,Cisatracurium Besylate Injection,cisatracurium besylate injection,cisatracurium besylate,2020-04-11,7,False,False,False,True,False,,2021-07-28
+294,Dexmedetomidine Injection,dexmedetomidine injection,dexmedetomidine,2020-04-11,7,False,False,False,True,False,,
+295,Etomidate Injection,etomidate injection,etomidate,2020-04-11,7,False,False,False,True,False,,2021-04-22
+296,"Furosemide Injection, USP","furosemide injection, usp",furosemide,2020-04-11,7,False,False,False,True,False,,
+297,Propofol Injectable Emulsion,propofol injectable emulsion,propofol,2020-04-11,7,False,False,False,True,False,,2022-11-23
+298,Azithromycin Tablets,azithromycin tablets,azithromycin,2020-04-17,6,False,False,False,False,False,,2020-12-31
+299,Continuous Renal Replacement Therapy (CRRT) Solutions,continuous renal replacement therapy (crrt) solutions,continuous renal replacement therapy,2020-04-25,8,False,False,False,False,False,,2022-09-20
+300,Sulfasalazine Tablets,sulfasalazine tablets,sulfasalazine,2020-04-25,8,False,False,False,False,False,,
+301,Hydroxypropyl (Lacrisert) Cellulose Ophthalmic Insert,hydroxypropyl (lacrisert) cellulose ophthalmic insert,hydroxypropyl cellulose insert,2020-05-02,7,False,False,False,False,False,,
+302,Famotidine Injection,famotidine injection,famotidine,2020-05-09,7,False,False,False,False,False,,2021-11-18
+302,Famotidine Tablets,famotidine tablets,famotidine,2020-05-09,7,False,False,False,False,False,,2021-11-18
+303,"Lithium Carbonate Oral Solution, USP","lithium carbonate oral solution, usp",lithium carbonate,2020-05-09,7,False,False,False,False,False,,
+304,Vecuronium Bromide for Injection,vecuronium bromide for injection,vecuronium bromide,2020-05-09,7,False,False,False,False,False,,
+305,Dimercaprol (Bal in Oil) Injection USP,dimercaprol (bal in oil) injection usp,dimercaprol,2020-05-16,7,False,False,False,False,False,,
+306,Amifostine Injection,amifostine injection,amifostine,2020-05-23,7,False,False,False,False,False,,
+307,Lithium Oral Solution,lithium oral solution,lithium,2020-05-23,7,False,False,False,False,True,lithium carbonate,
+308,"Sertraline Hydrochloride Oral Solution, USP","sertraline hydrochloride oral solution, usp",sertraline hydrochloride,2020-05-28,5,False,False,False,False,False,,2021-04-18
+309,Rabeprazole Sodium Delayed-Release Tablets,rabeprazole sodium delayed-release tablets,rabeprazole sodium,2020-06-21,10,False,False,False,False,False,,
+310,Doxycycline Hyclate Injection,doxycycline hyclate injection,doxycycline hyclate,2020-07-11,7,False,False,False,False,False,,2021-01-17
+311,Leuprolide Acetate Injection,leuprolide acetate injection,leuprolide acetate,2020-07-25,8,False,False,False,False,False,,2022-10-28
+312,Chlorothiazide (Diuril) Oral Suspension,chlorothiazide (diuril) oral suspension,chlorothiazide,2020-08-13,5,False,False,False,False,False,,2020-12-31
+313,Tobramycin Lyophilized Powder for Injection,tobramycin lyophilized powder for injection,tobramycin,2020-08-28,7,False,False,False,False,False,,2021-04-18
+314,"Hydralazine Hydrochloride Injection, USP","hydralazine hydrochloride injection, usp",hydralazine hydrochloride,2020-09-13,8,False,False,False,False,False,,
+315,"Floxuridine for Injection, USP","floxuridine for injection, usp",floxuridine,2020-09-20,7,False,False,False,False,False,,
+316,Nefazodone Hydrochloride Tablets,nefazodone hydrochloride tablets,nefazodone hydrochloride,2020-09-20,7,False,False,False,False,False,,2022-06-19
+317,Cysteamine Hydrochloride Ophthalmic Solution,cysteamine hydrochloride ophthalmic solution,cysteamine hydrochloride,2020-10-30,6,False,False,False,False,False,,2022-06-19
+318,Cyclopentolate Ophthalmic Solution,cyclopentolate ophthalmic solution,cyclopentolate,2020-11-13,7,False,False,False,False,False,,
+319,Acetazolamide Injection,acetazolamide injection,acetazolamide,2020-12-08,12,False,False,False,False,False,,2022-06-19
+320,Amino Acids,amino acids,amino acid,2020-12-18,10,False,False,False,False,False,,2020-12-23
+321,Zinc Acetate Capsules,zinc acetate capsules,zinc acetate,2020-12-18,10,False,False,False,False,False,,2021-05-21
+322,Azacitidine for Injection,azacitidine for injection,azacitidine,2020-12-23,5,False,False,False,False,False,,
+323,Teprotumumab-trbw,teprotumumab-trbw,teprotumumab trbw,2020-12-23,5,False,False,False,False,False,,2023-04-30
+324,Misoprostol (Cytotec) Tablets,misoprostol (cytotec) tablets,misoprostol,2020-12-31,8,False,False,False,False,False,,
+324,Misoprostol Tablets,misoprostol tablets,misoprostol,2020-12-31,8,False,False,False,False,False,,2022-03-17
+325,"Valproate Sodium Injection, USP","valproate sodium injection, usp",valproate sodium,2020-12-31,8,False,False,False,False,False,,
+326,Ceftolozane and Tazobactam (Zerbaxa) Injection,ceftolozane and tazobactam (zerbaxa) injection,ceftolozane tazobactam,2021-01-05,5,False,False,False,False,False,,2022-03-17
+327,Calcium Disodium Versenate Injection,calcium disodium versenate injection,calcium disodium versenate,2021-02-11,7,False,False,False,True,False,,
+328,"Ceftazidime and Avibactam (AVYCAZ®) for Injection, 2 grams/0.5 grams","ceftazidime and avibactam (avycaz®) for injection, 2 grams/0.5 grams",ceftazidime avibactam gram gram,2021-02-11,7,False,False,False,True,False,,2022-02-11
+329,Histreline Acetate Implant,histreline acetate implant,histreline acetate implant,2021-02-11,7,False,False,False,True,False,,
+330,Isoniazid Injection USP,isoniazid injection usp,isoniazid,2021-02-11,7,False,False,False,True,False,,
+331,Rifampin Injection,rifampin injection,rifampin,2021-02-21,10,False,False,False,False,False,,
+332,Trimethobenzamide Hydrochloride Capsules,trimethobenzamide hydrochloride capsules,trimethobenzamide hydrochloride,2021-02-21,10,False,False,False,False,False,,
+333,Succimer (Chemet) Capsules,succimer (chemet) capsules,succimer,2021-02-26,5,False,False,False,False,True,technetium tc99m succimer,2021-09-18
+334,Desmopressin Acetate (Stimate) Nasal Spray,desmopressin acetate (stimate) nasal spray,desmopressin acetate,2021-03-18,11,False,False,False,False,False,,
+335,Calcium Gluconate Injection,calcium gluconate injection,calcium gluconate,2021-04-11,24,True,False,False,False,False,,2023-09-08
+336,"Chlordiazepoxide Hydrochloride USP, Capsules","chlordiazepoxide hydrochloride usp, capsules",chlordiazepoxide hydrochloride,2021-04-11,24,True,False,False,False,False,,
+337,Cortisone Acetate Tablets,cortisone acetate tablets,cortisone acetate,2021-04-11,24,True,False,False,False,False,,
+338,Disopyramide Phosphate (Norpace) Capsules,disopyramide phosphate (norpace) capsules,disopyramide phosphate,2021-04-11,24,True,False,False,False,False,,
+339,Hydroxocobalamin Injection,hydroxocobalamin injection,hydroxocobalamin,2021-04-22,4,False,False,False,False,False,,2022-01-22
+340,"Protamine Sulfate Injection, USP","protamine sulfate injection, usp",protamine sulfate,2021-04-22,4,False,False,False,False,False,,
+341,Triamcinolone Hexacetonide Injectable suspension,triamcinolone hexacetonide injectable suspension,triamcinolone hexacetonide,2021-05-06,6,False,False,False,False,False,,
+342,Chloroprocaine Hydrochloride Injection,chloroprocaine hydrochloride injection,chloroprocaine hydrochloride,2021-05-21,8,False,False,False,False,False,,
+343,Methohexital Sodium (Brevital) Injection,methohexital sodium (brevital) injection,methohexital sodium,2021-05-21,8,False,False,False,False,False,,2021-11-18
+344,Digoxin Injection,digoxin injection,digoxin,2021-06-13,23,True,False,False,False,False,,2024-05-05
+345,Crisantaspase (Erwinase),crisantaspase (erwinase),crisantaspase,2021-07-02,10,False,False,False,False,False,,
+346,Varenicline Tartrate (Chantix) Tablets,varenicline tartrate (chantix) tablets,varenicline tartrate,2021-07-02,10,False,False,False,False,False,,2022-06-02
+347,Mepivacaine Hydrochloride Injection,mepivacaine hydrochloride injection,mepivacaine hydrochloride,2021-07-14,12,False,False,False,False,False,,2024-02-17
+348,Gentamicin Sulfate Injection,gentamicin sulfate injection,gentamicin sulfate,2021-07-24,10,False,False,False,False,False,,2024-07-27
+349,Tocilizumab Injection,tocilizumab injection,tocilizumab,2021-08-18,5,False,False,False,False,False,,2022-04-06
+350,Sodium Phosphates Injection,sodium phosphates injection,sodium phosphate,2021-09-18,22,True,False,False,False,True,dexamethasone sodium phosphate,
+351,Cytarabine Injection,cytarabine injection,cytarabine,2021-09-27,9,False,False,False,False,False,,2024-07-13
+352,Mannitol Injection,mannitol injection,mannitol,2021-09-27,9,False,False,False,False,False,,2024-02-24
+353,Paclitaxel Injection (protein-bound particles),paclitaxel injection (protein-bound particles),paclitaxel,2021-10-08,11,False,False,False,False,False,,2023-02-10
+354,Kit for the Preparation of Technetium Tc 99m Sulfur Colloid Injection,kit for the preparation of technetium tc 99m sulfur colloid injection,the preparation of technetium tc 99m sulfur colloid,2021-10-08,11,False,False,False,False,False,,
+355,Triamcinolone Acetonide Injectable Suspension,triamcinolone acetonide injectable suspension,triamcinolone acetonide,2021-10-08,11,False,False,False,False,False,,
+356,Dacarbazine Injection,dacarbazine injection,dacarbazine,2021-10-27,9,False,False,False,False,False,,
+357,Lipid Injection,lipid injection,lipid,2021-10-27,9,False,False,False,False,False,,
+358,Vitamin A Palmitate (Aquasol A) Injection,vitamin a palmitate (aquasol a) injection,vitamin a palmitate,2021-10-27,9,False,False,False,False,False,,2022-04-16
+359,Potassium Chloride Concentrate Injection,potassium chloride concentrate injection,potassium chloride,2021-11-04,8,False,False,False,False,False,,
+360,"Amphetamine Oral Suspension, Extended Release","amphetamine oral suspension, extended release",amphetamine,2021-12-05,17,True,False,False,False,False,,2022-08-26
+361,Bacteriostatic Water for Injection,bacteriostatic water for injection,bacteriostatic water,2021-12-05,17,True,False,False,False,False,,
+362,Technetium Tc 99m Sulfur Colloid Injection,technetium tc 99m sulfur colloid injection,technetium tc 99m sulfur colloid,2021-12-05,17,True,False,False,False,True,the preparation of technetium tc 99m sulfur colloid,2022-05-07
+363,Sterile Water for Injection,sterile water for injection,water,2021-12-05,17,True,False,False,False,False,,
+364,Bacteriostatic 0.9% Sodium Chloride Injection,bacteriostatic 0.9% sodium chloride injection,bacteriostatic sodium chloride,2021-12-18,11,False,False,False,False,False,,
+365,Methylprednisolone Acetate Injection,methylprednisolone acetate injection,methylprednisolone acetate,2021-12-18,11,False,False,False,False,False,,
+366,Cefixime Oral Capsules,cefixime oral capsules,cefixime,2022-01-22,10,False,False,False,False,False,,
+367,Dextrose 50% Injection,dextrose 50% injection,dextrose,2022-01-22,10,False,False,False,False,False,,
+368,Metronidazole Injection,metronidazole injection,metronidazole,2022-01-22,10,False,False,False,False,False,,
+369,Azithromycin (Azasite) Ophthalmic Solution 1%,azithromycin (azasite) ophthalmic solution 1%,azithromycin,2022-03-04,11,False,False,False,False,False,,2023-08-04
+370,Diflunisal Tablets,diflunisal tablets,diflunisal,2022-03-04,11,False,False,False,False,False,,2023-08-04
+371,Streptozocin Powder for Injection,streptozocin powder for injection,streptozocin,2022-03-04,11,False,False,False,False,False,,
+372,Conivaptan Hydrochloride (Vaprisol) in 5% Dextrose Plastic Container,conivaptan hydrochloride (vaprisol) in 5% dextrose plastic container,conivaptan hydrochloride dextrose plastic container,2022-03-17,9,False,False,False,False,True,dextrose,
+373,Pentostatin Injection,pentostatin injection,pentostatin,2022-03-26,9,False,False,False,False,False,,2023-05-20
+374,Semaglutide (WEGOVY®) Injection,semaglutide (wegovy®) injection,semaglutide,2022-04-06,11,False,False,False,False,False,,
+375,Technetium TC-99M Mebrofenin Injection,technetium tc-99m mebrofenin injection,technetium tc 99m mebrofenin,2022-04-06,11,False,False,False,False,False,,2023-08-10
+376,Fludarabine Phosphate Injection,fludarabine phosphate injection,fludarabine phosphate,2022-05-07,9,False,False,False,False,False,,2024-04-21
+377,Fluorescein Injection,fluorescein injection,fluorescein,2022-05-07,9,False,False,False,False,False,,2022-12-10
+378,Ibutilide Fumarate Injection,ibutilide fumarate injection,ibutilide fumarate,2022-05-07,9,False,False,False,False,False,,2023-10-05
+379,Sufentanil Citrate Injection,sufentanil citrate injection,sufentanil citrate,2022-05-07,9,False,False,False,False,False,,
+380,Iodixanol (Visipaque) Injection,iodixanol (visipaque) injection,iodixanol,2022-05-13,6,False,False,False,False,False,,
+381,Iohexol (Omnipaque) Injection,iohexol (omnipaque) injection,iohexol,2022-05-13,6,False,False,False,False,False,,
+382,Lutetium Lu 177 Dotatate (LUTATHERA) Injection,lutetium lu 177 dotatate (lutathera) injection,lutetium lu dotatate,2022-05-13,6,False,False,False,False,False,,2022-08-02
+383,Iopromide (Ultravist) Injection,iopromide (ultravist) injection,iopromide,2022-06-02,10,False,False,False,False,False,,2022-11-04
+384,Diazepam Rectal Gel,diazepam rectal gel,diazepam,2022-06-19,17,True,False,False,False,False,,
+385,Remifentanil Injection,remifentanil injection,remifentanil,2022-07-01,8,False,False,False,False,False,,
+386,Erythromycin Ophthalmic Ointment,erythromycin ophthalmic ointment,erythromycin,2022-07-17,7,False,False,False,False,False,,
+387,Iomeprol injection,iomeprol injection,iomeprol,2022-07-17,7,False,False,False,False,False,,2022-12-28
+388,Vandetanib Tablets,vandetanib tablets,vandetanib,2022-07-17,7,False,False,False,False,False,,2022-10-28
+389,Belladonna and Opium Suppositories,belladonna and opium suppositories,belladonna opium suppositorie,2022-08-14,12,False,False,False,False,False,,
+390,Flurazepam Hydrochloride Capsules,flurazepam hydrochloride capsules,flurazepam hydrochloride,2022-08-14,12,False,False,False,False,False,,
+391,Indigotindisulfonate Sodium Injection,indigotindisulfonate sodium injection,indigotindisulfonate sodium,2022-08-26,8,False,False,False,False,False,,2024-03-16
+392,IV Fat Emulsion,iv fat emulsion,fat,2022-09-15,10,False,False,False,False,False,,
+393,"Conjugated Estrogens/Bazedoxifene (DUAVEE) Tablet, Film Coated","conjugated estrogens/bazedoxifene (duavee) tablet, film coated",conjugated estrogen bazedoxifene,2022-10-01,11,False,False,False,False,False,,
+394,Oxytocin Injection,oxytocin injection,oxytocin,2022-10-01,11,False,False,False,False,False,,2023-08-17
+395,Etomidate Injection,etomidate injection,etomidate,2022-10-07,6,False,False,False,False,False,,
+396,Alprostadil (Muse) Suppository,alprostadil (muse) suppository,alprostadil,2022-10-21,7,False,False,False,False,False,,
+397,Verteporfin (Visudyne) Injection,verteporfin (visudyne) injection,verteporfin,2022-10-21,7,False,False,False,False,False,,2023-02-10
+398,Albuterol Sulfate Inhalational Solution,albuterol sulfate inhalational solution,albuterol sulfate,2022-10-28,7,False,False,False,False,False,,
+399,Amoxicillin Oral Solution,amoxicillin oral solution,amoxicillin,2022-10-28,7,False,False,False,False,False,,
+400,Neomycin Sulfate Tablets,neomycin sulfate tablets,neomycin sulfate,2022-11-19,9,False,False,False,False,False,,
+401,Technetium TC-99m Sodium Pertechnetate Generator,technetium tc-99m sodium pertechnetate generator,technetium tc 99m sodium pertechnetate generator,2022-11-19,9,False,False,False,False,False,,2023-01-21
+402,Collagenase Ointment,collagenase ointment,collagenase,2022-11-23,4,False,False,False,False,False,,
+403,Edetate Calcium Disodium Injection,edetate calcium disodium injection,edetate calcium disodium,2022-12-03,10,False,False,False,False,False,,2023-10-27
+404,Dulaglutide (Trulicity) Injection,dulaglutide (trulicity) injection,dulaglutide,2022-12-16,6,False,False,False,False,False,,
+405,Oxybutynin Chloride Syrup,oxybutynin chloride syrup,oxybutynin chloride,2022-12-16,6,False,False,False,False,False,,2024-09-01
+406,Tirzepatide Injection,tirzepatide injection,tirzepatide,2022-12-16,6,False,False,False,False,False,,
+407,Chlorothiazide Oral Suspension,chlorothiazide oral suspension,chlorothiazide,2022-12-24,8,False,False,False,False,False,,
+408,Difluprednate Ophthalmic Emulsion,difluprednate ophthalmic emulsion,difluprednate,2022-12-24,8,False,False,False,False,False,,
+409,Somatropin Injection,somatropin injection,somatropin,2023-01-06,9,False,False,False,False,False,,
+410,Sucralfate Tablets,sucralfate tablets,sucralfate,2023-01-06,9,False,False,False,False,False,,
+411,Quinapril Hydrochloride Tablets,quinapril hydrochloride tablets,quinapril hydrochloride,2023-01-21,7,False,False,False,False,False,,
+412,Quinapril and Hydrochlorothiazide Tablets,quinapril and hydrochlorothiazide tablets,quinapril hydrochlorothiazide,2023-01-21,7,False,False,False,False,False,,
+413,Capecitabine Tablets,capecitabine tablets,capecitabine,2023-02-10,6,False,False,False,False,False,,
+414,Cisplatin Injection,cisplatin injection,cisplatin,2023-02-10,6,False,False,False,False,False,,2024-06-28
+415,Palifermin (Kepivance) Lyophilized Powder for Injection,palifermin (kepivance) lyophilized powder for injection,palifermin,2023-02-10,6,False,False,False,False,False,,
+416,Rocuronium Bromide Injection,rocuronium bromide injection,rocuronium bromide,2023-02-18,8,False,False,False,False,False,,2023-02-25
+417,Dimercaprol (Bal in Oil) Injection,dimercaprol (bal in oil) injection,dimercaprol,2023-03-05,8,False,False,False,False,False,,
+418,Lutetium Lu 177 Vipivotide Tetraxetan (Pluvicto) Injection,lutetium lu 177 vipivotide tetraxetan (pluvicto) injection,lutetium lu vipivotide tetraxetan,2023-03-09,4,False,False,False,False,False,,
+419,Clonazepam Tablets,clonazepam tablets,clonazepam,2023-03-17,8,False,False,False,False,False,,
+420,Methamphetamine Hydrochloride Tablets,methamphetamine hydrochloride tablets,methamphetamine hydrochloride,2023-03-17,8,False,False,False,False,False,,
+421,Methotrexate Injection,methotrexate injection,methotrexate,2023-03-17,8,False,False,False,False,False,,
+422,Clindamycin Phosphate Injection,clindamycin phosphate injection,clindamycin phosphate,2023-03-24,7,False,False,False,False,False,,
+423,Hydrocortisone Sodium Succinate Injection,hydrocortisone sodium succinate injection,hydrocortisone sodium succinate,2023-03-24,7,False,False,False,False,False,,
+424,Chloramphenicol Sodium Succinate Injection,chloramphenicol sodium succinate injection,chloramphenicol sodium succinate,2023-04-07,7,False,False,False,False,False,,
+425,Carboplatin Injection,carboplatin injection,carboplatin,2023-04-30,8,False,False,False,False,False,,
+426,Penicillin G Benzathine Injectable Suspension,penicillin g benzathine injectable suspension,penicillin g benzathine,2023-04-30,8,False,False,False,False,False,,
+427,Rivaroxaban Oral Suspension,rivaroxaban oral suspension,rivaroxaban,2023-06-16,7,False,False,False,False,False,,2023-07-15
+428,Lisdexamfetamine Dimesylate Capsules,lisdexamfetamine dimesylate capsules,lisdexamfetamine dimesylate,2023-07-15,10,False,False,False,False,False,,
+429,Liraglutide Injection,liraglutide injection,liraglutide,2023-07-22,7,False,False,False,False,False,,
+430,Methylphenidate Hydrochloride Extended Release Tablets,methylphenidate hydrochloride extended release tablets,methylphenidate hydrochloride,2023-07-29,7,False,False,False,False,False,,
+431,"Atropa Belladonna, Opium Suppository","atropa belladonna, opium suppository",atropa belladonna opium,2023-09-16,8,False,False,True,True,False,,
+432,"Bazedoxifene Acetate, Estrogens, Conjugated Tablet, Film Coated","bazedoxifene acetate, estrogens, conjugated tablet, film coated",bazedoxifene acetate estrogen conjugated,2023-09-16,8,False,False,True,True,False,,
+433,"Bupivacaine Hydrochloride, Epinephrine Bitartrate Injection, Solution","bupivacaine hydrochloride, epinephrine bitartrate injection, solution",bupivacaine hydrochloride epinephrine bitartrate,2023-09-16,8,False,False,True,True,True,bupivacaine hydrochloride,
+434,"Clindamycin Injection, Solution","clindamycin injection, solution",clindamycin,2023-09-16,8,False,False,True,True,True,clindamycin phosphate,
+435,Clindaymycin Phosphate Injection,clindaymycin phosphate injection,clindaymycin phosphate,2023-09-16,8,False,False,True,True,False,,
+436,Collagenase Clostridium Histolyticum Ointment,collagenase clostridium histolyticum ointment,collagenase clostridium histolyticum,2023-09-16,8,False,False,True,True,True,collagenase,2024-04-14
+437,"Conivaptan Hydrochloride Injection, Solution","conivaptan hydrochloride injection, solution",conivaptan hydrochloride,2023-09-16,8,False,False,True,True,True,conivaptan hydrochloride dextrose plastic container,
+438,Cyclopentolate Hydrochloride Solution,cyclopentolate hydrochloride solution,cyclopentolate hydrochloride,2023-09-16,8,False,False,True,True,False,,
+438,Cyclopentolate Hydrochloride Solution/ Drops,cyclopentolate hydrochloride solution/ drops,cyclopentolate hydrochloride,2023-09-16,8,False,False,True,True,False,,
+439,"Cyclopentolate Hydrochloride, Phenylephrine Hydrochloride Solution/ Drops","cyclopentolate hydrochloride, phenylephrine hydrochloride solution/ drops",cyclopentolate hydrochloride phenylephrine hydrochloride,2023-09-16,8,False,False,True,True,False,,
+440,Dexmedetomidine Hydrochloride Injection,dexmedetomidine hydrochloride injection,dexmedetomidine hydrochloride,2023-09-16,8,False,False,True,True,True,dexmedetomidine,
+440,"Dexmedetomidine Hydrochloride Injection, Solution","dexmedetomidine hydrochloride injection, solution",dexmedetomidine hydrochloride,2023-09-16,8,False,False,True,True,True,dexmedetomidine,
+440,"Dexmedetomidine Hydrochloride Injection, Solution, Concentrate","dexmedetomidine hydrochloride injection, solution, concentrate",dexmedetomidine hydrochloride,2023-09-16,8,False,False,True,True,True,dexmedetomidine,
+441,"Dextrose Monohydrate, Lidocaine Hydrochloride Anhydrous Injection, Solution","dextrose monohydrate, lidocaine hydrochloride anhydrous injection, solution",dextrose lidocaine hydrochloride,2023-09-16,8,False,False,True,True,True,dextrose,
+442,"Disopyramide Phosphate Capsule, Gelatin Coated","disopyramide phosphate capsule, gelatin coated",disopyramide phosphate gelatin,2023-09-16,8,False,False,True,True,True,disopyramide phosphate,
+443,"Epinephrine Bitartrate, Lidocaine Hydrochloride Anhydrous Injection, Solution","epinephrine bitartrate, lidocaine hydrochloride anhydrous injection, solution",epinephrine bitartrate lidocaine hydrochloride,2023-09-16,8,False,False,True,True,True,epinephrine,
+444,"Epinephrine, Lidocaine Hydrochloride Injection, Solution","epinephrine, lidocaine hydrochloride injection, solution",epinephrine lidocaine hydrochloride,2023-09-16,8,False,False,True,True,True,epinephrine,
+445,"Fish Oil, Medium-chain Triglycerides, Olive Oil, Soybean Oil Injection, Emulsion","fish oil, medium-chain triglycerides, olive oil, soybean oil injection, emulsion",fish oil medium chain triglyceride olive oil soybean oil,2023-09-16,8,False,False,True,True,False,,
+446,"Fluconazole Injection, Solution","fluconazole injection, solution",fluconazole,2023-09-16,8,False,False,True,True,False,,
+447,Fluorescein Sodium Injection,fluorescein sodium injection,fluorescein sodium,2023-09-16,8,False,False,True,True,True,fluorescein,2023-12-10
+447,"Fluorescein Sodium Injection, Solution","fluorescein sodium injection, solution",fluorescein sodium,2023-09-16,8,False,False,True,True,True,fluorescein,
+448,Heparin Sodium Injection,heparin sodium injection,heparin sodium,2023-09-16,8,False,False,True,True,False,,
+448,"Heparin Sodium Injection, Solution","heparin sodium injection, solution",heparin sodium,2023-09-16,8,False,False,True,True,False,,
+449,"Hydrochlorothiazide, Quinapril Hydrochloride Tablet, Film Coated","hydrochlorothiazide, quinapril hydrochloride tablet, film coated",hydrochlorothiazide quinapril hydrochloride,2023-09-16,8,False,False,True,True,True,quinapril hydrochloride,
+450,Ketamine Hydrochloride Injection,ketamine hydrochloride injection,ketamine hydrochloride,2023-09-16,8,False,False,True,True,True,ketamine,
+450,"Ketamine Hydrochloride Injection, Solution","ketamine hydrochloride injection, solution",ketamine hydrochloride,2023-09-16,8,False,False,True,True,True,ketamine,
+450,"Ketamine Hydrochloride Injection, Solution, Concentrate","ketamine hydrochloride injection, solution, concentrate",ketamine hydrochloride,2023-09-16,8,False,False,True,True,True,ketamine,
+451,"Methotrexate Sodium Injection, Powder, Lyophilized, For Solution","methotrexate sodium injection, powder, lyophilized, for solution",methotrexate sodium,2023-09-16,8,False,False,True,True,True,methotrexate,
+451,"Methotrexate Sodium Injection, Solution","methotrexate sodium injection, solution",methotrexate sodium,2023-09-16,8,False,False,True,True,True,methotrexate,
+451,Methotrexate Sodium Tablet,methotrexate sodium tablet,methotrexate sodium,2023-09-16,8,False,False,True,True,True,methotrexate,2024-06-28
+451,"Methotrexate Sodium Tablet, Film Coated","methotrexate sodium tablet, film coated",methotrexate sodium,2023-09-16,8,False,False,True,True,True,methotrexate,
+452,Midazolam Hydrochloride Injection,midazolam hydrochloride injection,midazolam hydrochloride,2023-09-16,8,False,False,True,True,True,midazolam,
+452,"Midazolam Hydrochloride Injection, Solution","midazolam hydrochloride injection, solution",midazolam hydrochloride,2023-09-16,8,False,False,True,True,True,midazolam,
+453,"Olive Oil, Soybean Oil Injection, Emulsion","olive oil, soybean oil injection, emulsion",olive oil soybean oil,2023-09-16,8,False,False,True,True,False,,
+454,"Remifentanil Hydrochloride Injection, Powder, Lyophilized, For Solution","remifentanil hydrochloride injection, powder, lyophilized, for solution",remifentanil hydrochloride,2023-09-16,8,False,False,True,True,True,remifentanil,
+455,Sodium Chloride Irrigant,sodium chloride irrigant,sodium chloride irrigant,2023-09-16,8,False,False,True,True,False,,
+456,"Sodium Phosphate, Dibasic, Anhydrous, Sodium Phosphate, Monobasic, Monohydrate Injection, Solution","sodium phosphate, dibasic, anhydrous, sodium phosphate, monobasic, monohydrate injection, solution",sodium phosphate dibasic sodium phosphate monobasic,2023-09-16,8,False,False,True,True,True,sodium phosphate,
+457,Soybean Oil Emulsion,soybean oil emulsion,soybean oil,2023-09-16,8,False,False,True,True,False,,
+457,"Soybean Oil Injection, Solution","soybean oil injection, solution",soybean oil,2023-09-16,8,False,False,True,True,False,,
+458,Vinblastine Sulfate Injection,vinblastine sulfate injection,vinblastine sulfate,2023-09-16,8,False,False,True,True,False,,
+459,Water Irrigant,water irrigant,water irrigant,2023-09-16,8,False,False,True,True,True,water,
+460,I.V. Fat Emulsion,i.v. fat emulsion,i v fat,2023-09-22,6,False,False,True,False,True,fat,2024-01-27
+461,Nitroglycerin Injectable,nitroglycerin injectable,nitroglycerin,2023-10-13,8,False,False,True,False,False,,
+462,Cromolyn Sodium Concentrate,cromolyn sodium concentrate,cromolyn sodium,2023-11-04,8,False,False,False,False,False,,
+463,Propranolol Hydrochloride Injection,propranolol hydrochloride injection,propranolol hydrochloride,2023-11-04,8,False,False,False,False,False,,
+464,Promethazine Hydrochloride Injection,promethazine hydrochloride injection,promethazine hydrochloride,2023-11-23,7,False,False,False,False,False,,
+465,Technetium TC-99M Pyrophosphate Kit Injection,technetium tc-99m pyrophosphate kit injection,technetium tc 99m pyrophosphate,2023-12-29,8,False,False,False,False,False,,
+466,Sodium Pyrophosphate Injection,sodium pyrophosphate injection,sodium pyrophosphate,2024-01-20,8,False,False,False,False,False,,
+467,Riluzole Oral Suspension,riluzole oral suspension,riluzole,2024-01-27,7,False,False,False,False,False,,
+468,Naltrexone Hydrochloride Tablet,naltrexone hydrochloride tablet,naltrexone hydrochloride,2024-03-02,7,False,False,False,False,False,,
+469,Hydroxocobalamin Injection,hydroxocobalamin injection,hydroxocobalamin,2024-04-14,7,False,False,False,True,False,,
+470,Sulfasalazine AZULFIDINE (Sulfasalazine tablets) 500 mg tablets; Bottle of 100 (NDC 0013-0101-10),sulfasalazine azulfidine (sulfasalazine tablets) 500 mg tablets; bottle of 100 (ndc 0013-0101-10),sulfasalazine azulfidine,2024-04-14,7,False,False,False,True,False,,
+470,Sulfasalazine AZULFIDINE (Sulfasalazine tablets) 500 mg tablets; Bottle of 300 (NDC 0013-0101-20/0013-0101-30),sulfasalazine azulfidine (sulfasalazine tablets) 500 mg tablets; bottle of 300 (ndc 0013-0101-20/0013-0101-30),sulfasalazine azulfidine,2024-04-14,7,False,False,False,True,False,,
+471,Sulfasalazine AZULFIDINE EN-tabsÂ® (Sulfasalazine delayed release tablets) 500 mg Delayed-Release tablets; Bottle of 100 (NDC 0013-0102-50),sulfasalazine azulfidine en-tabsâ® (sulfasalazine delayed release tablets) 500 mg delayed-release tablets; bottle of 100 (ndc 0013-0102-50),sulfasalazine azulfidine en tab,2024-04-14,7,False,False,False,True,False,,
+471,Sulfasalazine AZULFIDINE EN-tabsÂ® (Sulfasalazine delayed release tablets) 500 mg Delayed-Release tablets; Bottle of 300 (NDC 0013-0102-20/0013-0102-60),sulfasalazine azulfidine en-tabsâ® (sulfasalazine delayed release tablets) 500 mg delayed-release tablets; bottle of 300 (ndc 0013-0102-20/0013-0102-60),sulfasalazine azulfidine en tab,2024-04-14,7,False,False,False,True,False,,
+472,Sulfasalazine Cleocin Phosphate 600 mg/4 mL (150 mg/mL); 4 mL Vial (NDC 0009-0775-26),sulfasalazine cleocin phosphate 600 mg/4 ml (150 mg/ml); 4 ml vial (ndc 0009-0775-26),sulfasalazine cleocin phosphate,2024-04-14,7,False,False,False,True,False,,
+472,Sulfasalazine Cleocin Phosphate 9 g/60 mL (150 mg/mL) Pharmacy Bulk Package (NDC 0009-0728-09),sulfasalazine cleocin phosphate 9 g/60 ml (150 mg/ml) pharmacy bulk package (ndc 0009-0728-09),sulfasalazine cleocin phosphate,2024-04-14,7,False,False,False,True,False,,
+473,Sulfasalazine Sulfasalazine Delayed-Release Tablets 500 mg Delayed-Release tablets; bottle of 100 (NDC 59762-0104-1/59762-0104-5),sulfasalazine sulfasalazine delayed-release tablets 500 mg delayed-release tablets; bottle of 100 (ndc 59762-0104-1/59762-0104-5),sulfasalazine sulfasalazine,2024-04-14,7,False,False,False,True,False,,
+473,Sulfasalazine Sulfasalazine Delayed-Release Tablets 500 mg Delayed-Release tablets; bottle of 300 (NDC 59762-0104-6),sulfasalazine sulfasalazine delayed-release tablets 500 mg delayed-release tablets; bottle of 300 (ndc 59762-0104-6),sulfasalazine sulfasalazine,2024-04-14,7,False,False,False,True,False,,
+474,Mefloquine Hydrochloride Tablet,mefloquine hydrochloride tablet,mefloquine hydrochloride,2024-05-19,10,False,False,False,False,False,,
+475,Vitamin A Palmitate Injection,vitamin a palmitate injection,vitamin a palmitate,2024-06-15,7,False,False,False,False,False,,
+476,Indocyanine Green Injection,indocyanine green injection,indocyanine green,2024-08-25,9,False,False,False,False,False,,
