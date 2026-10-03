@@ -1,6 +1,6 @@
 """Step 4: parse archived FDA drug-shortage detail pages into per-company supplier rows.
 
-Reads data/raw/detail/{timestamp}_{hash}.html (fetched by 02_fetch.py --only-needed). Each page has a
+Reads data/raw/detail/{YYYY}/{timestamp}_{hash}.html (fetched by 02_fetch.py --only-needed). Each page has a
 product header (status, date first posted) and one block per company: an <h3> heading
 "Company ( Revised|New|Reverified mm/dd/yyyy )" followed by a content <div> holding either
   - a table: Presentation | Availability and Estimated Shortage Duration | Related Information | Shortage Reason
@@ -154,7 +154,7 @@ def main():
     names = file_index()
 
     out, pages, held_out = [], [], 0
-    for f in sorted(RAW.glob("*.html")):
+    for f in sorted(RAW.rglob("*.html"), key=lambda f: f.name):  # data/raw/detail/{YYYY}/
         cap = pd.to_datetime(f.name[:8], format="%Y%m%d")
         if not args.final and cap >= pd.Timestamp(config.OOS_START):
             held_out += 1
