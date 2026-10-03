@@ -534,7 +534,7 @@ event_id,ticker,stage,reason,company,winners,controls
 335,,supplier,unmapped,HQ Specialty Pharma,,
 335,,supplier,unmapped,HQ Specialty Pharma,,
 335,,event,included,,1.0,0.0
-336,,event,included,,1.0,6.0
+336,,event,capture_not_current_shortage,,,
 337,,event,no_listed_available_winner,,,
 338,,event,included,,2.0,6.0
 339,,supplier,unmapped,SERB SA,,
@@ -581,13 +581,8 @@ event_id,ticker,stage,reason,company,winners,controls
 360,,event,no_listed_available_winner,,,
 361,,event,no_capture_in_window,,,
 362,,event,artifact_flag,,,
-363,PRIVATE,supplier,private,B. Braun Medical Inc.,,
-363,PRIVATE,supplier,private,B. Braun Medical Inc.,,
-363,PRIVATE,supplier,private,B. Braun Medical Inc.,,
-363,PRIVATE,supplier,private,B. Braun Medical Inc.,,
-363,PRIVATE,supplier,private,B. Braun Medical Inc.,,
 363,,supplier,unmapped,"Medefil, Inc.",,
-363,,event,included,,1.0,0.0
+363,,event,no_listed_available_winner,,,
 364,,event,no_listed_available_winner,,,
 365,,supplier,unmapped,Northstar,,
 365,,supplier,unmapped,Northstar,,
