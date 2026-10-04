@@ -1,0 +1,210 @@
+{
+  "schema_version": 2,
+  "vendor_policy": "webull",
+  "vendor": "Webull OpenAPI for US listings; yfinance/Yahoo for the rest and as a recorded fallback",
+  "vendor_versions": {
+    "yfinance": "1.7.0",
+    "webull_sdk": "3.0.0"
+  },
+  "requested_start": "2013-01-01",
+  "requested_end_exclusive": "2024-10-01",
+  "adjustments": {
+    "yahoo": {
+      "auto_adjust": false,
+      "actions": true,
+      "repair": false,
+      "lse_price_unit": "GBP converted from GBp",
+      "valuation": "adj_close total-return units"
+    },
+    "webull": {
+      "daily_bars": "forward-adjusted ('previous weight' per SDK)",
+      "valuation": "close used as adj_close",
+      "dividends": "inclusion measured by cross_check annualized_log_return_gap",
+      "actions": "not provided; stored as zero"
+    }
+  },
+  "cross_check_thresholds": {
+    "date_overlap": 0.95,
+    "return_correlation": 0.95
+  },
+  "symbols": {
+    "AMPH": {
+      "file": "AMPH.csv",
+      "sha256": "97b791613dbbcdf64c7a0424c8c0cc25117655fd199fe0ce04d9a6f75a70b427",
+      "rows": 2584,
+      "vendor": "webull",
+      "fallback_reason": null,
+      "cross_check": {
+        "sessions_primary": 2584,
+        "sessions_reference": 2584,
+        "date_overlap": 1.0,
+        "return_correlation": 1.0,
+        "annualized_log_return_gap": 0.0,
+        "ok": true
+      },
+      "actual_start": "2014-06-25",
+      "actual_end": "2024-09-30",
+      "retrieved_at": "2026-10-03T22:43:52.844553+00:00"
+    },
+    "AMRX": {
+      "file": "AMRX.csv",
+      "sha256": "a3864355fcee225f9e59c3da2b182f02c7e34f36777cd94ffc34f3b9d0b5ba9b",
+      "rows": 1604,
+      "vendor": "webull",
+      "fallback_reason": null,
+      "cross_check": {
+        "sessions_primary": 1604,
+        "sessions_reference": 1611,
+        "date_overlap": 0.9957,
+        "return_correlation": 1.0,
+        "annualized_log_return_gap": 0.0,
+        "ok": true
+      },
+      "actual_start": "2018-05-15",
+      "actual_end": "2024-09-30",
+      "retrieved_at": "2026-10-03T22:43:54.093571+00:00"
+    },
+    "BAX": {
+      "file": "BAX.csv",
+      "sha256": "408a755d315c3418b6e02f6a34705312dcd38cf7142784422f267e628a630c62",
+      "rows": 2956,
+      "vendor": "webull",
+      "fallback_reason": null,
+      "cross_check": {
+        "sessions_primary": 2956,
+        "sessions_reference": 2956,
+        "date_overlap": 1.0,
+        "return_correlation": 1.0,
+        "annualized_log_return_gap": -0.0,
+        "ok": true
+      },
+      "actual_start": "2013-01-02",
+      "actual_end": "2024-09-30",
+      "retrieved_at": "2026-10-03T22:43:55.805535+00:00"
+    },
+    "ICUI": {
+      "file": "ICUI.csv",
+      "sha256": "8834c848cb1aa7b4f3c89f56a75dea6e64b163b844332ba2adf9c7151f75739e",
+      "rows": 2956,
+      "vendor": "webull",
+      "fallback_reason": null,
+      "cross_check": {
+        "sessions_primary": 2956,
+        "sessions_reference": 2956,
+        "date_overlap": 1.0,
+        "return_correlation": 1.0,
+        "annualized_log_return_gap": 0.0,
+        "ok": true
+      },
+      "actual_start": "2013-01-02",
+      "actual_end": "2024-09-30",
+      "retrieved_at": "2026-10-03T22:43:57.572476+00:00"
+    },
+    "PFE": {
+      "file": "PFE.csv",
+      "sha256": "731e428937cbabda857becc03edbd436763ad536adfd13ba7c44455d3eec0dfe",
+      "rows": 2956,
+      "vendor": "webull",
+      "fallback_reason": null,
+      "cross_check": {
+        "sessions_primary": 2956,
+        "sessions_reference": 2956,
+        "date_overlap": 1.0,
+        "return_correlation": 0.9999,
+        "annualized_log_return_gap": -0.0006,
+        "ok": true
+      },
+      "actual_start": "2013-01-02",
+      "actual_end": "2024-09-30",
+      "retrieved_at": "2026-10-03T22:43:59.209696+00:00"
+    },
+    "RDY": {
+      "file": "RDY.csv",
+      "sha256": "53571f6f627e52798e205f934f2cf1c426bf50b61e11cc8638121dc5d3b9eb02",
+      "rows": 2956,
+      "vendor": "yfinance",
+      "fallback_reason": "Webull series failed cross-check: {'sessions_primary': 2956, 'sessions_reference': 2956, 'date_overlap': 1.0, 'return_correlation': 0.2057, 'annualized_log_return_gap': -0.0019, 'ok': False}",
+      "cross_check": {
+        "sessions_primary": 2956,
+        "sessions_reference": 2956,
+        "date_overlap": 1.0,
+        "return_correlation": 0.2057,
+        "annualized_log_return_gap": -0.0019,
+        "ok": false
+      },
+      "actual_start": "2013-01-02",
+      "actual_end": "2024-09-30",
+      "retrieved_at": "2026-10-03T22:44:00.795480+00:00"
+    },
+    "SPY": {
+      "file": "SPY.csv",
+      "sha256": "694deff8667057da895e6557b33824dbf0c9009db628110c0a7ae9b34cbd6f62",
+      "rows": 2956,
+      "vendor": "webull",
+      "fallback_reason": null,
+      "cross_check": {
+        "sessions_primary": 2956,
+        "sessions_reference": 2956,
+        "date_overlap": 1.0,
+        "return_correlation": 1.0,
+        "annualized_log_return_gap": 0.0,
+        "ok": true
+      },
+      "actual_start": "2013-01-02",
+      "actual_end": "2024-09-30",
+      "retrieved_at": "2026-10-03T22:44:02.914427+00:00"
+    },
+    "TEVA": {
+      "file": "TEVA.csv",
+      "sha256": "ee1ae1fe3b9bafa979296b00ab61c51f31f4dfd2857380ddd85e85eb585cd436",
+      "rows": 2956,
+      "vendor": "yfinance",
+      "fallback_reason": "Webull series failed cross-check: {'sessions_primary': 650, 'sessions_reference': 2956, 'date_overlap': 0.2199, 'return_correlation': 0.5108, 'annualized_log_return_gap': -0.0126, 'ok': False}",
+      "cross_check": {
+        "sessions_primary": 650,
+        "sessions_reference": 2956,
+        "date_overlap": 0.2199,
+        "return_correlation": 0.5108,
+        "annualized_log_return_gap": -0.0126,
+        "ok": false
+      },
+      "actual_start": "2013-01-02",
+      "actual_end": "2024-09-30",
+      "retrieved_at": "2026-10-03T22:44:04.186831+00:00"
+    },
+    "VTRS": {
+      "file": "VTRS.csv",
+      "sha256": "fee22d0123d25ebb3060fc2db190ceb51249bb595a2e9685112f88fb4f3aee22",
+      "rows": 2956,
+      "vendor": "webull",
+      "fallback_reason": null,
+      "cross_check": {
+        "sessions_primary": 2956,
+        "sessions_reference": 2956,
+        "date_overlap": 1.0,
+        "return_correlation": 0.9999,
+        "annualized_log_return_gap": 0.0,
+        "ok": true
+      },
+      "actual_start": "2013-01-02",
+      "actual_end": "2024-09-30",
+      "retrieved_at": "2026-10-03T22:44:07.297573+00:00"
+    },
+    "^GSPC": {
+      "file": "%5EGSPC.csv",
+      "sha256": "c547e3d588c49df08b101c99886e0cacc0b45d221fb98211ee1aae32dec6a0a5",
+      "rows": 2956,
+      "vendor": "yfinance",
+      "fallback_reason": null,
+      "cross_check": null,
+      "actual_start": "2013-01-02",
+      "actual_end": "2024-09-30",
+      "retrieved_at": "2026-10-03T22:44:08.073471+00:00"
+    }
+  },
+  "exclusions": {
+    "HSP": "Hospira delisted 2015 (cash acquisition by Pfizer); no vendor history on Webull or Yahoo",
+    "MYL": "Mylan delisted 2020 (Viatris); not on Webull or Yahoo; predecessor history not aliased by design"
+  },
+  "failures": []
+}

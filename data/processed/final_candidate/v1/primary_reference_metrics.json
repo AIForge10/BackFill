@@ -1,0 +1,41 @@
+{
+  "annualized_return": -0.005588830275835788,
+  "annualized_volatility": 0.009372639272262851,
+  "sharpe": -0.5940770438102602,
+  "max_drawdown": -0.06661590432388431,
+  "annualized_turnover": 0.23786217060975146,
+  "turnover_definition": "both-leg absolute buys+sells / average NAV / elapsed years",
+  "skew": -2.633578901704306,
+  "active_days": 704,
+  "sessions": 2601,
+  "events": 17,
+  "positions": 19,
+  "transaction_cost": 1564.3917992583233,
+  "hedge_carry_cost": 642.4190632129946,
+  "risk_free_assumption": "zero cash return; Sharpe above zero; explicit hedge carry separate",
+  "accounting_currency": "USD; unhedged daily closing FX marks",
+  "inference": {
+    "mean_daily": -2.2095515204626443e-05,
+    "hac_t": -1.4196805486363386,
+    "p_value": 0.15582058652630063,
+    "ci_daily": [
+      -5.261405932693546e-05,
+      8.423028917682577e-06
+    ],
+    "hac_lags": 60
+  },
+  "worst_month": -0.03163754438344679,
+  "returns_by_year": {
+    "2014": 0.00033375568828719615,
+    "2015": -0.002031172843647844,
+    "2016": 0.00971503896635273,
+    "2017": 0.0,
+    "2018": 0.0,
+    "2019": 0.0,
+    "2020": -0.0028026608855543644,
+    "2021": -0.015562912288314523,
+    "2022": -0.004432257009052698,
+    "2023": -0.0420496816573831,
+    "2024": 0.0
+  }
+}

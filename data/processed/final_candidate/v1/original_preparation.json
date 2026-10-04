@@ -1,0 +1,67 @@
+{
+  "classification": "post-primary exploratory supplier-definition variant; data preparation only",
+  "source_hashes": {
+    "/private/tmp/gator-backfill-diagnostic-review-20261003/data/raw/strict_timing_fda_snapshot_20261003/data/processed/shortage_events.csv": "5b1d6824ce8db884239cd42f2a60660b78c94371094e9fe5ddc137d3d04be3df",
+    "/private/tmp/gator-backfill-diagnostic-review-20261003/data/raw/strict_timing_fda_snapshot_20261003/data/processed/suppliers.csv": "03f71badc11dec14cf15a19af592e51743ae1f6a57a79ecdd4380e749b6ae168",
+    "/private/tmp/gator-backfill-diagnostic-review-20261003/data/raw/strict_timing_fda_snapshot_20261003/data/company_ticker_map.csv": "d8c5c1ea94f6277751f3ace31c85c906e5e8ca7726ce9707ff05fcf554b3056b"
+  },
+  "summaries": {
+    "capture30": {
+      "original_positions": 42,
+      "original_events": 30,
+      "strict_positions": 18,
+      "strict_events": 15,
+      "strict_tickers": 12,
+      "by_country": {
+        "CH": 1,
+        "DE": 2,
+        "IN": 4,
+        "US": 11
+      },
+      "by_ticker": {
+        "AMRX": 1,
+        "APLLTD.NS": 1,
+        "AUROPHARMA.NS": 1,
+        "BAX": 1,
+        "FRE.DE": 2,
+        "ICUI": 1,
+        "MYL": 3,
+        "NOVN.SW": 1,
+        "PFE": 1,
+        "TEVA": 4,
+        "TORNTPHARM.NS": 1,
+        "ZYDUSLIFE.NS": 1
+      }
+    },
+    "capture60": {
+      "original_positions": 62,
+      "original_events": 44,
+      "strict_positions": 26,
+      "strict_events": 23,
+      "strict_tickers": 13,
+      "by_country": {
+        "CH": 2,
+        "DE": 3,
+        "IN": 5,
+        "US": 16
+      },
+      "by_ticker": {
+        "AMRX": 1,
+        "APLLTD.NS": 1,
+        "AUROPHARMA.NS": 1,
+        "BAX": 4,
+        "CAPLIPOINT.NS": 1,
+        "FRE.DE": 3,
+        "ICUI": 1,
+        "MYL": 4,
+        "NOVN.SW": 2,
+        "PFE": 1,
+        "TEVA": 5,
+        "TORNTPHARM.NS": 1,
+        "ZYDUSLIFE.NS": 1
+      }
+    }
+  },
+  "rule": "Every parent-owned row on the chosen archived formulation page is available, not on allocation, and has a nonempty presentation.",
+  "caveat": "FDA-listed presentations only; not a complete product catalogue or verified spare production capacity."
+}
