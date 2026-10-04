@@ -5,9 +5,10 @@
 > [!IMPORTANT]
 > ## 📄 Research report
 >
-> **[Read the five-page research note (PDF) →](output/pdf/backfill_working_candidate_v1.pdf)**
+> **[Backfill: Trading the Suppliers Behind Drug Shortages (PDF, 5 pages) →](output/pdf/QuantNote_BackFill.pdf)**
 >
-> The main submission: hypothesis, data, method, results, robustness checks and limitations.
+> The main submission: hypothesis, data, methodology, results, the Hurricane Helene illustration,
+> risk management, liquidity and capacity, and limitations.
 > Supporting detail: [results and limitations](results/research/final_candidate_v1_20261004/RESULTS.md).
 
 Backfill reconstructs historical FDA shortage notices and supplier availability from Internet
@@ -23,7 +24,7 @@ the evidence.
 
 ## Contents
 
-- [Research report](output/pdf/backfill_working_candidate_v1.pdf)
+- [Research report](output/pdf/QuantNote_BackFill.pdf)
 - [Hypothesis](#hypothesis)
 - [Results](#results)
 - [Architecture](#architecture)
@@ -290,7 +291,7 @@ BackFill/
 ├── strategies/                # registered primary strategy
 ├── research/final_candidate/  # the 20/5 candidate: spec, rule config, runner, report
 ├── results/                   # committed outputs: summary, research run, explanations.json
-├── output/pdf/                # the five-page research note
+├── output/pdf/                # the research report: QuantNote_BackFill.pdf
 │
 ├── proof/                     # freeze-v1 file list, manifest and Solana receipt
 ├── scripts/                   # make_manifest, anchor_solana, verify_proof, render_proof,
