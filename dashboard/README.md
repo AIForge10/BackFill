@@ -83,6 +83,26 @@ and basket have summary metrics only here; missing curves are reported honestly.
 Downloads expose selected derived artifacts, never credentials or licensed raw
 price files. Filtering evidence does not select a new strategy or tune metrics.
 
+## Proof on Solana
+
+Section 07 shows the `freeze-v1` anchor from `proof/freeze-v1/receipt.json` and
+`manifest.json`: anchor time, tag/commit, manifest hash, on-chain memo, explorer
+link and the 10 fingerprinted files. **Verify now** calls `/api/proof/verify`,
+which reuses `scripts/make_manifest.py` (recompute the memo from the git tag) and
+`scripts/verify_proof.py` (read the memo live from Solana devnet) and returns:
+
+- `PASS`: recomputed and on-chain memos match; both are shown side by side.
+- `FAIL`: they differ, or devnet does not know the transaction; differing fields are named.
+- `UNAVAILABLE`: devnet unreachable or the tag is not fetched (`git fetch --tags`);
+  the saved receipt is shown instead. The endpoint never crashes the page.
+
+Results are cached for 60 seconds per server process. `/api/proof` returns the
+saved facts only and needs no network. The panel also separates the two integrity
+checks: `freeze.json` (8 files, local copy against the team's recorded hashes, no
+external timestamp) and `freeze-v1` (10 files, anchored on Solana). Four files are
+in both. The proof shows the frozen rules existed at 2026-10-04 08:47 UTC; it does
+not make the 2014–2024 backtest out-of-sample.
+
 ## Connect Tiger Data
 
 Tiger Data is the time-series database, not a source of stock prices or FDA
@@ -138,6 +158,7 @@ Reference: [Tiger Data Python/PostgreSQL integration](https://www.tigerdata.com/
 | `tiger.py` | Read-only, bounded live queries and connection states |
 | `server.py` | Local HTTP/API server and static assets |
 | `ingest.py` | Explicit, validated observation ingestion |
+| `proof.py` | Saved Solana receipt and cached live re-verification of `freeze-v1` |
 | `schema.sql` | Operator-run table creation |
 | `static/tokens.css` | Rezt tokens, fonts, themes and primitives |
 | `static/app.css` | Responsive page and instrument geometry |

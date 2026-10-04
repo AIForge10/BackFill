@@ -7,13 +7,14 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlsplit
 
+from dashboard.proof import ProofService
 from dashboard.repository import ResearchRepository
 from dashboard.tiger import TigerMonitor
 
 STATIC = Path(__file__).parent / "static"
 
 
-def handler(repository, monitor):
+def handler(repository, monitor, proof):
     class Handler(BaseHTTPRequestHandler):
         def respond(self, data, content_type="application/json", status=200, filename=None):
             body = data if isinstance(data, bytes) else json.dumps(data, allow_nan=False).encode()
@@ -47,6 +48,10 @@ def handler(repository, monitor):
                         min(100, max(1, int(params.get("limit", 15))))))
                 if path == "/api/event":
                     return self.respond(repository.event(params.get("id", ""), params.get("ticker", "")))
+                if path == "/api/proof":
+                    return self.respond(proof.summary())
+                if path == "/api/proof/verify":
+                    return self.respond(proof.verify())
                 if path == "/api/live":
                     return self.respond(monitor.snapshot())
                 if path == "/api/live/history":
@@ -86,7 +91,8 @@ def main():
         load_dotenv(args.data_root / ".env", override=False)
     except ImportError:
         pass
-    server = ThreadingHTTPServer((args.host, args.port), handler(ResearchRepository(args.data_root), TigerMonitor()))
+    server = ThreadingHTTPServer((args.host, args.port), handler(ResearchRepository(args.data_root), TigerMonitor(),
+                                                                ProofService(args.data_root)))
     print(f"Backfill observatory · http://{args.host}:{args.port} · read-only", flush=True)
     try:
         server.serve_forever()

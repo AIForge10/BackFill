@@ -112,7 +112,27 @@
     <span class="rule"></span><div class="section-index">07 · VERIFY / OPEN THE RECEIPTS</div>
     <div class="section-heading reveal"><div><p class="eyebrow">MAKE THE RESULT REPRODUCIBLE</p><h2 id="audit-title">Inspect. Download.<br><em>Reproduce.</em></h2></div><span class="mono small">READ-ONLY RESEARCH VIEW</span></div>
     <div class="audit-grid"><article class="panel"><span class="eyebrow">PRICE PROVENANCE</span><h3>The recorded vendor mix</h3><div id="price-provenance"></div><a class="text-link" href="/api/download/manifest.json">Download price manifest <span>↓</span></a></article><article class="panel"><span class="eyebrow">REPLAY THE SAVED CANDIDATE</span><h3>Run the same accounting</h3><div class="terminal"><code id="reproduce-command">uv run python -m research.final_candidate.run</code><button id="copy-command" class="quiet-button" aria-label="Copy reproduction command">Copy</button></div><p class="small-note">Requires the exact frozen licensed price cache. A new vendor download is a different data vintage. This view never launches a backtest.</p><div class="download-links"><a id="lots-download" href="/api/download/lots.csv">Lots ↓</a><a id="trades-download" href="/api/download/trades.csv">Cashflows ↓</a><a href="/api/download/freeze.json">Frozen identity ↓</a><a href="https://github.com/AIForge10/Gator_Hacks" target="_blank" rel="noopener">Source code ↗</a></div></article></div>
-    <details class="details-panel"><summary>Source integrity &amp; SHA-256 checks <span>+</span></summary><div class="integrity-layout"><div class="instrument"><div class="instrument-label eyebrow">FROZEN SOURCE INTEGRITY</div><div class="dial-wrap"><canvas id="integrity-dial" aria-label="Frozen source file integrity"></canvas><div class="dial-reading"><span id="integrity-count" class="dial-number">—</span><span class="mono">MATCHING SOURCE HASHES</span></div></div><div class="instrument-footer"><span class="badge" id="integrity-badge">Checking files</span><span class="mono" id="integrity-total">SHA-256</span></div></div><div id="hash-records" class="details-content"></div></div></details>
+    <article class="panel proof-panel reveal" id="proof" aria-labelledby="proof-title">
+      <div class="panel-top"><div><span class="eyebrow">PROOF ON SOLANA · FREEZE-V1</span><h3 id="proof-title">The frozen rules, timestamped on chain</h3></div><span class="badge" id="proof-anchor-badge">Loading receipt</span></div>
+      <p class="proof-statement bracketed" id="proof-statement">Proves the frozen rules existed at the anchor time. It does not make the 2014–2024 backtest out-of-sample.</p>
+      <dl class="proof-facts" id="proof-facts"></dl>
+      <div class="proof-verify">
+        <div class="proof-verify-head"><button type="button" class="button" id="proof-verify-button">Verify now <span>→</span></button><span class="badge" id="proof-result-badge">Not checked yet</span><span class="small-note" id="proof-checked"></span></div>
+        <div class="proof-compare" id="proof-compare" hidden>
+          <div><span class="eyebrow">RECOMPUTED FROM GIT TAG</span><code id="proof-recomputed">—</code></div>
+          <div><span class="eyebrow">ON SOLANA DEVNET</span><code id="proof-onchain">—</code></div>
+        </div>
+        <p class="small-note" id="proof-reason">Recomputes the fingerprint from the freeze-v1 git tag and reads the memo live from Solana devnet. Results are cached for 60 seconds.</p>
+      </div>
+      <div class="terminal"><code id="proof-command">uv run python scripts/verify_proof.py --tag freeze-v1</code><button id="copy-proof-command" class="quiet-button" aria-label="Copy verification command">Copy</button></div>
+      <div class="proof-two-checks">
+        <span class="eyebrow">TWO INTEGRITY CHECKS, TWO JOBS</span>
+        <div class="proof-check-grid" id="proof-check-grid"></div>
+        <p class="small-note" id="proof-shared"></p>
+      </div>
+      <details class="proof-files"><summary>The fingerprinted files <span>+</span></summary><div id="proof-files"></div></details>
+    </article>
+    <details class="details-panel"><summary>Frozen inputs check · freeze.json · 8 files <span>+</span></summary><div class="integrity-layout"><div class="instrument"><div class="instrument-label eyebrow">FROZEN SOURCE INTEGRITY</div><div class="dial-wrap"><canvas id="integrity-dial" aria-label="Frozen source file integrity"></canvas><div class="dial-reading"><span id="integrity-count" class="dial-number">—</span><span class="mono">MATCHING SOURCE HASHES</span></div></div><div class="instrument-footer"><span class="badge" id="integrity-badge">Checking files</span><span class="mono" id="integrity-total">SHA-256</span></div></div><div id="hash-records" class="details-content"></div></div></details>
     <details class="details-panel"><summary>Full research comparisons &amp; declared limitations <span>+</span></summary><div class="details-content"><ul id="limitations"></ul><div class="table-scroll"><table><thead><tr><th>Rule</th><th>Price policy</th><th>Costs</th><th>Sharpe</th><th>Positions</th><th>HAC p</th></tr></thead><tbody id="variant-rows"></tbody></table></div></div></details>
   </section>
   <footer><a class="wordmark" href="#">backfill<em>.</em></a><p>FDA shortage research, with the uncertainty left in.</p><span class="mono">GQH 2026 / SYSTEMATIC TRADING</span></footer>

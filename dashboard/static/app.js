@@ -192,6 +192,58 @@ $('#strategy').addEventListener('change',event=>{state.strategy=event.target.val
 $('#vendor').addEventListener('change',event=>{state.vendor=event.target.value;loadResearch();});
 $('#cost-switch').querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{state.costs=Number(button.dataset.cost);loadResearch();}));
 $('.chart-switch').querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{state.chart=button.dataset.chart;$('.chart-switch').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));renderChart();}));
+const shortHash = value => value ? `${String(value).slice(0,12)}…${String(value).slice(-6)}` : '—';
+
+function renderProof(data) {
+  const r=data.receipt??{};
+  text('#proof-statement',data.statement);
+  text('#proof-command',data.verify_command);
+  badge('#proof-anchor-badge',data.anchored?`Anchored · ${r.cluster??'devnet'}`:'Not anchored',!data.anchored);
+  const explorer=safeURL(r.explorer);
+  const facts=data.anchored?[
+    ['Anchored (UTC)',esc(r.timestamp_utc)],
+    ['Git tag / commit',`${esc(data.tag)} · <code>${esc(String(data.commit??'').slice(0,12))}</code>`],
+    ['Manifest hash',`<code>${esc(data.manifest_sha256)}</code>`],
+    ['On-chain memo',`<code>${esc(r.memo)}</code>`],
+    ['Transaction',explorer?`<a class="text-link" href="${esc(explorer)}" target="_blank" rel="noopener">${esc(shortHash(r.signature))} ↗</a>`:esc(shortHash(r.signature))],
+    ['Signer',`<code>${esc(r.signer??'—')}</code>`]]:[['Status','No receipt in proof/freeze-v1. Run scripts/anchor_solana.py after reviewing the manifest.']];
+  $('#proof-facts').innerHTML=facts.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join('');
+  $('#proof-verify-button').disabled=!data.anchored;
+  const c=data.comparison;
+  $('#proof-check-grid').innerHTML=[['older','Frozen inputs check (below)'],['anchored','Proof on Solana (this panel)']].map(([key,title])=>{const x=c[key];return `<div class="proof-check ${key==='anchored'?'is-anchored':''}"><strong>${esc(title)}</strong><span class="mono">${esc(x.name)} · ${esc(x.files)} files</span><dl><div><dt>Compares</dt><dd>${esc(x.checks)}</dd></div><div><dt>Independent timestamp</dt><dd>${esc(x.timestamp)}</dd></div><div><dt>Source</dt><dd><code>${esc(x.source)}</code></dd></div></dl></div>`;}).join('');
+  text('#proof-shared',`${c.shared.length} files appear in both: ${c.shared.map(f=>f.split('/').pop()).join(', ')}. The older check covers supplier evidence and earlier screens; freeze-v1 adds the hypothesis, rule config, spec, price manifest, shortage events and published results, and is the only one anchored outside our own repository.`);
+  $('#proof-files').innerHTML=data.files.length?data.files.map(f=>`<div class="hash-row"><div><span>${esc(f.path)}</span><span>${Number(f.bytes).toLocaleString('en-US')} B</span></div><code>${esc(f.sha256)}</code></div>`).join(''):empty('No manifest','proof/freeze-v1/manifest.json is not present.');
+}
+
+function renderVerification(result) {
+  const status=result.status??'UNAVAILABLE';
+  badge('#proof-result-badge',status,status==='FAIL');
+  $('#proof-result-badge').dataset.status=status;
+  $('#proof-compare').hidden=false;
+  text('#proof-recomputed',result.recomputed??'Not recomputed');
+  text('#proof-onchain',result.on_chain??'No memo read');
+  $('#proof-compare').classList.toggle('mismatch',status==='FAIL');
+  const saved=status==='UNAVAILABLE'&&result.on_chain?' (saved receipt)':'';
+  $('#proof-onchain').previousElementSibling.textContent=`ON SOLANA DEVNET${saved.toUpperCase()}`;
+  const diffs=(result.differences??[]).map(d=>`${d.field}: ${d.recomputed||'∅'} ≠ ${d.on_chain||'∅'}`).join(' · ');
+  text('#proof-reason',[result.reason,diffs].filter(Boolean).join(' '));
+  text('#proof-checked',result.checked_at?`Checked ${result.checked_at}${result.cached?` · cached ${result.age_seconds}s ago`:''}`:'');
+}
+
+async function loadProof() {
+  try{renderProof(await api('/api/proof'));}
+  catch{badge('#proof-anchor-badge','Receipt unavailable',true);$('#proof-verify-button').disabled=true;}
+}
+
+async function verifyProof() {
+  const button=$('#proof-verify-button');
+  button.disabled=true;button.firstChild.textContent='Verifying… ';
+  badge('#proof-result-badge','Checking devnet');delete $('#proof-result-badge').dataset.status;
+  try{renderVerification(await api('/api/proof/verify'));}
+  catch{renderVerification({status:'UNAVAILABLE',reason:'The dashboard server could not complete the check. The saved receipt above is unchanged.'});}
+  finally{button.disabled=false;button.firstChild.textContent='Verify now ';}
+}
+
 let searchTimer;
 $('#search').addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{state.offset=0;loadEvidence();},250);});
 for(const selector of ['#ticker-filter','#role-filter'])$(selector).addEventListener('change',()=>{state.offset=0;loadEvidence();});
@@ -203,6 +255,8 @@ $('#refresh-live').addEventListener('click',async()=>{await loadLive();scheduleL
 $('#live-instrument').addEventListener('change',loadMarketHistory);
 $('#auto-refresh').addEventListener('change',scheduleLive);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&$('#auto-refresh').checked)loadLive();scheduleLive();});
+$('#proof-verify-button').addEventListener('click',verifyProof);
+$('#copy-proof-command').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#proof-command').textContent);showToast('Verification command copied');}catch{showToast('Clipboard unavailable. Select and copy the command.');}});
 $('#copy-command').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#reproduce-command').textContent);showToast('Reproduction command copied');}catch{showToast('Clipboard unavailable. Select and copy the command.');}});
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
   document.documentElement.classList.add('js-motion');
@@ -210,4 +264,4 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
   document.querySelectorAll('.reveal').forEach((element,index)=>{element.style.transitionDelay=`${Math.min(index%2,1)*110}ms`;observer.observe(element);});
 }
 try{renderOverview(await api('/api/overview'));}catch(error){badge('#integrity-badge','Research unavailable',true);text('#integrity-total','No integrity claim');showToast(error.message);}
-await Promise.allSettled([loadResearch(),loadEvidence(),loadLive(),initCase()]);scheduleLive();
+await Promise.allSettled([loadResearch(),loadEvidence(),loadLive(),initCase(),loadProof()]);scheduleLive();
