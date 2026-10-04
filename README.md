@@ -24,11 +24,26 @@ the first archived page that shows it, reads which companies were listed
 against their market index. The hypothesis, pre-registered before any
 backtest, is in [`HYPOTHESIS.md`](HYPOTHESIS.md).
 
+## For judges: reproduce the results
+
 ```bash
-uv sync
-uv run python run_all.py --prepare-only
-uv run python -m unittest discover -s tests -v
+uv sync                                   # or: python -m venv .venv && .venv/bin/pip install -r requirements.txt
+cp .env.example .env                      # optional: Webull keys; without them, prices come from yfinance
+uv run python run_all.py                  # signals -> prices -> backtest -> summary (in-sample)
 ```
+
+`run_all.py` rebuilds the signals from the committed FDA tables, fetches daily prices once
+(the only network step; prices are licensed, so they are never committed), runs the registered
+backtest offline and prints the summary table (also saved as `results/backfill/<run>/summary.md`).
+No Webull keys? Run `uv run python data/download.py prices --vendor yfinance` first.
+
+| Step | Script | What it does |
+|---|---|---|
+| Data | `data/download.py` | `prices` (daily bars), `release` (the team's archived FDA pages), `fda-csv` (FDA CSV exports for the 2024–25 gap), `rebuild` (re-fetch everything from Wayback) |
+| Signals | `src/signals.py` | Shortage events + point-in-time supplier evidence (wraps steps 03, 03b, 04, 05) |
+| Backtest | `src/backtest.py` | Offline lot engine: next-close entry, 60-session hold, beta hedge, costs; `--variant` for declared variants |
+| Analysis | `src/analysis.py` | Headline table: return, volatility, Sharpe, drawdown, turnover, worst month, HAC t, winners vs controls |
+| Tests | `uv run python -m unittest discover -s tests` | Synthetic accounting, point-in-time and holdout-lock tests |
 
 > [!WARNING]
 > Everything dated on or after **2024-10-01** is the out-of-sample
@@ -83,24 +98,31 @@ company_ticker_map.csv  →  evidence + attrition (05)  →  cached-price lot en
 
 ```
 Gator_Hacks/
+├── README.md                setup + one command to run
+├── run_all.py               reproduces the note (signals → prices → backtest → summary)
+├── requirements.txt         dependencies (also pyproject.toml / uv.lock)
+├── .env.example             Webull keys template; .env stays out of git
 ├── HYPOTHESIS.md            pre-registration (commit before any backtest)
 ├── config.py                shared settings: holdout, gap days, costs, caps
-├── pyproject.toml           one uv environment for pipeline + backtest
+├── data/
+│   ├── download.py          download scripts: prices, team release, FDA CSVs, full rebuild
+│   ├── company_ticker_map.csv   supplier regex → listed parent, listing windows
+│   ├── processed/           derived FDA tables, committed (indexes, events, suppliers)
+│   └── raw/                 caches (archived pages, CSV copies, prices), gitignored
 ├── src/
+│   ├── signals.py           build signals (runs 03, 03b, 04, 05)
+│   ├── backtest.py          run the offline backtest
+│   ├── analysis.py          headline metrics table
 │   ├── 01_wayback_index.py  CDX index + coverage table (gaps across years)
 │   ├── 02_fetch.py          polite resumable download (--years, --shard, --only-needed)
 │   ├── 03_parse_main.py     list pages → main_status.csv, shortage_events.csv
+│   ├── 03b_parse_fda_csv.py archived FDA CSV exports → fda_csv_rows.csv (2024–25 gap)
 │   ├── 04_parse_details.py  detail pages → suppliers.csv (rule-tagged availability)
 │   ├── 05_events.py         point-in-time evidence ledger + attrition
 │   └── 06_prices.py         explicit price acquisition (Webull for US, yfinance fallback) + immutable manifest
 ├── strategies/primary.py   pure primary signal selection
 ├── backfill/               settings, evidence, cache, lot engine, analysis, guards
 ├── tests/                  synthetic accounting and point-in-time regression cases
-├── run_all.py              offline research orchestration
-├── data/
-│   ├── company_ticker_map.csv   supplier regex → listed parent, listing windows
-│   ├── processed/           derived FDA tables, committed (indexes, events, suppliers)
-│   └── raw/{main,detail}/YYYY/   Wayback HTML cache by year, gitignored
 ├── examples/
 │   ├── backtest/main.py     backtest runner (Webull data, holdout lock, run log)
 │   └── strategies/          preserved sponsor/demo specifications

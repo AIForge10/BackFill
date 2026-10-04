@@ -45,6 +45,12 @@ def normalize_yahoo(frame, symbol):
              "Adj Close": "adj_close", "Volume": "volume", "Dividends": "dividends",
              "Stock Splits": "splits"}
     frame = frame.rename(columns=names)
+    # keepna=True returns placeholder rows with no prices at all on days Yahoo has no bar. They are not
+    # sessions, so drop them (counted in the manifest); partially missing bars still fail validation.
+    price_cols = [c for c in ["open", "high", "low", "close", "adj_close"] if c in frame]
+    empty = frame[price_cols].isna().all(axis=1)
+    frame, index = frame[~empty], index[~empty.to_numpy()]
+    dropped = int(empty.sum())
     if "adj_close" not in frame:
         if symbol.startswith("^") or symbol.endswith("=X"):
             frame["adj_close"] = frame["close"]
@@ -60,6 +66,7 @@ def normalize_yahoo(frame, symbol):
             frame[name] = frame[name] / 100.0
     frame = frame[COLUMNS].sort_values("date").reset_index(drop=True)
     validate_bars(frame, symbol)
+    frame.attrs["dropped_empty_rows"] = dropped
     return frame
 
 
@@ -80,7 +87,8 @@ def validate_bars(frame, symbol):
         raise ValueError(f"{symbol}: invalid high/low or volume")
 
 
-WEBULL_ENV = Path(__file__).resolve().parents[1] / "examples/backtest/.env"
+ROOT_ENV = Path(__file__).resolve().parents[1] / ".env"
+WEBULL_ENV = Path(__file__).resolve().parents[1] / "examples/backtest/.env"  # sponsor kit's file, fallback
 CROSS_CHECK_MIN = dict(date_overlap=0.95, return_correlation=0.95)
 
 
@@ -97,10 +105,11 @@ def webull_client():
     from webull.core.client import ApiClient
     from webull.data.data_client import DataClient
 
-    load_dotenv(WEBULL_ENV)
+    load_dotenv(ROOT_ENV)       # root .env (see .env.example) first,
+    load_dotenv(WEBULL_ENV)     # then the sponsor kit's file; existing values are not overwritten
     key, secret = os.environ.get("WEBULL_APP_KEY"), os.environ.get("WEBULL_APP_SECRET")
     if not key or not secret:
-        raise ValueError(f"Webull credentials missing in {WEBULL_ENV}.")
+        raise ValueError(f"Webull credentials missing in {ROOT_ENV} or {WEBULL_ENV}.")
     region = os.environ.get("WEBULL_REGION_ID", "us")
     api = ApiClient(key, secret, region)
     api.add_endpoint(region, os.environ.get("WEBULL_API_ENDPOINT", "api.webull.com"))
@@ -263,6 +272,7 @@ def fetch_cache(events, directory, *, start="2013-01-01", end="2024-10-01", excl
                 raise ValueError("Vendor returned data outside the requested period.")
             bars.to_csv(path, index=False, date_format="%Y-%m-%d")
             entries[symbol] = dict(file=path.name, sha256=sha256(path), rows=len(bars), vendor=source,
+                                   dropped_empty_rows=bars.attrs.get("dropped_empty_rows", 0),
                                    fallback_reason=fallback_reason, cross_check=check,
                                    actual_start=str(dates.min().date()), actual_end=str(dates.max().date()),
                                    retrieved_at=datetime.now(timezone.utc).isoformat())
