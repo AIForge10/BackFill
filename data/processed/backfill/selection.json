@@ -1,0 +1,148 @@
+{
+  "selected": {
+    "variant": "v3_injectable_basket",
+    "net_sharpe": 0.10692898232026521,
+    "placebo_p": 0.04725876709573915,
+    "bundle": "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/results/backfill/9e879a24178a",
+    "identity": {
+      "commit": "18b72a5f52a3f5fffb77bd593f0b2762d0c0fc1f",
+      "files": {
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/data/processed/shortage_events.csv": "5b1d6824ce8db884239cd42f2a60660b78c94371094e9fe5ddc137d3d04be3df",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/data/processed/suppliers.csv": "cd84344c0578434e0e6b767af2ab5126c02c3be4dbc8a5dbc1f544d1bb932dcb",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/data/company_ticker_map_v2.csv": "630305179486a0d9092dd26cae0251b4d12aeaf4205b52697d3e037afaa2189e",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/HYPOTHESIS.md": "65f3bd88faf1deba4522d3a89edb6c188150c97e0f0efd6178afdec9e9459d37",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/data/raw/prices/is-v3/manifest.json": "9ae15dc7183609843e16dd56bcda5efe555724fce4b407b9845da0c96f18d827",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/data/processed/main_status.csv": "ed72d161e586ba7d927ff7adedccae0b2a88e5206ce7f302af24556c28ec712b",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/config.py": "6bffbe77b60f7c27ce9dd373cac0b43c6917f3d375326cbc719e086d38aae8cf",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/backfill/__init__.py": "d3ba624a824dfa1dfb1e0465acdc75758853e6c45f0018ef4022a39915d27408",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/backfill/analysis.py": "9e411e0280deca31b05541f9b1da06167dd305f5b2a405ac39bfcbd62f21be39",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/backfill/date_events.py": "9e7fa4369c355d285e68324b70a1e854db0722768197d3bc7f7365c832f571f1",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/backfill/engine.py": "d94497e67402ab232d4e0b0f220bb5a2a668918a18e3664b9862f85affa26c83",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/backfill/events.py": "9f22ee60b8fc8347247c85216af8b05658a0052e31e7018489f9936a34ced7e4",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/backfill/guardrails.py": "39bd84f8233f152e503c726aa75ea2a24c6a60c7288d48d7f52ff3cab5917282",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/backfill/pipeline.py": "5f045380b5494bf464b007347308fe94bf569c46331c9992464a67578e4df6e0",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/backfill/prices.py": "62f428ed70676ac2fcc4b030a568dccb163abe21035d070ce74452e9f2137f4c",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/backfill/selection.py": "df35bbdac05f44e118cb1804e0df22ecc1536e8f121153b1afa641716ec12c7e",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/backfill/settings.py": "0a89f6100cff582e9625fd53ce659ab756b9fab69f429ceac2ac3fdde02f6769",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/strategies/__init__.py": "3cb2a2897645a4af93515a473b01e132f0308781723f0b675b8d383e2aaf9f0d",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/strategies/backfill.py": "ff28ba35b5f49f4fa167f0fcea5593eb67ee122ca7e0a2f4708ab197d6001b68",
+        "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/src/03_parse_main.py": "ed8efc34f2e37ad757a428d1f6afe991d89bd6ecefa3fde350c12fa34f12cad8"
+      },
+      "settings": {
+        "start": "2014-06-01",
+        "end": "2024-09-30",
+        "hold_days": 60,
+        "beta_lookback": 250,
+        "event_weight": 0.05,
+        "name_cap": 0.08,
+        "country_cap": 0.3,
+        "sector_cap": 0.5,
+        "gross_cap": 1.5,
+        "net_cap": 0.25,
+        "foreign_long_cap": 0.2,
+        "cost_multiplier": 1.0,
+        "costs_bps": {
+          "US": 10,
+          "UK": 15,
+          "DE": 15,
+          "CH": 15,
+          "IN": 25
+        },
+        "hedge_cost_bps": 2,
+        "hedge_carry_bps_year": 50.0,
+        "initial_nav": 1000000.0,
+        "drawdown_trigger": 0.1,
+        "recovery_sessions": 20,
+        "adv_lookback": 60,
+        "adv_participation": 0.01,
+        "final": false
+      },
+      "selected_variant": "v3_injectable_basket",
+      "diagnostic_leave_out": null
+    },
+    "metrics_hashes": {
+      "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/results/backfill/9e879a24178a/v3_injectable_basket/winner/costs1/metrics.json": "51a4baa960d0b9b39320b0e7c35f08b7e1a882d55ca467496701cd98b67d349c",
+      "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/results/backfill/9e879a24178a/v3_injectable_basket/placebo/costs1/metrics.json": "a69b0bb34f3e8855768ab200736836c74eb25cfd527087b778ae817dafad3951"
+    }
+  },
+  "disclosed_variants": [
+    {
+      "variant": "primary",
+      "in_sample_net_sharpe": -0.59
+    },
+    {
+      "variant": "hold10",
+      "in_sample_net_sharpe": -0.07
+    },
+    {
+      "variant": "hold20",
+      "in_sample_net_sharpe": -0.44
+    },
+    {
+      "variant": "hold40",
+      "in_sample_net_sharpe": -0.35
+    },
+    {
+      "variant": "hold120",
+      "in_sample_net_sharpe": -0.15
+    },
+    {
+      "variant": "capture60",
+      "in_sample_net_sharpe": -0.56
+    },
+    {
+      "variant": "allocation",
+      "in_sample_net_sharpe": -0.49
+    },
+    {
+      "variant": "certain_dates",
+      "in_sample_net_sharpe": -0.58
+    },
+    {
+      "variant": "all_flags",
+      "in_sample_net_sharpe": -0.67
+    },
+    {
+      "variant": "capture180",
+      "in_sample_net_sharpe": -0.52
+    },
+    {
+      "variant": "capture180_markets",
+      "in_sample_net_sharpe": -0.45
+    },
+    {
+      "variant": "all_markets",
+      "in_sample_net_sharpe": -0.19
+    },
+    {
+      "variant": "v2_expanded",
+      "in_sample_net_sharpe": -0.5
+    },
+    {
+      "variant": "v2_specialist",
+      "in_sample_net_sharpe": -0.42
+    },
+    {
+      "variant": "v2_injectables",
+      "in_sample_net_sharpe": -0.11
+    },
+    {
+      "variant": "v2_primary",
+      "in_sample_net_sharpe": -0.11
+    },
+    {
+      "variant": "v2_specialist_basket",
+      "in_sample_net_sharpe": 0.67
+    },
+    {
+      "variant": "v3_injectable_basket",
+      "in_sample_net_sharpe": 0.11
+    },
+    {
+      "variant": "v4_disrupted (long book; short = sign flipped)",
+      "in_sample_net_sharpe": -0.03
+    }
+  ],
+  "rule": "OVERRIDE of the default primary-only rule, decided 2026-10-04 by the repository user on branch oos/v3-holdout: the holdout evaluates the pre-registered v3 (docs/PREREG_v3_injectable_basket.md, commit 8e4cc6b) TOGETHER with the registered primary, once; both are reported. v3 was chosen after about 19 in-sample versions; none was significant.",
+  "warning": "OOS signal window is effectively Jan-Jul 2026 (Wayback list pages missing 2024-09-06 to 2026-01-11); another session parsed 2026 FDA signal pages on 2026-10-03 (results/forward_oct2024) but loaded no OOS returns. Nonlisted controls are not verified nonmanufacturers; nonsignificance is not equivalence."
+}
