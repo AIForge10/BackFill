@@ -1,0 +1,10 @@
+HYPOTHESIS.md
+research/final_candidate/freeze_v1_config.json
+research/final_candidate/SPEC.md
+data/processed/final_candidate/v1/price_manifest.json
+data/processed/shortage_events.csv
+data/processed/final_candidate/v1/winners.csv
+data/processed/final_candidate/v1/qualified_evidence.csv
+data/processed/final_candidate/v1/all_candidates.csv
+data/processed/final_candidate/v1/audit.csv
+results/backtest_report/summary.csv

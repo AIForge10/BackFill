@@ -1,0 +1,57 @@
+{
+  "tag": "freeze-v1",
+  "commit": "9c68c898ca2b71c2c742bcae91d1e90df99907ec",
+  "files": [
+    {
+      "path": "HYPOTHESIS.md",
+      "sha256": "246c1e52e4506bcb8bc3278e6edecdc1b784d2e208a4c12858a1e319b3ac5fff",
+      "bytes": 3331
+    },
+    {
+      "path": "data/processed/final_candidate/v1/all_candidates.csv",
+      "sha256": "131b92144dc209b743b9b0325354c6124a3fe9a023e17ed908611f1a3427cee4",
+      "bytes": 151790
+    },
+    {
+      "path": "data/processed/final_candidate/v1/audit.csv",
+      "sha256": "3eefb17c6a6425c60b10f2a66c7764c5c59cba1601fea244c27f1af897956bb5",
+      "bytes": 39916
+    },
+    {
+      "path": "data/processed/final_candidate/v1/price_manifest.json",
+      "sha256": "3053d3883d9dc5115c1cd8f9518df1927952e2b760c9b9bbeb4ac2a81d172da3",
+      "bytes": 6997
+    },
+    {
+      "path": "data/processed/final_candidate/v1/qualified_evidence.csv",
+      "sha256": "ef010aa8968f94462ed7eb5019122919442d78867e3703275b68b814806a52c1",
+      "bytes": 12312
+    },
+    {
+      "path": "data/processed/final_candidate/v1/winners.csv",
+      "sha256": "672f6ce37e988a7d70bea4bc8c7a7f4215bf912c30d2ad8474b8e51ce856eeda",
+      "bytes": 10515
+    },
+    {
+      "path": "data/processed/shortage_events.csv",
+      "sha256": "5b1d6824ce8db884239cd42f2a60660b78c94371094e9fe5ddc137d3d04be3df",
+      "bytes": 74679
+    },
+    {
+      "path": "research/final_candidate/SPEC.md",
+      "sha256": "2f7ea0845d16f5123ab55febb9d49c485534a0d262d9a7bbaee81523b09f3e6f",
+      "bytes": 4332
+    },
+    {
+      "path": "research/final_candidate/freeze_v1_config.json",
+      "sha256": "e0a5d6e3794b8cf3b50e2fc7f879aaa9272963bd37926058e838e38acc2dc5ac",
+      "bytes": 1981
+    },
+    {
+      "path": "results/backtest_report/summary.csv",
+      "sha256": "22e015d3a737c08180ba853b4bddf12f2ac8212b9ed1bdc9fa9f9fc3ed34f597",
+      "bytes": 3020
+    }
+  ],
+  "manifest_sha256": "9046c956c9f9618af1ab05900b8b078c1ace0d24402cea1f1316834dac264850"
+}

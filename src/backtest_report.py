@@ -110,10 +110,10 @@ def cls(x):
 
 
 def proof_section():
-    """Freeze proof card from proof/freeze-v1 (receipt written by proof.anchor_solana)."""
+    """Freeze proof card from proof/freeze-v1 (receipt written by scripts/anchor_solana.py)."""
     if not (PROOF / "receipt.json").exists():
-        return ('<p class="notes">Not yet anchored. Run <code>proof.make_manifest</code> then '
-                '<code>proof.anchor_solana</code> after tagging <code>freeze-v1</code>.</p>')
+        return ('<p class="notes">Not yet anchored. Run <code>scripts/make_manifest.py --tag freeze-v1</code>, '
+                'review the manifest, then <code>scripts/anchor_solana.py --tag freeze-v1</code>.</p>')
     r = json.loads((PROOF / "receipt.json").read_text())
     files = len(json.loads((PROOF / "manifest.json").read_text())["files"])
     rows = [("Tag / commit", f"<code>{r['tag']}</code> · <code>{r['commit'][:12]}</code>"),
@@ -121,8 +121,8 @@ def proof_section():
             ("Manifest hash", f"<code>{r['manifest_sha256']}</code>"),
             ("On-chain memo", f"<code>{r['memo']}</code>"),
             ("Transaction", f"<a href='{r['explorer']}' target='_blank' rel='noopener'>{r['signature'][:24]}…</a> (Solana devnet)"),
-            ("Block time / slot", f"{r['block_time']} · {r['slot']}"),
-            ("Verify", "<code>uv run python -m proof.verify_proof</code>")]
+            ("Sent (UTC)", f"{r['timestamp_utc']} · {r['cluster']}"),
+            ("Verify", "<code>uv run python scripts/verify_proof.py --tag freeze-v1</code>")]
     return "<table class='proof'>" + "".join(f"<tr><td>{k}</td><td>{v}</td></tr>" for k, v in rows) + "</table>"
 
 
