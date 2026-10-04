@@ -1,0 +1,11 @@
+{
+  "tag": "freeze-v1",
+  "commit": "9c68c898ca2b71c2c742bcae91d1e90df99907ec",
+  "manifest_sha256": "9046c956c9f9618af1ab05900b8b078c1ace0d24402cea1f1316834dac264850",
+  "memo": "backfill:freeze-v1:9046c956c9f9618af1ab05900b8b078c1ace0d24402cea1f1316834dac264850:9c68c89",
+  "signature": "4hCNYKkhWvrBxXZtShVL3depyb3BmU2WjadXSv1WjpKACKCEsKHxwk2RwzYfEknpMiQsW7oebcgYGk5bRGCqq4Vg",
+  "cluster": "devnet",
+  "signer": "GohLXDCJzJRMhxLYoj16H4D93ozcQXbweKod1Vi6xxyH",
+  "timestamp_utc": "2026-10-04T08:47:16+00:00",
+  "explorer": "https://explorer.solana.com/tx/4hCNYKkhWvrBxXZtShVL3depyb3BmU2WjadXSv1WjpKACKCEsKHxwk2RwzYfEknpMiQsW7oebcgYGk5bRGCqq4Vg?cluster=devnet"
+}
