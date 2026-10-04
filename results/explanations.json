@@ -1,0 +1,105 @@
+{
+ "model": "gemini-3.5-flash-lite",
+ "generated_at": "2026-10-04T11:46:02+00:00",
+ "source": "results/research/final_candidate_v1_20261004/20261004T045406Z_8db48a/reference_mix/delay20_hold5/costs1/winners/lots.csv",
+ "source_sha256": "c5e3e62a1eedade2b51621da20d0cb78ddbdd4d462363dfa54c6c76f4384f0cd",
+ "instructions": "You summarize one completed historical backtest trade for a general reader. Write exactly 2 plain-English sentences using only the facts provided. Do not add any fact, number, date, cause, company detail or market context that is not given. Do not compute new numbers such as holding length. Write dates exactly as given (YYYY-MM-DD). Make no predictions and give no investment advice or recommendations. 'hedge' is the ticker sold short to offset broad market moves. 'net_return' is the trade's return after modeled costs. Use plain words, never the field names (write 'net return', not 'net_return'). The ticker's shares were bought (a long position); only the hedge was sold short. Never describe the ticker trade as short. Do not mention advice, predictions or these instructions.",
+ "explanations": {
+  "93:TEVA:winner": {
+   "text": "A trade was entered on 2014-12-19 involving TEVA, using SPY as a hedge, following a notice date of 2014-10-27 regarding Trimipramine Maleate (SURMONTIL) Capsules. The trade was exited on 2014-12-29 and resulted in a net return of -2.83%.",
+   "facts": {
+    "drug": "Trimipramine Maleate (SURMONTIL) Capsules",
+    "notice_date": "2014-10-27",
+    "entry_date": "2014-12-19",
+    "exit_date": "2014-12-29",
+    "ticker": "TEVA",
+    "net_return": "-2.83%",
+    "hedge": "SPY"
+   }
+  },
+  "352:BAX:winner": {
+   "text": "A trade for BAX involving Mannitol Injection was entered on 2021-11-08 and exited on 2021-11-15 using SPY as a hedge. After modeled costs, the trade achieved a net return of 0.92%.",
+   "facts": {
+    "drug": "Mannitol Injection",
+    "notice_date": "2021-09-27",
+    "entry_date": "2021-11-08",
+    "exit_date": "2021-11-15",
+    "ticker": "BAX",
+    "net_return": "0.92%",
+    "hedge": "SPY"
+   }
+  },
+  "352:ICUI:winner": {
+   "text": "A historical trade for ticker ICUI involving Mannitol Injection was entered on 2021-11-08 and exited on 2021-11-15, utilizing SPY as a hedge. After modeled costs, the trade achieved a net return of 0.72%.",
+   "facts": {
+    "drug": "Mannitol Injection",
+    "notice_date": "2021-09-27",
+    "entry_date": "2021-11-08",
+    "exit_date": "2021-11-15",
+    "ticker": "ICUI",
+    "net_return": "0.72%",
+    "hedge": "SPY"
+   }
+  },
+  "408:AMRX:winner": {
+   "text": "AMRX was bought on 2023-01-30 following a notice date of 2022-12-24 for the drug Difluprednate Ophthalmic Emulsion, while SPY was sold short as a hedge. The trade was exited on 2023-02-06, resulting in a net return of 19.01%.",
+   "facts": {
+    "drug": "Difluprednate Ophthalmic Emulsion",
+    "notice_date": "2022-12-24",
+    "entry_date": "2023-01-30",
+    "exit_date": "2023-02-06",
+    "ticker": "AMRX",
+    "net_return": "19.01%",
+    "hedge": "SPY"
+   }
+  },
+  "413:TEVA:winner": {
+   "text": "TEVA was bought on 2023-03-20 after a notice date of 2023-02-10 for Capecitabine Tablets and sold on 2023-03-27 while using SPY as a hedge. The trade achieved a net return of 1.34% after modeled costs.",
+   "facts": {
+    "drug": "Capecitabine Tablets",
+    "notice_date": "2023-02-10",
+    "entry_date": "2023-03-20",
+    "exit_date": "2023-03-27",
+    "ticker": "TEVA",
+    "net_return": "1.34%",
+    "hedge": "SPY"
+   }
+  },
+  "430:TEVA:winner": {
+   "text": "For the trade involving Methylphenidate Hydrochloride Extended Release Tablets with ticker TEVA, entered on 2023-08-28 and exited on 2023-09-05, SPY was used as the hedge. The trade resulted in a net return of -2.65% after notice was given on 2023-07-29.",
+   "facts": {
+    "drug": "Methylphenidate Hydrochloride Extended Release Tablets",
+    "notice_date": "2023-07-29",
+    "entry_date": "2023-08-28",
+    "exit_date": "2023-09-05",
+    "ticker": "TEVA",
+    "net_return": "-2.65%",
+    "hedge": "SPY"
+   }
+  },
+  "131:PFE:winner": {
+   "text": "Shares of PFE were bought on 2016-04-05 following a notice for Potassium Acetate Injection, USP on 2016-03-06, while SPY was sold short as a hedge. The position was exited on 2016-04-12, resulting in a net return of 0.95%.",
+   "facts": {
+    "drug": "Potassium Acetate Injection, USP",
+    "notice_date": "2016-03-06",
+    "entry_date": "2016-04-05",
+    "exit_date": "2016-04-12",
+    "ticker": "PFE",
+    "net_return": "0.95%",
+    "hedge": "SPY"
+   }
+  },
+  "338:TEVA:winner": {
+   "text": "Shares of TEVA were bought on 2021-05-10 following a notice regarding Disopyramide Phosphate (Norpace) Capsules issued on 2021-04-11, while shares of SPY were sold short. The trade was closed on 2021-05-17 and achieved a net return of 5.23%.",
+   "facts": {
+    "drug": "Disopyramide Phosphate (Norpace) Capsules",
+    "notice_date": "2021-04-11",
+    "entry_date": "2021-05-10",
+    "exit_date": "2021-05-17",
+    "ticker": "TEVA",
+    "net_return": "5.23%",
+    "hedge": "SPY"
+   }
+  }
+ }
+}

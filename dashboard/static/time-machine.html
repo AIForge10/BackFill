@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f4f0e8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#11100e" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="Point-in-time FDA drug shortage pages, archived and stored in Tiger Data.">
+  <title>Backfill — FDA Time Machine</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/tokens.css"><link rel="stylesheet" href="/app.css">
+  <script type="module" src="/time-machine.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#tm-table-title">Skip to the shortage table</a>
+<header class="nav">
+  <a href="/" class="wordmark" aria-label="Backfill observatory home"><span class="brand-mark">b</span>backfill<span class="edition">FDA TIME MACHINE</span></a>
+  <nav aria-label="Main navigation"><a href="/">Observatory</a><a href="/#live">Fresh information</a><a href="/time-machine.html" aria-current="page">Time machine</a></nav>
+  <a class="nav-repo" href="https://github.com/AIForge10/Gator_Hacks" target="_blank" rel="noopener">View repository <span>↗</span></a>
+</header>
+<main class="framed">
+  <section class="section" aria-labelledby="tm-title">
+    <span class="rule"></span><div class="section-index">FDA TIME MACHINE / TIGER DATA</div>
+    <div class="section-heading"><div><p class="eyebrow">POINT-IN-TIME FDA SHORTAGE PAGES</p><h2 id="tm-title">What did the FDA page say<br><em>on that day?</em></h2></div><span class="badge" id="tm-state">Loading</span></div>
+    <p class="small-note tm-intro">Each row is a drug's latest archived FDA shortage page captured on or before the date you pick, read from Tiger Data. Only information public at that moment appears: no later updates, no hindsight. Archive dates are in UTC.</p>
+
+    <div class="tm-controls">
+      <label class="select-field"><span>AS OF (UTC)</span><input type="date" id="tm-date" aria-describedby="tm-range"></label>
+      <fieldset class="segmented" id="tm-status"><legend>SHOW</legend><button type="button" data-status="Currently in Shortage" aria-pressed="true">Shortages</button><button type="button" data-status="" aria-pressed="false">All statuses</button></fieldset>
+      <label class="search-field tm-search"><span aria-hidden="true">⌕</span><input type="search" id="tm-search" placeholder="Search drug or manufacturer" aria-label="Search drug or manufacturer"></label>
+    </div>
+    <p class="mono small" id="tm-range"></p>
+
+    <article class="panel tm-snapshot" aria-live="polite">
+      <div><span class="eyebrow">SNAPSHOT SHOWN</span><p class="tm-asof">As of <strong id="tm-asof-date">—</strong></p></div>
+      <div><span class="eyebrow">NEWEST ARCHIVED PAGE USED</span><p class="tm-asof" id="tm-newest">—</p></div>
+      <div class="tm-counts" id="tm-counts"></div>
+      <p class="small-note" id="tm-message"></p>
+    </article>
+
+    <article class="panel tm-timeline" id="tm-timeline" hidden aria-labelledby="tm-timeline-title">
+      <div class="panel-top"><div><span class="eyebrow">STATUS TIMELINE · ALL ARCHIVED SNAPSHOTS</span><h3 id="tm-timeline-title">—</h3></div><button type="button" class="quiet-button" id="tm-timeline-close">Close ×</button></div>
+      <p class="small-note" id="tm-timeline-summary"></p>
+      <ol class="tm-changes" id="tm-changes"></ol>
+      <p class="small-note">FDA can list one drug on several tabs at once (in shortage and discontinued presentations), and the archive captures each tab separately. Same-day captures are merged; alternating statuses on different days can reflect which tab was archived.</p>
+    </article>
+
+    <h3 class="tm-table-title" id="tm-table-title">Shortages and manufacturers</h3>
+    <div class="table-scroll"><table class="tm-table"><thead><tr><th>Drug</th><th>FDA status</th><th>Manufacturers on the page</th><th>Page archived (UTC)</th><th>Evidence</th></tr></thead><tbody id="tm-rows"><tr><td colspan="5">Loading…</td></tr></tbody></table></div>
+    <div class="table-footer"><span class="mono small" id="tm-shown"></span><button type="button" class="quiet-button" id="tm-more" hidden>Show more</button></div>
+  </section>
+  <footer><a class="wordmark" href="/">backfill<em>.</em></a><p>FDA shortage research, with the uncertainty left in.</p><span class="mono">GQH 2026 / SYSTEMATIC TRADING</span></footer>
+</main>
+<div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>

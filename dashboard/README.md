@@ -83,7 +83,80 @@ and basket have summary metrics only here; missing curves are reported honestly.
 Downloads expose selected derived artifacts, never credentials or licensed raw
 price files. Filtering evidence does not select a new strategy or tune metrics.
 
-## Connect Tiger Data
+## Proof on Solana
+
+Section 07 shows the `freeze-v1` anchor from `proof/freeze-v1/receipt.json` and
+`manifest.json`: anchor time, tag/commit, manifest hash, on-chain memo, explorer
+link and the 10 fingerprinted files. **Verify now** calls `/api/proof/verify`,
+which reuses `scripts/make_manifest.py` (recompute the memo from the git tag) and
+`scripts/verify_proof.py` (read the memo live from Solana devnet) and returns:
+
+- `PASS`: recomputed and on-chain memos match; both are shown side by side.
+- `FAIL`: they differ, or devnet does not know the transaction; differing fields are named.
+- `UNAVAILABLE`: devnet unreachable or the tag is not fetched (`git fetch --tags`);
+  the saved receipt is shown instead. The endpoint never crashes the page.
+
+Results are cached for 60 seconds per server process. `/api/proof` returns the
+saved facts only and needs no network. The panel also separates the two integrity
+checks: `freeze.json` (8 files, local copy against the team's recorded hashes, no
+external timestamp) and `freeze-v1` (10 files, anchored on Solana). Four files are
+in both. The proof shows the frozen rules existed at 2026-10-04 08:47 UTC; it does
+not make the 2014–2024 backtest out-of-sample.
+
+## Research audit (Snowflake)
+
+Section 07's **Research audit** panel lists every tested specification: the nine
+registered variants labeled `registered`, and the 20/5 candidate rows labeled
+`chosen after seeing results`, sorted by Sharpe. It reads:
+
+- `/api/audit/variants`: `BACKFILL.RESEARCH.RUNS`
+- `/api/audit/freeze`: the zero-copy clone `BACKFILL_FREEZE_V1.RESEARCH.RUNS` plus its
+  `PROOF` row (freeze-v1 manifest hash and Solana explorer link)
+
+Load the tables first with `uv run --extra snowflake python scripts/load_snowflake.py`.
+Credentials come only from the root `.env` (`SNOWFLAKE_*`). The server queries Snowflake
+at most once per endpoint every 10 minutes; the page never polls it. If Snowflake is not
+configured, the connector is missing (`uv sync --extra snowflake`) or a query fails, both
+endpoints fall back to `results/backtest_report/summary.csv` (and the saved receipt) with
+`source="file"`; driver messages and settings are never returned.
+
+## AI trade summaries (Gemini, precomputed)
+
+Each executed trade's evidence record shows a two-sentence summary labeled "AI-generated summary of
+the facts above". The summaries are generated offline and cached; the page never calls Gemini.
+
+```bash
+uv run python scripts/explain_trades.py --dry-run   # print the facts that would be sent
+uv run python scripts/explain_trades.py             # needs GEMINI_API_KEY in the root .env
+```
+
+For each lot in the published 20/5 candidate (`reference_mix/delay20_hold5/costs1/winners/lots.csv`)
+only drug, notice date, entry date, exit date, ticker, net return and hedge are sent. A summary is
+rejected and retried if it is not two sentences or contains a number that is not in those facts;
+nothing is written unless every trade passes. `results/explanations.json` records the model, the
+UTC timestamp, the prompt, the source file and its SHA-256. `GET /api/explain/{lot_id}` returns the
+cached text (404 if absent) with `current: false` when the source file has changed since generation.
+
+## FDA Time Machine (Tiger Data)
+
+`/time-machine.html` shows each drug's latest archived FDA shortage page on or before a chosen
+date (UTC), with its status, manufacturers, archive time and Wayback link, so you can see what
+was public on any day without hindsight. Click a drug for its status timeline.
+
+```bash
+uv run --extra dashboard python scripts/load_tiger.py --dry-run   # build rows only
+uv run --extra dashboard python scripts/load_tiger.py             # hypertable + bulk load
+```
+
+The loader creates `backfill_live.fda_snapshots(snapshot_ts, drug, manufacturer, status, source_url)`
+as a hypertable on `snapshot_ts` and loads one row per archived capture, drug and manufacturer from
+`results/forward_oct2024/suppliers.csv` (18,218 rows, 1,042 drugs, 2014-07-14 to 2026-09-23). Each
+drug keeps one canonical name (its latest display name). Endpoints, read-only and cached 60 s:
+`/api/fda/asof?date=YYYY-MM-DD` and `/api/fda/timeline?drug=...`. If Tiger is unreachable they
+return `state: "error"` with a message; a bad date returns a JSON error. The timeline merges
+same-day captures, because FDA can list one drug on several tabs at once.
+
+
 
 Tiger Data is the time-series database, not a source of stock prices or FDA
 notices. Your Webull/FDA collector must send sourced observations into it.
@@ -113,12 +186,25 @@ uv run python -m dashboard.ingest --kind supplier_updates --file /path/to/fda_up
 
 Quote CSV columns: `time,ticker,price,previous_close,volume,source`.
 Supply CSV columns:
-`observed_at,event_key,product,company,ticker,availability,source,source_url`.
+`observed_at,event_key,product,company,ticker,availability,source,source_url,status`
+(`status` is optional; run `python -m dashboard.apply_schema` once to add the column).
 Timestamps must include a timezone and cannot be in the future. Prices must be
 positive/finite. Availability is `available`, `allocation`, `disrupted` or
 `unknown`. Supplier updates require a public source URL. Duplicate observations
 are ignored without rewriting prior records. `received_at` is database-generated
 ingestion time; never substitute it for the source's observation time.
+
+**Archived FDA notices.** `python -m dashboard.collect_fda_notices --out notices.csv` writes the
+newest archived snapshot of each drug captured in the 30 days before the latest capture, one row per
+supplier, with page status and the exact Wayback URL (matched on timestamp *and* drug, since one
+archive second can hold several pages). The card groups rows into one notice per drug snapshot and
+shows the 10 newest, each labeled "Archived FDA page, snapshot YYYY-MM-DD": point-in-time records,
+not live signals.
+
+**Stale quotes.** Quotes older than five minutes keep the "Stale" badge (with a tooltip). On a
+weekend or NYSE holiday, if the newest stored quote is the last session close, a note explains it:
+"Markets closed - showing last close (Fri Oct 2, 4:00 PM ET)", built from the stored timestamp.
+On trading days no note is shown and the normal stale warning stands (`market_hours.py`).
 
 Read sessions have a connection timeout, statement timeout and read-only
 transaction. Connection errors sent to the browser omit driver details that
@@ -138,6 +224,12 @@ Reference: [Tiger Data Python/PostgreSQL integration](https://www.tigerdata.com/
 | `tiger.py` | Read-only, bounded live queries and connection states |
 | `server.py` | Local HTTP/API server and static assets |
 | `ingest.py` | Explicit, validated observation ingestion |
+| `collect_fda_notices.py` | Archived FDA detail-page captures → supplier_updates CSV |
+| `apply_schema.py` | Operator command to apply `schema.sql` (idempotent) |
+| `fda_history.py` | FDA Time Machine as-of and timeline queries (read-only, cached) |
+| `market_hours.py` | NYSE calendar used only to explain stale quotes |
+| `audit.py` | Research audit from Snowflake with a 10-minute cache and file fallback |
+| `proof.py` | Saved Solana receipt and cached live re-verification of `freeze-v1` |
 | `schema.sql` | Operator-run table creation |
 | `static/tokens.css` | Rezt tokens, fonts, themes and primitives |
 | `static/app.css` | Responsive page and instrument geometry |

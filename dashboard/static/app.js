@@ -161,8 +161,26 @@ async function openEvent(id,ticker) {
   try{
     const data=await api(`/api/event?id=${encodeURIComponent(id)}&ticker=${encodeURIComponent(ticker)}`);
     const row=data.selected,execution=data.executions[0];
-    $('#event-content').innerHTML=`<h2 id="event-title">${esc(row.product)}</h2><div class="event-meta">${esc(row.ticker)} · ${esc(row.company||'Page-absent control')} · EVENT ${esc(row.event_id)}</div>${link(row.archive_url,'Open archived FDA source')}<div class="event-timeline"><div><b>PUBLIC OBSERVATION</b><span>${esc(row.public_date)}</span></div><div><b>SUPPLIER CAPTURE</b><span>${esc(row.capture_date)}</span></div><div><b>ACTUAL ENTRY / V1</b><span>${esc(execution?.trade_date??'Not executed')}</span></div><div><b>ACTUAL EXIT / V1</b><span>${esc(execution?.exit_date??'Not executed')}</span></div></div><p class="small-note">Information known at ${esc(row.known_at)}. Event dates can be interval-censored by archive gaps. Actual executions here refer to the saved mixed-vendor v1 candidate.</p><h3>Presentation-level evidence</h3>${row.presentations.length?row.presentations.map(item=>`<div class="presentation">${esc(item.presentation)}<small>${esc(item.availability_raw??item.availability)} · ALLOCATION: ${item.on_allocation?'YES':'NO'}</small></div>`).join(''): '<p class="small-note">This control is absent from the selected FDA page. Product manufacture absence is not verified.</p>'}<h3>Other listed roles &amp; controls</h3><div class="table-scroll"><table><thead><tr><th>Owner</th><th>Role</th><th>Evidence</th></tr></thead><tbody>${data.suppliers.map(peer=>`<tr><td>${esc(peer.ticker)}</td><td>${esc(peer.role)}</td><td>${peer.presentations.length} PRESENTATIONS</td></tr>`).join('')}</tbody></table></div>${execution?`<h3>Recorded trade accounting</h3><div class="event-meta">Entry total-return mark ${fixed(execution.entry_stock_mark,4)} → exit ${fixed(execution.exit_stock_mark,4)}<br>Prior-window beta ${fixed(execution.beta,4)} · hedge ${esc(execution.hedge)}<br>Capital ${money(execution.entry_usd)} · net P&amp;L ${money(execution.net_pnl)}<br>Transaction costs ${money(execution.transaction_cost)} · carry ${money(execution.hedge_carry_cost)}<br>Net lot return ${pct(execution.net_lot_return)}</div>`:''}`;
+    $('#event-content').innerHTML=`<h2 id="event-title">${esc(row.product)}</h2><div class="event-meta">${esc(row.ticker)} · ${esc(row.company||'Page-absent control')} · EVENT ${esc(row.event_id)}</div>${link(row.archive_url,'Open archived FDA source')}<div class="event-timeline"><div><b>PUBLIC OBSERVATION</b><span>${esc(row.public_date)}</span></div><div><b>SUPPLIER CAPTURE</b><span>${esc(row.capture_date)}</span></div><div><b>ACTUAL ENTRY / V1</b><span>${esc(execution?.trade_date??'Not executed')}</span></div><div><b>ACTUAL EXIT / V1</b><span>${esc(execution?.exit_date??'Not executed')}</span></div></div><p class="small-note">Information known at ${esc(row.known_at)}. Event dates can be interval-censored by archive gaps. Actual executions here refer to the saved mixed-vendor v1 candidate.</p><h3>Presentation-level evidence</h3>${row.presentations.length?row.presentations.map(item=>`<div class="presentation">${esc(item.presentation)}<small>${esc(item.availability_raw??item.availability)} · ALLOCATION: ${item.on_allocation?'YES':'NO'}</small></div>`).join(''): '<p class="small-note">This control is absent from the selected FDA page. Product manufacture absence is not verified.</p>'}<h3>Other listed roles &amp; controls</h3><div class="table-scroll"><table><thead><tr><th>Owner</th><th>Role</th><th>Evidence</th></tr></thead><tbody>${data.suppliers.map(peer=>`<tr><td>${esc(peer.ticker)}</td><td>${esc(peer.role)}</td><td>${peer.presentations.length} PRESENTATIONS</td></tr>`).join('')}</tbody></table></div>${execution?`<h3>Recorded trade accounting</h3><div class="event-meta">Entry total-return mark ${fixed(execution.entry_stock_mark,4)} → exit ${fixed(execution.exit_stock_mark,4)}<br>Prior-window beta ${fixed(execution.beta,4)} · hedge ${esc(execution.hedge)}<br>Capital ${money(execution.entry_usd)} · net P&amp;L ${money(execution.net_pnl)}<br>Transaction costs ${money(execution.transaction_cost)} · carry ${money(execution.hedge_carry_cost)}<br>Net lot return ${pct(execution.net_lot_return)}</div><div class="trade-explanation" id="trade-explanation" data-lot="${esc(execution.lot_id)}" hidden></div>`:''}`;
+    if(execution)loadExplanation(execution.lot_id);
   }catch(error){$('#event-content').textContent=error.message;}
+}
+
+async function loadExplanation(lotId) {
+  try{
+    const data=await api(`/api/explain/${encodeURIComponent(lotId)}`);
+    const element=$('#trade-explanation');
+    if(element?.dataset.lot!==lotId)return;
+    element.innerHTML=`<span class="eyebrow">${esc(data.label)}</span><p>${esc(data.text)}</p><small>${esc(data.model)} · generated ${esc(String(data.generated_at).slice(0,10))}${data.current?'':' · source file has changed since generation'}</small>`;
+    element.hidden=false;
+  }catch{}
+}
+
+function renderNotice(row) {
+  const archived=row.source==='fda_archive';
+  const label=archived?`Archived FDA page, snapshot ${esc(String(row.observed_at).slice(0,10))}`:`${esc(row.source)} · ${esc(new Date(row.observed_at).toLocaleString())}`;
+  const suppliers=(row.suppliers??[]).map(s=>`<li><span>${esc(s.company)}</span><span class="role-label ${s.availability==='available'?'':'disrupted'}">${esc(String(s.availability).toUpperCase())}${s.ticker?` · ${esc(s.ticker)}`:''}</span></li>`).join('');
+  return `<div class="live-event"><span class="mono notice-snapshot">${label}</span>${row.status?`<span class="notice-status">${esc(row.status)}</span>`:''}<p>${esc(row.product)}</p>${suppliers?`<ul class="notice-suppliers">${suppliers}</ul>`:''}<div>${link(row.source_url,archived?'Open archived page':'Source notice')}</div></div>`;
 }
 
 async function loadLive() {
@@ -173,8 +191,11 @@ async function loadLive() {
     badge('#live-badge',{not_configured:'Not connected',driver_missing:'Driver not installed',schema_missing:'Schema not ready',error:'Connection unavailable',empty:'Connected · awaiting data',connected:'Connected'}[data.state]??data.state,false,data.state==='connected');
     text('#live-checked',`Last checked: ${new Date(data.checked_at).toLocaleTimeString('en-US',{hour12:false})}`);
     text('#live-received',`Latest ingestion: ${data.latest_received_at?new Date(data.latest_received_at).toLocaleString():'No observations received'}`);
-    $('#live-quotes').innerHTML=data.quotes.length?data.quotes.map(row=>{const change=row.previous_close?(Number(row.price)/Number(row.previous_close)-1):null;return `<div class="quote-row ${row.stale?'':'fresh-quote'}"><div><strong>${esc(row.ticker)}</strong><small>${esc(row.source)}</small></div><div><span class="quote-price">${fixed(row.price)}</span><small class="${change<0?'negative':''}">${pct(change)} VS PRIOR CLOSE</small></div><div><span class="badge ${row.stale?'':'live'}">${row.stale?'Stale':'Fresh'}</span><small>${esc(new Date(row.time).toLocaleString())}</small></div></div>`;}).join(''):empty(data.state==='empty'?'Awaiting market observations':'Live quotes unavailable',data.message);
-    $('#live-events').innerHTML=data.events.length?data.events.map(row=>`<div class="live-event"><span class="role-label ${row.availability==='disrupted'?'disrupted':''}">${esc(row.availability.toUpperCase())} · ${esc(row.ticker??'UNMAPPED')}</span><p>${esc(row.product)}</p><span class="mono">${esc(row.company)} · ${esc(row.source)} · ${esc(new Date(row.observed_at).toLocaleString())}</span><div>${link(row.source_url,'Source notice')}</div></div>`).join(''):empty('Awaiting sourced supply updates',data.state==='not_configured'?'Configure Tiger Data and ingest supplier notices to observe them here.':data.message);
+    $('#live-quotes').innerHTML=data.quotes.length?data.quotes.map(row=>{const change=row.previous_close?(Number(row.price)/Number(row.previous_close)-1):null;return `<div class="quote-row ${row.stale?'':'fresh-quote'}"><div><strong>${esc(row.ticker)}</strong><small>${esc(row.source)}</small></div><div><span class="quote-price">${fixed(row.price)}</span><small class="${change<0?'negative':''}">${pct(change)} VS PRIOR CLOSE</small></div><div><span class="badge ${row.stale?'':'live'}"${row.stale?' title="Last stored close; markets are closed or data hasn&#39;t refreshed yet." tabindex="0"':''}>${row.stale?'Stale':'Fresh'}</span><small>${esc(new Date(row.time).toLocaleString())}</small></div></div>`;}).join(''):empty(data.state==='empty'?'Awaiting market observations':'Live quotes unavailable',data.message);
+    const note=data.market?.note;$('#market-closed-note').hidden=!note;text('#market-closed-note',note??'');
+    const notices=data.events.length?data.events.map(renderNotice).join(''):empty('Awaiting sourced supply updates',data.state==='not_configured'?'Configure Tiger Data and ingest supplier notices to observe them here.':data.message);
+    // Re-render only when the notices change, and start at the newest; keeps a reader's scroll during the 15 s refresh.
+    if(notices!==state.noticesHtml){state.noticesHtml=notices;$('#live-events').innerHTML=notices;$('#live-events').scrollTop=0;}
     if(state.lastReceipt&&data.latest_received_at&&state.lastReceipt!==data.latest_received_at){$('.live-layout').classList.remove('pulse-received');void $('.live-layout').offsetWidth;$('.live-layout').classList.add('pulse-received');}
     state.lastReceipt=data.latest_received_at;
   }catch(error){badge('#live-badge','Connection unavailable');$('#live-quotes').innerHTML=empty('Live monitor unavailable',error.message);}
@@ -192,6 +213,75 @@ $('#strategy').addEventListener('change',event=>{state.strategy=event.target.val
 $('#vendor').addEventListener('change',event=>{state.vendor=event.target.value;loadResearch();});
 $('#cost-switch').querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{state.costs=Number(button.dataset.cost);loadResearch();}));
 $('.chart-switch').querySelectorAll('button').forEach(button=>button.addEventListener('click',()=>{state.chart=button.dataset.chart;$('.chart-switch').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));renderChart();}));
+const shortHash = value => value ? `${String(value).slice(0,12)}…${String(value).slice(-6)}` : '—';
+
+function renderProof(data) {
+  const r=data.receipt??{};
+  text('#proof-statement',data.statement);
+  text('#proof-command',data.verify_command);
+  badge('#proof-anchor-badge',data.anchored?`Anchored · ${r.cluster??'devnet'}`:'Not anchored',!data.anchored);
+  const explorer=safeURL(r.explorer);
+  const facts=data.anchored?[
+    ['Anchored (UTC)',esc(r.timestamp_utc)],
+    ['Git tag / commit',`${esc(data.tag)} · <code>${esc(String(data.commit??'').slice(0,12))}</code>`],
+    ['Manifest hash',`<code>${esc(data.manifest_sha256)}</code>`],
+    ['On-chain memo',`<code>${esc(r.memo)}</code>`],
+    ['Transaction',explorer?`<a class="text-link" href="${esc(explorer)}" target="_blank" rel="noopener">${esc(shortHash(r.signature))} ↗</a>`:esc(shortHash(r.signature))],
+    ['Signer',`<code>${esc(r.signer??'—')}</code>`]]:[['Status','No receipt in proof/freeze-v1. Run scripts/anchor_solana.py after reviewing the manifest.']];
+  $('#proof-facts').innerHTML=facts.map(([k,v])=>`<div><dt>${esc(k)}</dt><dd>${v}</dd></div>`).join('');
+  $('#proof-verify-button').disabled=!data.anchored;
+  const c=data.comparison;
+  $('#proof-check-grid').innerHTML=[['older','Frozen inputs check (below)'],['anchored','Proof on Solana (this panel)']].map(([key,title])=>{const x=c[key];return `<div class="proof-check ${key==='anchored'?'is-anchored':''}"><strong>${esc(title)}</strong><span class="mono">${esc(x.name)} · ${esc(x.files)} files</span><dl><div><dt>Compares</dt><dd>${esc(x.checks)}</dd></div><div><dt>Independent timestamp</dt><dd>${esc(x.timestamp)}</dd></div><div><dt>Source</dt><dd><code>${esc(x.source)}</code></dd></div></dl></div>`;}).join('');
+  text('#proof-shared',`${c.shared.length} files appear in both: ${c.shared.map(f=>f.split('/').pop()).join(', ')}. The older check covers supplier evidence and earlier screens; freeze-v1 adds the hypothesis, rule config, spec, price manifest, shortage events and published results, and is the only one anchored outside our own repository.`);
+  $('#proof-files').innerHTML=data.files.length?data.files.map(f=>`<div class="hash-row"><div><span>${esc(f.path)}</span><span>${Number(f.bytes).toLocaleString('en-US')} B</span></div><code>${esc(f.sha256)}</code></div>`).join(''):empty('No manifest','proof/freeze-v1/manifest.json is not present.');
+}
+
+function renderVerification(result) {
+  const status=result.status??'UNAVAILABLE';
+  badge('#proof-result-badge',status,status==='FAIL');
+  $('#proof-result-badge').dataset.status=status;
+  $('#proof-compare').hidden=false;
+  text('#proof-recomputed',result.recomputed??'Not recomputed');
+  text('#proof-onchain',result.on_chain??'No memo read');
+  $('#proof-compare').classList.toggle('mismatch',status==='FAIL');
+  const saved=status==='UNAVAILABLE'&&result.on_chain?' (saved receipt)':'';
+  $('#proof-onchain').previousElementSibling.textContent=`ON SOLANA DEVNET${saved.toUpperCase()}`;
+  const diffs=(result.differences??[]).map(d=>`${d.field}: ${d.recomputed||'∅'} ≠ ${d.on_chain||'∅'}`).join(' · ');
+  text('#proof-reason',[result.reason,diffs].filter(Boolean).join(' '));
+  text('#proof-checked',result.checked_at?`Checked ${result.checked_at}${result.cached?` · cached ${result.age_seconds}s ago`:''}`:'');
+}
+
+async function loadProof() {
+  try{renderProof(await api('/api/proof'));}
+  catch{badge('#proof-anchor-badge','Receipt unavailable',true);$('#proof-verify-button').disabled=true;}
+}
+
+async function verifyProof() {
+  const button=$('#proof-verify-button');
+  button.disabled=true;button.firstChild.textContent='Verifying… ';
+  badge('#proof-result-badge','Checking devnet');delete $('#proof-result-badge').dataset.status;
+  try{renderVerification(await api('/api/proof/verify'));}
+  catch{renderVerification({status:'UNAVAILABLE',reason:'The dashboard server could not complete the check. The saved receipt above is unchanged.'});}
+  finally{button.disabled=false;button.firstChild.textContent='Verify now ';}
+}
+
+function renderAudit(live,frozen) {
+  const fromSnowflake=live.source==='snowflake';
+  badge('#audit-source-badge',fromSnowflake?'Source: Snowflake':'Source: file',!fromSnowflake);
+  text('#audit-summary',`${live.registered} registered before testing · ${live.post_hoc} chosen after seeing results. Sorted by Sharpe at modeled costs.`);
+  $('#audit-rows').innerHTML=live.rows.length?live.rows.map(r=>{const posthoc=r.label!=='registered';return `<tr class="${posthoc?'post-hoc':''}"><td>${esc(r.spec)}</td><td><span class="audit-label ${posthoc?'is-post-hoc':''}">${esc(r.label)}</span></td><td>${r.trades??'—'}</td><td class="${Number(r.sharpe)<0?'negative':''}">${fixed(r.sharpe)}</td><td class="${Number(r.sharpe_x2)<0?'negative':''}">${fixed(r.sharpe_x2)}</td><td class="${Number(r.total_return)<0?'negative':''}">${pct(r.total_return)}</td><td>${pct(r.max_drawdown)}</td><td>${fixed(r.winner_p,3)}</td><td>${fixed(r.winner_minus_placebo_p,3)}</td></tr>`;}).join(''):'<tr><td colspan="9">No audit rows could be read.</td></tr>';
+  text('#audit-source',fromSnowflake?`source: Snowflake · ${live.location} · fetched ${live.fetched_at} · cached on the server for up to 10 min`:`source: file · ${live.location} · ${live.reason??''}`);
+  const p=frozen?.proof, explorer=safeURL(p?.explorer);
+  const same=frozen&&JSON.stringify(frozen.rows)===JSON.stringify(live.rows);
+  const snapshot=frozen?.source==='snowflake'?`Frozen snapshot <code>${esc(frozen.snapshot)}</code>: ${frozen.rows.length} rows, ${same?'identical to the live table':'<strong class="negative">differs from the live table</strong>'}.`:'Frozen Snowflake snapshot unavailable; proof shown from the saved receipt.';
+  $('#audit-freeze').innerHTML=`<span class="eyebrow">LINKED TO THE SOLANA PROOF</span><p>${snapshot}</p>${p?`<div class="audit-freeze-hash"><span>freeze-v1 manifest hash</span><code>${esc(p.manifest_sha256)}</code></div><p class="small-note">Anchored ${esc(p.timestamp_utc)} · ${explorer?`<a class="text-link" href="${esc(explorer)}" target="_blank" rel="noopener">Solana explorer ↗</a>`:'explorer link unavailable'} · proof row from <code>${esc(frozen.proof_source)}</code></p>`:'<p class="small-note">No proof row available.</p>'}`;
+}
+
+async function loadAudit() {
+  try{const [live,frozen]=await Promise.all([api('/api/audit/variants'),api('/api/audit/freeze').catch(()=>null)]);renderAudit(live,frozen);}
+  catch{badge('#audit-source-badge','Audit unavailable',true);$('#audit-rows').innerHTML='<tr><td colspan="9">The audit could not be loaded.</td></tr>';}
+}
+
 let searchTimer;
 $('#search').addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{state.offset=0;loadEvidence();},250);});
 for(const selector of ['#ticker-filter','#role-filter'])$(selector).addEventListener('change',()=>{state.offset=0;loadEvidence();});
@@ -203,6 +293,8 @@ $('#refresh-live').addEventListener('click',async()=>{await loadLive();scheduleL
 $('#live-instrument').addEventListener('change',loadMarketHistory);
 $('#auto-refresh').addEventListener('change',scheduleLive);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&$('#auto-refresh').checked)loadLive();scheduleLive();});
+$('#proof-verify-button').addEventListener('click',verifyProof);
+$('#copy-proof-command').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#proof-command').textContent);showToast('Verification command copied');}catch{showToast('Clipboard unavailable. Select and copy the command.');}});
 $('#copy-command').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#reproduce-command').textContent);showToast('Reproduction command copied');}catch{showToast('Clipboard unavailable. Select and copy the command.');}});
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
   document.documentElement.classList.add('js-motion');
@@ -210,4 +302,4 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
   document.querySelectorAll('.reveal').forEach((element,index)=>{element.style.transitionDelay=`${Math.min(index%2,1)*110}ms`;observer.observe(element);});
 }
 try{renderOverview(await api('/api/overview'));}catch(error){badge('#integrity-badge','Research unavailable',true);text('#integrity-total','No integrity claim');showToast(error.message);}
-await Promise.allSettled([loadResearch(),loadEvidence(),loadLive(),initCase()]);scheduleLive();
+await Promise.allSettled([loadResearch(),loadEvidence(),loadLive(),initCase(),loadProof(),loadAudit()]);scheduleLive();
