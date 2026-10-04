@@ -132,6 +132,13 @@
       </div>
       <details class="proof-files"><summary>The fingerprinted files <span>+</span></summary><div id="proof-files"></div></details>
     </article>
+    <article class="panel audit-panel reveal" id="research-audit" aria-labelledby="research-audit-title">
+      <div class="panel-top"><div><span class="eyebrow">RESEARCH AUDIT · EVERY VARIANT TRIED</span><h3 id="research-audit-title">Everything we tested, not just the winner</h3></div><span class="badge" id="audit-source-badge">Loading audit</span></div>
+      <p class="small-note" id="audit-summary">Nine specifications were registered before testing. Rows marked “chosen after seeing results” were picked after the registered results were known.</p>
+      <div class="table-scroll"><table class="audit-table"><thead><tr><th>Specification</th><th>Status</th><th>Trades</th><th>Sharpe 1×</th><th>Sharpe 2×</th><th>Total return</th><th>Max DD</th><th>Winner p</th><th>Winner − placebo p</th></tr></thead><tbody id="audit-rows"><tr><td colspan="9">Loading…</td></tr></tbody></table></div>
+      <p class="mono small audit-source" id="audit-source">source: —</p>
+      <div class="audit-freeze" id="audit-freeze"></div>
+    </article>
     <details class="details-panel"><summary>Frozen inputs check · freeze.json · 8 files <span>+</span></summary><div class="integrity-layout"><div class="instrument"><div class="instrument-label eyebrow">FROZEN SOURCE INTEGRITY</div><div class="dial-wrap"><canvas id="integrity-dial" aria-label="Frozen source file integrity"></canvas><div class="dial-reading"><span id="integrity-count" class="dial-number">—</span><span class="mono">MATCHING SOURCE HASHES</span></div></div><div class="instrument-footer"><span class="badge" id="integrity-badge">Checking files</span><span class="mono" id="integrity-total">SHA-256</span></div></div><div id="hash-records" class="details-content"></div></div></details>
     <details class="details-panel"><summary>Full research comparisons &amp; declared limitations <span>+</span></summary><div class="details-content"><ul id="limitations"></ul><div class="table-scroll"><table><thead><tr><th>Rule</th><th>Price policy</th><th>Costs</th><th>Sharpe</th><th>Positions</th><th>HAC p</th></tr></thead><tbody id="variant-rows"></tbody></table></div></div></details>
   </section>

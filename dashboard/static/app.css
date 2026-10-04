@@ -1655,3 +1655,57 @@ dialog h3 {
     grid-template-columns:1fr
   }
 }
+/* Research audit (section 07) */
+.audit-panel {
+  margin-top:20px
+}
+.audit-table td:nth-child(n+3),.audit-table th:nth-child(n+3) {
+  text-align:right
+}
+.audit-table tr.post-hoc td:first-child {
+  font-weight:500
+}
+.audit-label {
+  display:inline-block;
+  font:9px/1.4 var(--mono);
+  padding:3px 8px;
+  border:1px solid var(--line);
+  border-radius:99px;
+  color:var(--muted);
+  white-space:nowrap
+}
+.audit-label.is-post-hoc {
+  border-color:rgb(var(--ember-rgb)/.6);
+  color:var(--ember)
+}
+.audit-source {
+  margin:12px 0 0;
+  overflow-wrap:anywhere
+}
+.audit-freeze {
+  margin-top:20px;
+  padding-top:16px;
+  border-top:1px solid var(--line-soft)
+}
+.audit-freeze .eyebrow {
+  display:block;
+  margin-bottom:8px
+}
+.audit-freeze p {
+  font-size:12px;
+  line-height:1.7;
+  margin:0 0 8px
+}
+.audit-freeze code {
+  font:10px var(--mono);
+  word-break:break-all
+}
+.audit-freeze-hash {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px 14px;
+  align-items:baseline;
+  font:9px var(--mono);
+  color:var(--muted);
+  margin-bottom:6px
+}

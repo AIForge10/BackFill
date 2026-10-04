@@ -103,6 +103,23 @@ external timestamp) and `freeze-v1` (10 files, anchored on Solana). Four files a
 in both. The proof shows the frozen rules existed at 2026-10-04 08:47 UTC; it does
 not make the 2014–2024 backtest out-of-sample.
 
+## Research audit (Snowflake)
+
+Section 07's **Research audit** panel lists every tested specification: the nine
+registered variants labeled `registered`, and the 20/5 candidate rows labeled
+`chosen after seeing results`, sorted by Sharpe. It reads:
+
+- `/api/audit/variants`: `BACKFILL.RESEARCH.RUNS`
+- `/api/audit/freeze`: the zero-copy clone `BACKFILL_FREEZE_V1.RESEARCH.RUNS` plus its
+  `PROOF` row (freeze-v1 manifest hash and Solana explorer link)
+
+Load the tables first with `uv run --extra snowflake python scripts/load_snowflake.py`.
+Credentials come only from the root `.env` (`SNOWFLAKE_*`). The server queries Snowflake
+at most once per endpoint every 10 minutes; the page never polls it. If Snowflake is not
+configured, the connector is missing (`uv sync --extra snowflake`) or a query fails, both
+endpoints fall back to `results/backtest_report/summary.csv` (and the saved receipt) with
+`source="file"`; driver messages and settings are never returned.
+
 ## Connect Tiger Data
 
 Tiger Data is the time-series database, not a source of stock prices or FDA
@@ -158,6 +175,7 @@ Reference: [Tiger Data Python/PostgreSQL integration](https://www.tigerdata.com/
 | `tiger.py` | Read-only, bounded live queries and connection states |
 | `server.py` | Local HTTP/API server and static assets |
 | `ingest.py` | Explicit, validated observation ingestion |
+| `audit.py` | Research audit from Snowflake with a 10-minute cache and file fallback |
 | `proof.py` | Saved Solana receipt and cached live re-verification of `freeze-v1` |
 | `schema.sql` | Operator-run table creation |
 | `static/tokens.css` | Rezt tokens, fonts, themes and primitives |

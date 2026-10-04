@@ -244,6 +244,23 @@ async function verifyProof() {
   finally{button.disabled=false;button.firstChild.textContent='Verify now ';}
 }
 
+function renderAudit(live,frozen) {
+  const fromSnowflake=live.source==='snowflake';
+  badge('#audit-source-badge',fromSnowflake?'Source: Snowflake':'Source: file',!fromSnowflake);
+  text('#audit-summary',`${live.registered} registered before testing · ${live.post_hoc} chosen after seeing results. Sorted by Sharpe at modeled costs.`);
+  $('#audit-rows').innerHTML=live.rows.length?live.rows.map(r=>{const posthoc=r.label!=='registered';return `<tr class="${posthoc?'post-hoc':''}"><td>${esc(r.spec)}</td><td><span class="audit-label ${posthoc?'is-post-hoc':''}">${esc(r.label)}</span></td><td>${r.trades??'—'}</td><td class="${Number(r.sharpe)<0?'negative':''}">${fixed(r.sharpe)}</td><td class="${Number(r.sharpe_x2)<0?'negative':''}">${fixed(r.sharpe_x2)}</td><td class="${Number(r.total_return)<0?'negative':''}">${pct(r.total_return)}</td><td>${pct(r.max_drawdown)}</td><td>${fixed(r.winner_p,3)}</td><td>${fixed(r.winner_minus_placebo_p,3)}</td></tr>`;}).join(''):'<tr><td colspan="9">No audit rows could be read.</td></tr>';
+  text('#audit-source',fromSnowflake?`source: Snowflake · ${live.location} · fetched ${live.fetched_at} · cached on the server for up to 10 min`:`source: file · ${live.location} · ${live.reason??''}`);
+  const p=frozen?.proof, explorer=safeURL(p?.explorer);
+  const same=frozen&&JSON.stringify(frozen.rows)===JSON.stringify(live.rows);
+  const snapshot=frozen?.source==='snowflake'?`Frozen snapshot <code>${esc(frozen.snapshot)}</code>: ${frozen.rows.length} rows, ${same?'identical to the live table':'<strong class="negative">differs from the live table</strong>'}.`:'Frozen Snowflake snapshot unavailable; proof shown from the saved receipt.';
+  $('#audit-freeze').innerHTML=`<span class="eyebrow">LINKED TO THE SOLANA PROOF</span><p>${snapshot}</p>${p?`<div class="audit-freeze-hash"><span>freeze-v1 manifest hash</span><code>${esc(p.manifest_sha256)}</code></div><p class="small-note">Anchored ${esc(p.timestamp_utc)} · ${explorer?`<a class="text-link" href="${esc(explorer)}" target="_blank" rel="noopener">Solana explorer ↗</a>`:'explorer link unavailable'} · proof row from <code>${esc(frozen.proof_source)}</code></p>`:'<p class="small-note">No proof row available.</p>'}`;
+}
+
+async function loadAudit() {
+  try{const [live,frozen]=await Promise.all([api('/api/audit/variants'),api('/api/audit/freeze').catch(()=>null)]);renderAudit(live,frozen);}
+  catch{badge('#audit-source-badge','Audit unavailable',true);$('#audit-rows').innerHTML='<tr><td colspan="9">The audit could not be loaded.</td></tr>';}
+}
+
 let searchTimer;
 $('#search').addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{state.offset=0;loadEvidence();},250);});
 for(const selector of ['#ticker-filter','#role-filter'])$(selector).addEventListener('change',()=>{state.offset=0;loadEvidence();});
@@ -264,4 +281,4 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
   document.querySelectorAll('.reveal').forEach((element,index)=>{element.style.transitionDelay=`${Math.min(index%2,1)*110}ms`;observer.observe(element);});
 }
 try{renderOverview(await api('/api/overview'));}catch(error){badge('#integrity-badge','Research unavailable',true);text('#integrity-total','No integrity claim');showToast(error.message);}
-await Promise.allSettled([loadResearch(),loadEvidence(),loadLive(),initCase(),loadProof()]);scheduleLive();
+await Promise.allSettled([loadResearch(),loadEvidence(),loadLive(),initCase(),loadProof(),loadAudit()]);scheduleLive();

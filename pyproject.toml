@@ -28,6 +28,9 @@ build-backend = "setuptools.build_meta"
 
 [project.optional-dependencies]
 dashboard = ["psycopg[binary]>=3.2,<4"]
+snowflake = [
+    "snowflake-connector-python>=4.0.0",
+]
 
 # Research modules are separate from the unchanged sponsor examples.
 [tool.setuptools]

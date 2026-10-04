@@ -7,6 +7,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlsplit
 
+from dashboard.audit import AuditService
 from dashboard.proof import ProofService
 from dashboard.repository import ResearchRepository
 from dashboard.tiger import TigerMonitor
@@ -14,7 +15,9 @@ from dashboard.tiger import TigerMonitor
 STATIC = Path(__file__).parent / "static"
 
 
-def handler(repository, monitor, proof):
+def handler(repository, monitor, proof, audit=None):
+    audit = audit or AuditService(repository.root)
+
     class Handler(BaseHTTPRequestHandler):
         def respond(self, data, content_type="application/json", status=200, filename=None):
             body = data if isinstance(data, bytes) else json.dumps(data, allow_nan=False).encode()
@@ -52,6 +55,10 @@ def handler(repository, monitor, proof):
                     return self.respond(proof.summary())
                 if path == "/api/proof/verify":
                     return self.respond(proof.verify())
+                if path == "/api/audit/variants":
+                    return self.respond(audit.variants())
+                if path == "/api/audit/freeze":
+                    return self.respond(audit.freeze())
                 if path == "/api/live":
                     return self.respond(monitor.snapshot())
                 if path == "/api/live/history":
