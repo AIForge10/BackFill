@@ -1127,6 +1127,21 @@ dialog h3 {
 .event-timeline span {
   font:10px var(--mono)
 }
+.trade-explanation {
+  border-top:1px solid var(--line-soft);
+  padding-top:14px;
+  margin-top:18px
+}
+.trade-explanation p {
+  font-size:13px;
+  line-height:1.5;
+  margin:8px 0
+}
+.trade-explanation small {
+  display:block;
+  color:var(--muted);
+  font:10px var(--mono)
+}
 .presentation {
   padding:14px 0;
   border-top:1px solid var(--line-soft);
@@ -1763,4 +1778,134 @@ dialog h3 {
 }
 #live-events>.empty-state {
   margin:auto 0
+}
+/* FDA Time Machine page */
+.tm-intro {
+  max-width:760px;
+  margin:0 0 22px
+}
+.tm-controls {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-end;
+  gap:16px
+}
+.tm-controls .select-field {
+  display:flex;
+  flex-direction:column;
+  gap:6px
+}
+.tm-search {
+  min-width:240px;
+  height:38px
+}
+#tm-range {
+  margin:10px 0 18px
+}
+.tm-snapshot {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px 28px;
+  margin-bottom:20px
+}
+.tm-asof {
+  font:400 30px/1.1 var(--serif);
+  margin:6px 0 0
+}
+.tm-asof strong {
+  font-weight:400;
+  color:var(--ember)
+}
+.tm-counts {
+  grid-column:1 / -1;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 22px;
+  font:11px var(--mono);
+  color:var(--muted)
+}
+.tm-counts strong {
+  color:var(--ink);
+  font-size:15px;
+  margin-right:4px
+}
+.tm-snapshot>.small-note {
+  grid-column:1 / -1;
+  margin:0
+}
+.tm-table-title {
+  margin:26px 0 12px
+}
+.tm-table td {
+  vertical-align:top
+}
+.tm-drug {
+  border:0;
+  background:none;
+  padding:0;
+  font:inherit;
+  color:var(--ink);
+  text-align:left;
+  cursor:pointer;
+  text-decoration:underline;
+  text-decoration-color:var(--line);
+  text-underline-offset:4px
+}
+.tm-drug:hover {
+  text-decoration-color:var(--ember)
+}
+.tm-mfrs {
+  font-size:11px;
+  line-height:1.7;
+  color:var(--ink-2)
+}
+.tm-table td small {
+  display:block;
+  font:9px var(--mono);
+  color:var(--muted);
+  margin-top:4px
+}
+.tm-table td small.tm-old {
+  color:var(--ember)
+}
+.tm-status {
+  display:inline-block;
+  font:9px/1.4 var(--mono);
+  padding:3px 8px;
+  border:1px solid var(--line);
+  border-radius:99px;
+  white-space:nowrap
+}
+.tm-status.is-shortage {
+  border-color:rgb(var(--ember-rgb)/.6);
+  color:var(--ember)
+}
+.tm-status.is-resolved {
+  border-color:var(--pass);
+  color:var(--pass)
+}
+.tm-timeline {
+  margin-bottom:20px
+}
+.tm-changes {
+  list-style:none;
+  padding:0;
+  margin:12px 0 0
+}
+.tm-changes li {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px 14px;
+  padding:10px 0;
+  border-top:1px solid var(--line-soft);
+  font-size:11px
+}
+@media(max-width:700px) {
+  .tm-snapshot {
+    grid-template-columns:1fr
+  }
+  .tm-asof {
+    font-size:24px
+  }
 }

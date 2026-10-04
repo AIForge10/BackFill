@@ -162,6 +162,17 @@ class ResearchRepository:
                     audit=[r for r in rows(self.frozen / "audit.csv") if r.get("event_id") == event_id
                            and r.get("ticker", ticker) == ticker])
 
+    def explanation(self, trade_id):
+        """Cached Gemini summary from scripts/explain_trades.py; never generated on request."""
+        cache = document(self.root / "results/explanations.json")
+        entry = cache.get("explanations", {}).get(trade_id)
+        if entry is None:
+            raise KeyError("Explanation not available")
+        source = cache.get("source")
+        return dict(trade_id=trade_id, text=entry["text"], facts=entry["facts"], model=cache.get("model"),
+                    generated_at=cache.get("generated_at"), label="AI-generated summary of the facts above",
+                    source=source, current=bool(source) and digest(self.root / source) == cache.get("source_sha256"))
+
     def download(self, name, costs=1, vendor="reference_mix"):
         if costs not in (1, 2) or vendor not in {"reference_mix", "webull_only"}:
             raise ValueError("Unknown scenario")

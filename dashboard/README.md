@@ -120,7 +120,43 @@ configured, the connector is missing (`uv sync --extra snowflake`) or a query fa
 endpoints fall back to `results/backtest_report/summary.csv` (and the saved receipt) with
 `source="file"`; driver messages and settings are never returned.
 
-## Connect Tiger Data
+## AI trade summaries (Gemini, precomputed)
+
+Each executed trade's evidence record shows a two-sentence summary labeled "AI-generated summary of
+the facts above". The summaries are generated offline and cached; the page never calls Gemini.
+
+```bash
+uv run python scripts/explain_trades.py --dry-run   # print the facts that would be sent
+uv run python scripts/explain_trades.py             # needs GEMINI_API_KEY in the root .env
+```
+
+For each lot in the published 20/5 candidate (`reference_mix/delay20_hold5/costs1/winners/lots.csv`)
+only drug, notice date, entry date, exit date, ticker, net return and hedge are sent. A summary is
+rejected and retried if it is not two sentences or contains a number that is not in those facts;
+nothing is written unless every trade passes. `results/explanations.json` records the model, the
+UTC timestamp, the prompt, the source file and its SHA-256. `GET /api/explain/{lot_id}` returns the
+cached text (404 if absent) with `current: false` when the source file has changed since generation.
+
+## FDA Time Machine (Tiger Data)
+
+`/time-machine.html` shows each drug's latest archived FDA shortage page on or before a chosen
+date (UTC), with its status, manufacturers, archive time and Wayback link, so you can see what
+was public on any day without hindsight. Click a drug for its status timeline.
+
+```bash
+uv run --extra dashboard python scripts/load_tiger.py --dry-run   # build rows only
+uv run --extra dashboard python scripts/load_tiger.py             # hypertable + bulk load
+```
+
+The loader creates `backfill_live.fda_snapshots(snapshot_ts, drug, manufacturer, status, source_url)`
+as a hypertable on `snapshot_ts` and loads one row per archived capture, drug and manufacturer from
+`results/forward_oct2024/suppliers.csv` (18,218 rows, 1,042 drugs, 2014-07-14 to 2026-09-23). Each
+drug keeps one canonical name (its latest display name). Endpoints, read-only and cached 60 s:
+`/api/fda/asof?date=YYYY-MM-DD` and `/api/fda/timeline?drug=...`. If Tiger is unreachable they
+return `state: "error"` with a message; a bad date returns a JSON error. The timeline merges
+same-day captures, because FDA can list one drug on several tabs at once.
+
+
 
 Tiger Data is the time-series database, not a source of stock prices or FDA
 notices. Your Webull/FDA collector must send sourced observations into it.
@@ -190,6 +226,7 @@ Reference: [Tiger Data Python/PostgreSQL integration](https://www.tigerdata.com/
 | `ingest.py` | Explicit, validated observation ingestion |
 | `collect_fda_notices.py` | Archived FDA detail-page captures → supplier_updates CSV |
 | `apply_schema.py` | Operator command to apply `schema.sql` (idempotent) |
+| `fda_history.py` | FDA Time Machine as-of and timeline queries (read-only, cached) |
 | `market_hours.py` | NYSE calendar used only to explain stale quotes |
 | `audit.py` | Research audit from Snowflake with a 10-minute cache and file fallback |
 | `proof.py` | Saved Solana receipt and cached live re-verification of `freeze-v1` |

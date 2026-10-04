@@ -8,6 +8,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlsplit
 
 from dashboard.audit import AuditService
+from dashboard.fda_history import FdaHistory
 from dashboard.proof import ProofService
 from dashboard.repository import ResearchRepository
 from dashboard.tiger import TigerMonitor
@@ -15,8 +16,9 @@ from dashboard.tiger import TigerMonitor
 STATIC = Path(__file__).parent / "static"
 
 
-def handler(repository, monitor, proof, audit=None):
+def handler(repository, monitor, proof, audit=None, fda=None):
     audit = audit or AuditService(repository.root)
+    fda = fda or FdaHistory()
 
     class Handler(BaseHTTPRequestHandler):
         def respond(self, data, content_type="application/json", status=200, filename=None):
@@ -59,12 +61,18 @@ def handler(repository, monitor, proof, audit=None):
                     return self.respond(audit.variants())
                 if path == "/api/audit/freeze":
                     return self.respond(audit.freeze())
+                if path == "/api/fda/asof":
+                    return self.respond(fda.asof(params.get("date", "")))
+                if path == "/api/fda/timeline":
+                    return self.respond(fda.timeline(params.get("drug", "")[:300]))
                 if path == "/api/live":
                     return self.respond(monitor.snapshot())
                 if path == "/api/live/history":
                     return self.respond(monitor.history(params.get("ticker", "ICUI")))
                 if path == "/api/health":
                     return self.respond(dict(ok=True, mode="read_only", time=datetime.now(timezone.utc).isoformat()))
+                if path.startswith("/api/explain/"):
+                    return self.respond(repository.explanation(path.removeprefix("/api/explain/")[:100]))
                 if path.startswith("/api/download/"):
                     file = repository.download(path.removeprefix("/api/download/"),
                             int(params.get("costs", 1)), params.get("vendor", "reference_mix"))
