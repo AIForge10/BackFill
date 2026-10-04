@@ -33,6 +33,8 @@ SOURCES = dict(
 )
 SETTINGS = ("ACCOUNT", "USER", "PASSWORD", "ROLE", "WAREHOUSE", "DATABASE", "SCHEMA")
 TABLES = ("RUNS", "TRADES", "CACHE_MANIFEST", "PROOF")
+# Read-only role used by the public dashboard (created once by an admin); see dashboard/README.md.
+READER_ROLE = "BACKFILL_READER"
 
 
 def sha256(path):
@@ -139,6 +141,17 @@ def load(cursor, table):
     return len(rows)
 
 
+def regrant_reader(cursor, clone, schema, role=READER_ROLE):
+    """A replaced clone loses database-level grants; restore the dashboard's read-only access."""
+    if not cursor.execute(f"SHOW ROLES LIKE '{role}'").fetchall():
+        return
+    for statement in (f"GRANT USAGE ON DATABASE {clone} TO ROLE {role}",
+                      f"GRANT USAGE ON SCHEMA {clone}.{schema} TO ROLE {role}",
+                      f"GRANT SELECT ON ALL TABLES IN SCHEMA {clone}.{schema} TO ROLE {role}"):
+        cursor.execute(statement)
+    print(f"re-granted read-only access on {clone} to {role}")
+
+
 def count(cursor, database, schema, table):
     try:
         return cursor.execute(f"SELECT COUNT(*) FROM {database}.{schema}.{table}").fetchone()[0]
@@ -165,7 +178,9 @@ def main():
         for table in TABLES:
             print(f"loaded {table:<15} {load(cursor, table):>4} rows")
         cursor.execute(f"CREATE OR REPLACE DATABASE {clone} CLONE {database}")
-        print(f"cloned {database} -> {clone}\n")
+        print(f"cloned {database} -> {clone}")
+        regrant_reader(cursor, clone, schema)
+        print()
         print(f"{'TABLE':<16}{database + '.' + schema:>22}{clone + '.' + schema:>30}  MATCH")
         ok = True
         for table in TABLES:

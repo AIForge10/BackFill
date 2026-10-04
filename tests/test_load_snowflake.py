@@ -58,6 +58,7 @@ class LoaderTests(unittest.TestCase):
         self.assertEqual(done.exception.code, 0)
         sql = [c.args[0] for c in cursor.execute.call_args_list]
         self.assertIn("CREATE OR REPLACE DATABASE BACKFILL_FREEZE_V1 CLONE BACKFILL", sql)
+        self.assertIn("GRANT USAGE ON DATABASE BACKFILL_FREEZE_V1 TO ROLE BACKFILL_READER", sql)
         for table in L.TABLES:
             self.assertIn(f"CREATE OR REPLACE TABLE {table}", " ".join(sql))
             self.assertIn(f"SELECT COUNT(*) FROM BACKFILL_FREEZE_V1.RESEARCH.{table}", sql)
