@@ -4,7 +4,8 @@ import hashlib
 import json
 import math
 from pathlib import Path
-from urllib.parse import quote
+
+from dashboard.archive import archive_index, wayback_url
 
 
 def number(value):
@@ -39,8 +40,7 @@ class ResearchRepository:
         if not self.run.resolve().is_relative_to(self.root):
             raise ValueError("Research run must be inside the repository")
         self.basket = document(Path(__file__).parent / "data/reported_basket.json")
-        self.archive = {r["timestamp"]: r["original"] for r in
-                        rows(self.root / "data/processed/index_detail.csv")}
+        self.archive = archive_index(rows(self.root / "data/processed/index_detail.csv"))
 
     def scenario(self, strategy="candidate", costs=1, vendor="reference_mix"):
         if strategy not in {"candidate", "primary", "basket"}:
@@ -95,9 +95,8 @@ class ResearchRepository:
         return result
 
     def archive_url(self, row):
-        timestamp = row.get("capture_ts", "")
-        original = self.archive.get(timestamp)
-        return f"https://web.archive.org/web/{quote(timestamp, safe='')}/{original}" if original else None
+        # Match on capture time AND drug: one archive second can hold several drug pages.
+        return wayback_url(self.archive, row.get("capture_ts", ""), row.get("ai_key", ""))
 
     def overview(self):
         manifest = document(self.frozen / "price_manifest.json")

@@ -165,6 +165,13 @@ async function openEvent(id,ticker) {
   }catch(error){$('#event-content').textContent=error.message;}
 }
 
+function renderNotice(row) {
+  const archived=row.source==='fda_archive';
+  const label=archived?`Archived FDA page, snapshot ${esc(String(row.observed_at).slice(0,10))}`:`${esc(row.source)} · ${esc(new Date(row.observed_at).toLocaleString())}`;
+  const suppliers=(row.suppliers??[]).map(s=>`<li><span>${esc(s.company)}</span><span class="role-label ${s.availability==='available'?'':'disrupted'}">${esc(String(s.availability).toUpperCase())}${s.ticker?` · ${esc(s.ticker)}`:''}</span></li>`).join('');
+  return `<div class="live-event"><span class="mono notice-snapshot">${label}</span>${row.status?`<span class="notice-status">${esc(row.status)}</span>`:''}<p>${esc(row.product)}</p>${suppliers?`<ul class="notice-suppliers">${suppliers}</ul>`:''}<div>${link(row.source_url,archived?'Open archived page':'Source notice')}</div></div>`;
+}
+
 async function loadLive() {
   $('#refresh-live').disabled=true;
   try{
@@ -173,8 +180,11 @@ async function loadLive() {
     badge('#live-badge',{not_configured:'Not connected',driver_missing:'Driver not installed',schema_missing:'Schema not ready',error:'Connection unavailable',empty:'Connected · awaiting data',connected:'Connected'}[data.state]??data.state,false,data.state==='connected');
     text('#live-checked',`Last checked: ${new Date(data.checked_at).toLocaleTimeString('en-US',{hour12:false})}`);
     text('#live-received',`Latest ingestion: ${data.latest_received_at?new Date(data.latest_received_at).toLocaleString():'No observations received'}`);
-    $('#live-quotes').innerHTML=data.quotes.length?data.quotes.map(row=>{const change=row.previous_close?(Number(row.price)/Number(row.previous_close)-1):null;return `<div class="quote-row ${row.stale?'':'fresh-quote'}"><div><strong>${esc(row.ticker)}</strong><small>${esc(row.source)}</small></div><div><span class="quote-price">${fixed(row.price)}</span><small class="${change<0?'negative':''}">${pct(change)} VS PRIOR CLOSE</small></div><div><span class="badge ${row.stale?'':'live'}">${row.stale?'Stale':'Fresh'}</span><small>${esc(new Date(row.time).toLocaleString())}</small></div></div>`;}).join(''):empty(data.state==='empty'?'Awaiting market observations':'Live quotes unavailable',data.message);
-    $('#live-events').innerHTML=data.events.length?data.events.map(row=>`<div class="live-event"><span class="role-label ${row.availability==='disrupted'?'disrupted':''}">${esc(row.availability.toUpperCase())} · ${esc(row.ticker??'UNMAPPED')}</span><p>${esc(row.product)}</p><span class="mono">${esc(row.company)} · ${esc(row.source)} · ${esc(new Date(row.observed_at).toLocaleString())}</span><div>${link(row.source_url,'Source notice')}</div></div>`).join(''):empty('Awaiting sourced supply updates',data.state==='not_configured'?'Configure Tiger Data and ingest supplier notices to observe them here.':data.message);
+    $('#live-quotes').innerHTML=data.quotes.length?data.quotes.map(row=>{const change=row.previous_close?(Number(row.price)/Number(row.previous_close)-1):null;return `<div class="quote-row ${row.stale?'':'fresh-quote'}"><div><strong>${esc(row.ticker)}</strong><small>${esc(row.source)}</small></div><div><span class="quote-price">${fixed(row.price)}</span><small class="${change<0?'negative':''}">${pct(change)} VS PRIOR CLOSE</small></div><div><span class="badge ${row.stale?'':'live'}"${row.stale?' title="Last stored close; markets are closed or data hasn&#39;t refreshed yet." tabindex="0"':''}>${row.stale?'Stale':'Fresh'}</span><small>${esc(new Date(row.time).toLocaleString())}</small></div></div>`;}).join(''):empty(data.state==='empty'?'Awaiting market observations':'Live quotes unavailable',data.message);
+    const note=data.market?.note;$('#market-closed-note').hidden=!note;text('#market-closed-note',note??'');
+    const notices=data.events.length?data.events.map(renderNotice).join(''):empty('Awaiting sourced supply updates',data.state==='not_configured'?'Configure Tiger Data and ingest supplier notices to observe them here.':data.message);
+    // Re-render only when the notices change, and start at the newest; keeps a reader's scroll during the 15 s refresh.
+    if(notices!==state.noticesHtml){state.noticesHtml=notices;$('#live-events').innerHTML=notices;$('#live-events').scrollTop=0;}
     if(state.lastReceipt&&data.latest_received_at&&state.lastReceipt!==data.latest_received_at){$('.live-layout').classList.remove('pulse-received');void $('.live-layout').offsetWidth;$('.live-layout').classList.add('pulse-received');}
     state.lastReceipt=data.latest_received_at;
   }catch(error){badge('#live-badge','Connection unavailable');$('#live-quotes').innerHTML=empty('Live monitor unavailable',error.message);}

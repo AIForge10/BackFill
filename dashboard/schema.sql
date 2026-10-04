@@ -27,6 +27,9 @@ CREATE TABLE IF NOT EXISTS backfill_live.supplier_updates (
     PRIMARY KEY (observed_at, event_key, company)
 );
 CREATE INDEX IF NOT EXISTS supplier_updates_time ON backfill_live.supplier_updates (observed_at DESC);
+-- Page-level status of an archived FDA notice (e.g. 'Currently in Shortage'); NULL for other sources.
+-- Safe to re-run on an existing table.
+ALTER TABLE backfill_live.supplier_updates ADD COLUMN IF NOT EXISTS status text;
 
 -- With the TimescaleDB extension enabled, optionally run:
 -- SELECT create_hypertable('backfill_live.quotes', by_range('time'), if_not_exists => TRUE);

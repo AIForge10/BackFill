@@ -54,8 +54,11 @@ def validate(kind, row):
     url = row.get("source_url", "")
     if not url or urlsplit(url).scheme not in {"http", "https"} or not urlsplit(url).hostname:
         raise ValueError("Supplier updates require a public source URL")
+    status = row.get("status", "").strip() or None
+    if status and len(status) > 100:
+        raise ValueError("Status is too long")
     return (timestamp(row["observed_at"]), row["event_key"], row["product"], row["company"],
-            ticker or None, availability, source, url)
+            ticker or None, availability, source, url, status)
 
 
 def main():
@@ -85,8 +88,8 @@ def main():
             (time,ticker,price,previous_close,volume,source) VALUES (%s,%s,%s,%s,%s,%s)
             ON CONFLICT (time,ticker,source) DO NOTHING""",
         "supplier_updates": """INSERT INTO backfill_live.supplier_updates
-            (observed_at,event_key,product,company,ticker,availability,source,source_url)
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (observed_at,event_key,company) DO NOTHING""",
+            (observed_at,event_key,product,company,ticker,availability,source,source_url,status)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) ON CONFLICT (observed_at,event_key,company) DO NOTHING""",
     }
     try:
         with psycopg.connect(dsn, connect_timeout=5, sslmode=os.environ.get("TIGER_SSLMODE", "require")) as conn:

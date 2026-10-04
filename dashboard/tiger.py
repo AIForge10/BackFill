@@ -5,6 +5,15 @@ import time
 from datetime import datetime, timezone
 from decimal import Decimal
 
+from dashboard.market_hours import market_context
+
+NOTICE_LIMIT = 10
+
+
+def _utcnow():
+    """Current time; a separate hook so tests can fix the clock."""
+    return datetime.now(timezone.utc)
+
 
 def serialized(row):
     return {key: value.isoformat() if isinstance(value, datetime) else
@@ -81,7 +90,7 @@ class TigerMonitor:
             return dict(base, state="error", message="Stored market history is unavailable. Check the server connection.")
 
     def _read(self):
-        now = datetime.now(timezone.utc)
+        now = _utcnow()
         base = dict(checked_at=now.isoformat(), provider="Tiger Data", quotes=[], events=[],
                     refresh_seconds=15, latest_received_at=None)
         dsn = os.environ.get("TIGER_DATABASE_URL", "")
@@ -102,24 +111,31 @@ class TigerMonitor:
                     FROM backfill_live.quotes WHERE time <= now() AND time > now() - interval '7 days'
                     ORDER BY ticker, time DESC, received_at DESC LIMIT 50
                 """).fetchall()
+                # One notice per drug snapshot (observed_at, event_key), its suppliers aggregated.
                 events = conn.execute("""
-                    SELECT observed_at, received_at, event_key, product, company, ticker,
-                           availability, source, source_url
+                    SELECT observed_at, event_key, max(received_at) AS received_at, max(product) AS product,
+                           max(status) AS status, max(source) AS source, max(source_url) AS source_url,
+                           json_agg(json_build_object('company', company, 'availability', availability,
+                                                      'ticker', ticker) ORDER BY company) AS suppliers
                     FROM backfill_live.supplier_updates WHERE observed_at <= now()
-                    ORDER BY observed_at DESC LIMIT 25
-                """).fetchall()
+                    GROUP BY observed_at, event_key
+                    ORDER BY observed_at DESC, event_key LIMIT %s
+                """, (NOTICE_LIMIT,)).fetchall()
             all_rows = quotes + events
             latest = max((r["received_at"] for r in all_rows), default=None)
             age = (now - latest).total_seconds() if latest else None
             for row in quotes:
                 row["age_seconds"] = max(0, (now - row["time"]).total_seconds())
                 row["stale"] = row["age_seconds"] > 300
-            return dict(base, state="connected" if all_rows else "empty",
+            latest_quote = max((row["time"] for row in quotes), default=None)
+            return dict(base, state="connected" if all_rows else "empty", market=market_context(now, latest_quote),
                         message="Read-only connection established." if all_rows else "Connected; no observations are available.",
                         quotes=[serialized(r) for r in quotes], events=[serialized(r) for r in events],
                         latest_received_at=latest.isoformat() if latest else None, ingest_age_seconds=age)
         except psycopg.errors.UndefinedTable:
             return dict(base, state="schema_missing", message="Connected; the documented backfill_live tables are missing.")
+        except getattr(psycopg.errors, "UndefinedColumn", ()):
+            return dict(base, state="schema_missing", message="Connected; re-run dashboard/schema.sql to add the notice status column.")
         except Exception:
             # Driver exceptions can contain credentials/DSNs: never send them to the browser.
             return dict(base, state="error", message="Tiger Data is unavailable. Check the server connection settings.")

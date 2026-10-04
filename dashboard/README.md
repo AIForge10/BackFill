@@ -150,12 +150,25 @@ uv run python -m dashboard.ingest --kind supplier_updates --file /path/to/fda_up
 
 Quote CSV columns: `time,ticker,price,previous_close,volume,source`.
 Supply CSV columns:
-`observed_at,event_key,product,company,ticker,availability,source,source_url`.
+`observed_at,event_key,product,company,ticker,availability,source,source_url,status`
+(`status` is optional; run `python -m dashboard.apply_schema` once to add the column).
 Timestamps must include a timezone and cannot be in the future. Prices must be
 positive/finite. Availability is `available`, `allocation`, `disrupted` or
 `unknown`. Supplier updates require a public source URL. Duplicate observations
 are ignored without rewriting prior records. `received_at` is database-generated
 ingestion time; never substitute it for the source's observation time.
+
+**Archived FDA notices.** `python -m dashboard.collect_fda_notices --out notices.csv` writes the
+newest archived snapshot of each drug captured in the 30 days before the latest capture, one row per
+supplier, with page status and the exact Wayback URL (matched on timestamp *and* drug, since one
+archive second can hold several pages). The card groups rows into one notice per drug snapshot and
+shows the 10 newest, each labeled "Archived FDA page, snapshot YYYY-MM-DD": point-in-time records,
+not live signals.
+
+**Stale quotes.** Quotes older than five minutes keep the "Stale" badge (with a tooltip). On a
+weekend or NYSE holiday, if the newest stored quote is the last session close, a note explains it:
+"Markets closed - showing last close (Fri Oct 2, 4:00 PM ET)", built from the stored timestamp.
+On trading days no note is shown and the normal stale warning stands (`market_hours.py`).
 
 Read sessions have a connection timeout, statement timeout and read-only
 transaction. Connection errors sent to the browser omit driver details that
@@ -175,6 +188,9 @@ Reference: [Tiger Data Python/PostgreSQL integration](https://www.tigerdata.com/
 | `tiger.py` | Read-only, bounded live queries and connection states |
 | `server.py` | Local HTTP/API server and static assets |
 | `ingest.py` | Explicit, validated observation ingestion |
+| `collect_fda_notices.py` | Archived FDA detail-page captures → supplier_updates CSV |
+| `apply_schema.py` | Operator command to apply `schema.sql` (idempotent) |
+| `market_hours.py` | NYSE calendar used only to explain stale quotes |
 | `audit.py` | Research audit from Snowflake with a 10-minute cache and file fallback |
 | `proof.py` | Saved Solana receipt and cached live re-verification of `freeze-v1` |
 | `schema.sql` | Operator-run table creation |
