@@ -227,6 +227,7 @@ Reference: [Tiger Data Python/PostgreSQL integration](https://www.tigerdata.com/
 | `collect_fda_notices.py` | Archived FDA detail-page captures → supplier_updates CSV |
 | `apply_schema.py` | Operator command to apply `schema.sql` (idempotent) |
 | `fda_history.py` | FDA Time Machine as-of and timeline queries (read-only, cached) |
+| `specialist_prices.py` | Hourly-cached Webull closes for the four specialists (display only) |
 | `market_hours.py` | NYSE calendar used only to explain stale quotes |
 | `audit.py` | Research audit from Snowflake with a 10-minute cache and file fallback |
 | `proof.py` | Saved Solana receipt and cached live re-verification of `freeze-v1` |

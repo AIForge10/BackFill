@@ -1909,3 +1909,70 @@ dialog h3 {
     font-size:24px
   }
 }
+/* Webull specialists chart (section 05) */
+.specialist-panel {
+  margin-top:20px
+}
+.specialist-legend {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 22px;
+  margin:14px 0 6px;
+  font:10px var(--mono)
+}
+.specialist-legend i {
+  display:inline-block;
+  width:14px;
+  height:2px;
+  margin-right:6px;
+  vertical-align:middle
+}
+.specialist-legend small {
+  color:var(--muted);
+  margin-left:4px
+}
+.specialist-legend small.negative {
+  color:var(--ember)
+}
+.specialist-chart svg {
+  width:100%;
+  height:auto;
+  display:block
+}
+.sp-line {
+  fill:none;
+  stroke-width:1.6;
+  vector-effect:non-scaling-stroke
+}
+.sp-0 {
+  stroke:var(--ember);
+  background:var(--ember)
+}
+.sp-1 {
+  stroke:var(--cool);
+  background:var(--cool)
+}
+.sp-2 {
+  stroke:var(--pass);
+  background:var(--pass)
+}
+.sp-3 {
+  stroke:var(--ink-2);
+  background:var(--ink-2)
+}
+.sp-grid {
+  stroke:var(--line);
+  vector-effect:non-scaling-stroke
+}
+.sp-base {
+  stroke:var(--muted);
+  stroke-dasharray:3 3;
+  vector-effect:non-scaling-stroke
+}
+.sp-tick {
+  font:9px var(--mono);
+  fill:var(--muted)
+}
+.sp-end {
+  text-anchor:end
+}

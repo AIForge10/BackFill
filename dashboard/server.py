@@ -11,14 +11,16 @@ from dashboard.audit import AuditService
 from dashboard.fda_history import FdaHistory
 from dashboard.proof import ProofService
 from dashboard.repository import ResearchRepository
+from dashboard.specialist_prices import SpecialistPrices
 from dashboard.tiger import TigerMonitor
 
 STATIC = Path(__file__).parent / "static"
 
 
-def handler(repository, monitor, proof, audit=None, fda=None):
+def handler(repository, monitor, proof, audit=None, fda=None, prices=None):
     audit = audit or AuditService(repository.root)
     fda = fda or FdaHistory()
+    prices = prices or SpecialistPrices()
 
     class Handler(BaseHTTPRequestHandler):
         def respond(self, data, content_type="application/json", status=200, filename=None):
@@ -65,6 +67,8 @@ def handler(repository, monitor, proof, audit=None, fda=None):
                     return self.respond(fda.asof(params.get("date", "")))
                 if path == "/api/fda/timeline":
                     return self.respond(fda.timeline(params.get("drug", "")[:300]))
+                if path == "/api/prices/specialists":
+                    return self.respond(prices.snapshot())
                 if path == "/api/live":
                     return self.respond(monitor.snapshot())
                 if path == "/api/live/history":

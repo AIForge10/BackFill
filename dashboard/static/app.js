@@ -282,6 +282,32 @@ async function loadAudit() {
   catch{badge('#audit-source-badge','Audit unavailable',true);$('#audit-rows').innerHTML='<tr><td colspan="9">The audit could not be loaded.</td></tr>';}
 }
 
+function renderSpecialists(data) {
+  const series=data.series??[];
+  const dates=[...new Set(series.flatMap(s=>s.points.map(p=>p.date)))].sort();
+  if(dates.length<2)return false;
+  const values=series.flatMap(s=>s.points.map(p=>p.index));
+  const lo=Math.min(...values),hi=Math.max(...values),pad=(hi-lo)*0.08||1;
+  const W=600,H=170,left=8,right=44,top=10,bottom=24;
+  const x=date=>left+dates.indexOf(date)/(dates.length-1)*(W-left-right);
+  const y=value=>top+(1-(value-lo+pad)/(hi-lo+2*pad))*(H-top-bottom);
+  const ticks=[lo,(lo+hi)/2,hi].map(v=>Math.round(v));
+  const grid=ticks.map(v=>`<line x1="${left}" x2="${W-right}" y1="${y(v)}" y2="${y(v)}" class="sp-grid"/><text class="sp-tick" x="${W-right+6}" y="${y(v)+3}">${v}</text>`).join('');
+  const base=`<line x1="${left}" x2="${W-right}" y1="${y(100)}" y2="${y(100)}" class="sp-base"/>`;
+  const lines=series.map((s,i)=>`<polyline class="sp-line sp-${i%4}" points="${s.points.map(p=>`${x(p.date).toFixed(1)},${y(p.index).toFixed(1)}`).join(' ')}"><title>${esc(s.ticker)}: ${fixed(s.last_close)} on ${esc(s.last_date)} (${pct(s.change)} since ${esc(s.points[0].date)})</title></polyline>`).join('');
+  const labels=`<text class="sp-tick" x="${left}" y="${H-6}">${esc(dates[0])}</text><text class="sp-tick sp-end" x="${W-right}" y="${H-6}">${esc(dates.at(-1))}</text>`;
+  $('#specialist-chart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${grid}${base}${lines}${labels}</svg>`;
+  $('#specialist-legend').innerHTML=series.map((s,i)=>`<span><i class="sp-swatch sp-${i%4}"></i><b>${esc(s.ticker)}</b> ${fixed(s.last_close)} <small class="${s.change<0?'negative':''}">${pct(s.change)}</small></span>`).join('');
+  text('#specialist-note',`${data.message} ${dates[0]} → ${dates.at(-1)}.${data.missing?.length?` Not available: ${data.missing.join(', ')}.`:''}`);
+  return true;
+}
+
+async function loadSpecialists() {
+  // One request per page load; the server caches Webull for an hour. Any failure keeps the panel hidden.
+  try{const data=await api('/api/prices/specialists');$('#specialist-panel').hidden=!(data.state==='ok'&&renderSpecialists(data));}
+  catch{$('#specialist-panel').hidden=true;}
+}
+
 let searchTimer;
 $('#search').addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{state.offset=0;loadEvidence();},250);});
 for(const selector of ['#ticker-filter','#role-filter'])$(selector).addEventListener('change',()=>{state.offset=0;loadEvidence();});
@@ -302,4 +328,4 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
   document.querySelectorAll('.reveal').forEach((element,index)=>{element.style.transitionDelay=`${Math.min(index%2,1)*110}ms`;observer.observe(element);});
 }
 try{renderOverview(await api('/api/overview'));}catch(error){badge('#integrity-badge','Research unavailable',true);text('#integrity-total','No integrity claim');showToast(error.message);}
-await Promise.allSettled([loadResearch(),loadEvidence(),loadLive(),initCase(),loadProof(),loadAudit()]);scheduleLive();
+await Promise.allSettled([loadResearch(),loadEvidence(),loadLive(),initCase(),loadProof(),loadAudit(),loadSpecialists()]);scheduleLive();
