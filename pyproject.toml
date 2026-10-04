@@ -26,10 +26,16 @@ dependencies = [
 requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
+[project.optional-dependencies]
+dashboard = ["psycopg[binary]>=3.2,<4"]
+
 # Research modules are separate from the unchanged sponsor examples.
 [tool.setuptools]
-packages = ["webull_bt", "backfill", "strategies"]
+packages = ["webull_bt", "backfill", "strategies", "dashboard"]
 py-modules = ["config"]
+
+[tool.setuptools.package-data]
+dashboard = ["static/*", "static/fonts/*", "data/*.json", "schema.sql"]
 
 # Editor type checker: resolve `backfill`, `strategies` and `config` from the repo root
 # (it otherwise infers src/ as the import root).
