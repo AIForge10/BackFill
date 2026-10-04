@@ -1,0 +1,9 @@
+lot_id,event_id,ticker,pre_trade_car,note
+131:AMPH:placebo,131,AMPH,-0.017496500462446836,descriptive; may include post-listing days; no independent-event t-test
+131:ICUI:placebo,131,ICUI,0.006468985254176999,descriptive; may include post-listing days; no independent-event t-test
+131:TEVA:placebo,131,TEVA,-0.09853203793394776,descriptive; may include post-listing days; no independent-event t-test
+338:AMPH:placebo,338,AMPH,-0.093725326979394,descriptive; may include post-listing days; no independent-event t-test
+338:ICUI:placebo,338,ICUI,-0.025866805718998402,descriptive; may include post-listing days; no independent-event t-test
+408:AMPH:placebo,408,AMPH,-0.022651305036661816,descriptive; may include post-listing days; no independent-event t-test
+408:BAX:placebo,408,BAX,-0.05995331515710844,descriptive; may include post-listing days; no independent-event t-test
+408:RDY:placebo,408,RDY,-0.0436288014410714,descriptive; may include post-listing days; no independent-event t-test

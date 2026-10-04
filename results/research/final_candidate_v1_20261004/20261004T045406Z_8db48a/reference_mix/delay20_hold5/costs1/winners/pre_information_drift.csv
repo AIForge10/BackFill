@@ -1,0 +1,9 @@
+lot_id,event_id,ticker,information_date,end_date,descriptive_pre_information_car,beta_estimation
+93:TEVA:winner,93,TEVA,2014-11-19,2014-11-18,0.02037940237386857,250 returns before evidence date; descriptive only
+131:PFE:winner,131,PFE,2016-03-06,2016-03-04,-0.013151502109197091,250 returns before evidence date; descriptive only
+338:TEVA:winner,338,TEVA,2021-04-11,2021-04-09,-0.036347239659315765,250 returns before evidence date; descriptive only
+352:BAX:winner,352,BAX,2021-10-08,2021-10-07,-0.0060164271076643214,250 returns before evidence date; descriptive only
+352:ICUI:winner,352,ICUI,2021-10-08,2021-10-07,-0.06910985092521896,250 returns before evidence date; descriptive only
+408:AMRX:winner,408,AMRX,2022-12-28,2022-12-27,-0.12023792126822973,250 returns before evidence date; descriptive only
+413:TEVA:winner,413,TEVA,2023-02-16,2023-02-15,-0.10662732151784782,250 returns before evidence date; descriptive only
+430:TEVA:winner,430,TEVA,2023-07-29,2023-07-28,0.08752382366421463,250 returns before evidence date; descriptive only

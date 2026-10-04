@@ -1,0 +1,103 @@
+{
+  "classification": "post-result exploratory; IS-only",
+  "settings": {
+    "start": "2014-06-01",
+    "end": "2024-09-30",
+    "hold_days": 5,
+    "beta_lookback": 250,
+    "event_weight": 0.05,
+    "name_cap": 0.08,
+    "country_cap": 0.3,
+    "sector_cap": 0.5,
+    "gross_cap": 1.5,
+    "net_cap": 0.25,
+    "foreign_long_cap": 0.2,
+    "cost_multiplier": 1.0,
+    "costs_bps": {
+      "US": 10,
+      "UK": 15,
+      "DE": 15,
+      "CH": 15,
+      "IN": 25
+    },
+    "hedge_cost_bps": 2,
+    "hedge_carry_bps_year": 50,
+    "initial_nav": 1000000,
+    "drawdown_trigger": 0.1,
+    "recovery_sessions": 20,
+    "adv_lookback": 60,
+    "adv_participation": 0.01,
+    "final": false
+  },
+  "code_and_input_hashes": {
+    "research/final_candidate/run.py": "be15c0175ce271e521584a062e2631bc0238820741c31490fcba7204b32f0283",
+    "research/final_candidate/factors.py": "d7ee636ffdf1aa044cdf072ebf4d29ffca3be6de4f15b83f0ea93e09e1249b34",
+    "research/final_candidate/__init__.py": "b84c3a280363c1ba6d49d51ee0e91456a204dab60470f3fad3d6f773d9d696a5",
+    "research/final_candidate/strategy.py": "8b9b58e76c84161e7be822dd5c0a278716e7d6beecd022b87c428a659293766a",
+    "research/final_candidate/SPEC.md": "2f7ea0845d16f5123ab55febb9d49c485534a0d262d9a7bbaee81523b09f3e6f",
+    "backfill/engine.py": "d94497e67402ab232d4e0b0f220bb5a2a668918a18e3664b9862f85affa26c83",
+    "backfill/analysis.py": "9e411e0280deca31b05541f9b1da06167dd305f5b2a405ac39bfcbd62f21be39",
+    "backfill/settings.py": "798cb00ed1646a9d97d4cda65d6792e2632be58bbc4f84e18b015b90315bdcbc",
+    "backfill/prices.py": "f2122430efa6d92cc965b9b932cad58d9063b64806b9181d1d1356b9773746e5",
+    "config.py": "6bffbe77b60f7c27ce9dd373cac0b43c6917f3d375326cbc719e086d38aae8cf",
+    "data/processed/final_candidate/v1/freeze.json": "a6d55b88f50975ae0f65bba8927607198e2fed4cf92c28fd57883cd38f2b7db0",
+    "data/processed/final_candidate/v1/factors.csv": "f9f4d5faad9c0ed8c38debcf465fec6b0ffd321a0807ad1ea7acf2230f66f691",
+    "data/processed/final_candidate/v1/factor_manifest.json": "5f23b224b303173b154232a9c982185a7f8e89c8b417748d10804b4f90efd366",
+    "data/raw/prices/final_candidate_v1/manifest.json": "3053d3883d9dc5115c1cd8f9518df1927952e2b760c9b9bbeb4ac2a81d172da3"
+  },
+  "frozen_inputs": {
+    "version": "v1",
+    "classification": "post-result exploratory candidate",
+    "frozen_files": {
+      "data/processed/final_candidate/v1/winners.csv": "672f6ce37e988a7d70bea4bc8c7a7f4215bf912c30d2ad8474b8e51ce856eeda",
+      "data/processed/final_candidate/v1/all_candidates.csv": "131b92144dc209b743b9b0325354c6124a3fe9a023e17ed908611f1a3427cee4",
+      "data/processed/final_candidate/v1/original_preparation.json": "666037f5344a51f9838e4da302e03a3edaf36fec1a3bcdc8fe4bbad19cd2be1f",
+      "data/processed/final_candidate/v1/prior_grid.csv": "638dd23c53f988837db41a8776715a64c0f8729511dc9e048f941b9f8ef71213",
+      "data/processed/final_candidate/v1/prior_omissions.csv": "225c877358d2f6839cdc72f9c84db05d479c1c0e42c581758fe32d5903148ee4",
+      "data/processed/final_candidate/v1/prior_screen.json": "3d184930a230d3fc74aa54018218edf37e1bbe21ed9c5fa592beb387f81d3701",
+      "data/processed/final_candidate/v1/qualified_evidence.csv": "ef010aa8968f94462ed7eb5019122919442d78867e3703275b68b814806a52c1",
+      "data/processed/final_candidate/v1/audit.csv": "3eefb17c6a6425c60b10f2a66c7764c5c59cba1601fea244c27f1af897956bb5"
+    },
+    "price_manifest_sha256": "3053d3883d9dc5115c1cd8f9518df1927952e2b760c9b9bbeb4ac2a81d172da3",
+    "spec_sha256": "2f7ea0845d16f5123ab55febb9d49c485534a0d262d9a7bbaee81523b09f3e6f",
+    "source_paths": {
+      "winners.csv": "/private/tmp/gator-backfill-diagnostic-review-20261003/data/processed/full_availability_refreshed/capture30/winners.csv",
+      "all_candidates.csv": "/private/tmp/gator-backfill-diagnostic-review-20261003/data/processed/full_availability_refreshed/capture30/all_candidates.csv",
+      "original_preparation.json": "/private/tmp/gator-backfill-diagnostic-review-20261003/data/processed/full_availability_refreshed/preparation.json",
+      "prior_grid.csv": "/private/tmp/gator-backfill-diagnostic-review-20261003/results/strict_timing/1b141b2d696b/summary.csv",
+      "prior_omissions.csv": "/private/tmp/gator-backfill-diagnostic-review-20261003/results/strict_timing/1b141b2d696b/diagnostics/summary.csv",
+      "prior_screen.json": "/private/tmp/gator-backfill-diagnostic-review-20261003/results/strict_timing/1b141b2d696b/screen.json",
+      "qualified_evidence.csv": "/private/tmp/gator-backfill-diagnostic-review-20261003/data/processed/full_availability_refreshed/capture30/qualified_evidence.csv",
+      "audit.csv": "/private/tmp/gator-backfill-diagnostic-review-20261003/data/processed/full_availability_refreshed/capture30/audit.csv"
+    }
+  },
+  "protected_files_before": {
+    "HYPOTHESIS.md": "46de428d058ed1325caaf362727e091485bba9095bfffb1fa501566ea75607d1",
+    "config.py": "6bffbe77b60f7c27ce9dd373cac0b43c6917f3d375326cbc719e086d38aae8cf",
+    "results/backfill_oos_attempt.json": "6c5ba6aea4f1e9ed0f5f07f756802889681fcff41d20fa691f5e3fd3939fc6b1",
+    "results/variants_log.csv": "c2dd824d6177279341350eb21da28e00c1711a2418c63d8a3bf433cf13b134f5"
+  },
+  "python": "3.12.14",
+  "calendar": "Webull SPY dates, mapped into engine ^GSPC calendar slot; no index quotes used",
+  "factor_manifest": {
+    "sources": {
+      "F-F_Research_Data_Factors": {
+        "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_CSV.zip",
+        "file": "F-F_Research_Data_Factors.zip",
+        "retrieved_at": "2026-10-04T04:34:49.571914+00:00",
+        "sha256": "593f4fbef03181bc0b22ff6292f217689dd1fb79355049ca905d95b262040a66"
+      },
+      "F-F_Momentum_Factor": {
+        "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Momentum_Factor_CSV.zip",
+        "file": "F-F_Momentum_Factor.zip",
+        "retrieved_at": "2026-10-04T04:34:49.942314+00:00",
+        "sha256": "c06d1c2e9a5e4f6985879722f23c6bb585f46b34eaf3fcb681d4de887e353f3e"
+      }
+    },
+    "csv_sha256": "f9f4d5faad9c0ed8c38debcf465fec6b0ffd321a0807ad1ea7acf2230f66f691",
+    "units": "decimal monthly returns",
+    "start": "2014-06-30",
+    "end": "2024-09-30",
+    "note": "Current CRSP CIZ factor vintage, acquired 2026-10-04; retrospective exposure check only, never a trading input."
+  }
+}

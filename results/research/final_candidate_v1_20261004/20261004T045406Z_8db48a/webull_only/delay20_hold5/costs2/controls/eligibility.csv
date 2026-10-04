@@ -1,0 +1,18 @@
+lot_id,event_id,ticker,reason,trade_date,exit_date,detail
+131:AMPH:placebo,131,AMPH,eligible,2016-04-05,2016-04-12,
+131:BAX:placebo,131,BAX,eligible,2016-04-05,2016-04-12,
+131:ICUI:placebo,131,ICUI,eligible,2016-04-05,2016-04-12,
+131:MYL:placebo,131,MYL,explicit_price_exclusion,,,Mylan delisted 2020 (Viatris); not on Webull or Yahoo; predecessor history not aliased by design
+131:RDY:placebo,131,RDY,explicit_price_exclusion,,,Excluded by Webull-only policy; original allocation retained in cash
+131:TEVA:placebo,131,TEVA,explicit_price_exclusion,,,Excluded by Webull-only policy; original allocation retained in cash
+352:AMPH:placebo,352,AMPH,eligible,2021-11-08,2021-11-15,
+352:AMRX:placebo,352,AMRX,eligible,2021-11-08,2021-11-15,
+352:RDY:placebo,352,RDY,explicit_price_exclusion,,,Excluded by Webull-only policy; original allocation retained in cash
+352:TEVA:placebo,352,TEVA,explicit_price_exclusion,,,Excluded by Webull-only policy; original allocation retained in cash
+352:VTRS:placebo,352,VTRS,insufficient_security_history,,,
+408:AMPH:placebo,408,AMPH,eligible,2023-01-30,2023-02-06,
+408:BAX:placebo,408,BAX,eligible,2023-01-30,2023-02-06,
+408:ICUI:placebo,408,ICUI,eligible,2023-01-30,2023-02-06,
+408:RDY:placebo,408,RDY,explicit_price_exclusion,,,Excluded by Webull-only policy; original allocation retained in cash
+408:TEVA:placebo,408,TEVA,explicit_price_exclusion,,,Excluded by Webull-only policy; original allocation retained in cash
+408:VTRS:placebo,408,VTRS,eligible,2023-01-30,2023-02-06,

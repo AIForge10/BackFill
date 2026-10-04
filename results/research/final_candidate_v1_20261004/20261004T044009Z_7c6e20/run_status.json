@@ -1,0 +1,4 @@
+{
+  "status": "failed_after_evaluations",
+  "reason": "numpy boolean in replacement-gate JSON serialization; no metrics changed; corrected and rerun logged separately"
+}

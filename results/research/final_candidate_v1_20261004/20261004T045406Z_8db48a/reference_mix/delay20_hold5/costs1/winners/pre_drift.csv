@@ -1,0 +1,9 @@
+lot_id,event_id,ticker,pre_trade_car,note
+93:TEVA:winner,93,TEVA,-0.018374147482503676,descriptive; may include post-listing days; no independent-event t-test
+131:PFE:winner,131,PFE,0.006339521440177048,descriptive; may include post-listing days; no independent-event t-test
+338:TEVA:winner,338,TEVA,-0.07516528779612221,descriptive; may include post-listing days; no independent-event t-test
+352:BAX:winner,352,BAX,-0.04757708618052853,descriptive; may include post-listing days; no independent-event t-test
+352:ICUI:winner,352,ICUI,0.017825667898875658,descriptive; may include post-listing days; no independent-event t-test
+408:AMRX:winner,408,AMRX,0.01335354942795861,descriptive; may include post-listing days; no independent-event t-test
+413:TEVA:winner,413,TEVA,-0.14163671112470255,descriptive; may include post-listing days; no independent-event t-test
+430:TEVA:winner,430,TEVA,0.16542094797859372,descriptive; may include post-listing days; no independent-event t-test

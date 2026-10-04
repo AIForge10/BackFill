@@ -30,3 +30,8 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 packages = ["webull_bt", "backfill", "strategies"]
 py-modules = ["config"]
+
+# Editor type checker: resolve `backfill`, `strategies` and `config` from the repo root
+# (it otherwise infers src/ as the import root).
+[tool.pyrefly]
+search-path = ["."]

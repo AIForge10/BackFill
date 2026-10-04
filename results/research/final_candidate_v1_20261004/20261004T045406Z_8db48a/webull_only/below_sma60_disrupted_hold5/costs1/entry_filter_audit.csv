@@ -1,0 +1,12 @@
+event_id,ticker,weight,rule,evidence_ready_date,reason,signal_close,signal_sma60
+84,MYL,0.05,below_sma60_disrupted_hold5,2014-10-27,request_selected,,
+85,MYL,0.05,below_sma60_disrupted_hold5,2014-10-27,no_other_listed_disrupted_on_exact_capture,,
+93,TEVA,0.05,below_sma60_disrupted_hold5,2014-11-19,no_other_listed_disrupted_on_exact_capture,,
+131,PFE,0.05,below_sma60_disrupted_hold5,2016-03-06,no_other_listed_disrupted_on_exact_capture,,
+136,MYL,0.05,below_sma60_disrupted_hold5,2016-05-02,request_selected,,
+338,TEVA,0.05,below_sma60_disrupted_hold5,2021-04-11,no_other_listed_disrupted_on_exact_capture,,
+352,BAX,0.025,below_sma60_disrupted_hold5,2021-10-08,preceding_close_not_below_SMA60,72.707864,71.32115253333333
+352,ICUI,0.025,below_sma60_disrupted_hold5,2021-10-08,preceding_close_not_below_SMA60,228.11,212.83333333333337
+408,AMRX,0.05,below_sma60_disrupted_hold5,2022-12-28,request_selected,,
+413,TEVA,0.05,below_sma60_disrupted_hold5,2023-02-16,no_other_listed_disrupted_on_exact_capture,,
+430,TEVA,0.05,below_sma60_disrupted_hold5,2023-07-29,request_selected,,

@@ -1,0 +1,3 @@
+lot_id,event_id,ticker,information_date,end_date,descriptive_pre_information_car,beta_estimation
+408:AMPH:placebo,408,AMPH,2022-12-28,2022-12-27,-0.013955382187337306,250 returns before evidence date; descriptive only
+408:BAX:placebo,408,BAX,2022-12-28,2022-12-27,-0.054064297166978595,250 returns before evidence date; descriptive only
