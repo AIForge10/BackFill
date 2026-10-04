@@ -34,6 +34,7 @@ function showToast(message) {
 
 function renderOverview(data) {
   state.overview=data;
+  glanceFromOverview(data);
   const matching=data.frozen_checks.filter(r=>r.status==='match').length;
   text('#integrity-count',`${String(matching).padStart(2,'0')} / ${String(data.frozen_checks.length).padStart(2,'0')}`);
   text('#integrity-total','SHA-256 / FROZEN INPUTS');
@@ -173,6 +174,7 @@ async function loadExplanation(lotId) {
     if(element?.dataset.lot!==lotId)return;
     element.innerHTML=`<span class="eyebrow">${esc(data.label)}</span><p>${esc(data.text)}</p><small>${esc(data.model)} · generated ${esc(String(data.generated_at).slice(0,10))}${data.current?'':' · source file has changed since generation'}</small>`;
     element.hidden=false;
+    if(!$('#ai-jump')){$('#event-title').insertAdjacentHTML('afterend','<button type="button" class="quiet-button ai-jump" id="ai-jump">Read the AI summary ↓</button>');$('#ai-jump').addEventListener('click',()=>element.scrollIntoView({behavior:'smooth',block:'center'}));}
   }catch{}
 }
 
@@ -266,6 +268,7 @@ async function verifyProof() {
 }
 
 function renderAudit(live,frozen) {
+  glanceFromAudit(live);
   const fromSnowflake=live.source==='snowflake';
   badge('#audit-source-badge',fromSnowflake?'Source: Snowflake':'Source: file',!fromSnowflake);
   text('#audit-summary',`${live.registered} registered before testing · ${live.post_hoc} chosen after seeing results. Sorted by Sharpe at modeled costs.`);
@@ -308,6 +311,37 @@ async function loadSpecialists() {
   catch{$('#specialist-panel').hidden=true;}
 }
 
+// "At a glance" tiles: every number comes from the same endpoints as the sections they link to.
+function glance(id,value,sub,tone='') {
+  const v=$(`#glance-${id}-value`); if(!v)return;
+  v.textContent=value; v.className=`glance-value ${tone}`;
+  if(sub!==undefined)text(`#glance-${id}-sub`,sub);
+}
+
+function glanceFromOverview(data) {
+  const c=(data.strategies??[]).find(s=>s.id==='candidate');
+  if(c?.metrics?.sharpe!==undefined)glance('rule',fixed(c.metrics.sharpe),`Sharpe, net of costs · ${c.metrics.positions} trades`);
+}
+
+function glanceFromAudit(live) {
+  const registered=(live.rows??[]).filter(r=>r.label==='registered');
+  if(!registered.length)return;
+  const negative=registered.filter(r=>Number(r.sharpe)<0).length;
+  glance('registered',`${negative} of ${registered.length}`,negative===registered.length?'registered variants lost money':'registered variants had negative Sharpe',negative?'negative':'');
+}
+
+async function loadGlance() {
+  const [proof,fda]=await Promise.allSettled([api('/api/proof/verify'),api('/api/fda/range')]);
+  const p=proof.status==='fulfilled'?proof.value:null;
+  const anchored=String(p?.receipt?.timestamp_utc??'').slice(0,10);
+  if(p?.status==='PASS')glance('proof','PASS',`Matches the chain · anchored ${anchored}`,'pass');
+  else if(p?.status==='FAIL')glance('proof','FAIL','Recomputed fingerprint differs from the chain','negative');
+  else glance('proof','Saved',anchored?`Receipt from ${anchored} · live check unavailable`:'Open the proof panel');
+  const f=fda.status==='fulfilled'?fda.value:null;
+  if(f?.state==='connected'&&f.drugs)glance('fda',Number(f.drugs).toLocaleString('en-US'),`drugs · ${Number(f.rows).toLocaleString('en-US')} archived pages · ${String(f.first).slice(0,4)}–${String(f.last).slice(0,4)}`);
+  else glance('fda','12 yrs','of archived FDA shortage pages');
+}
+
 let searchTimer;
 $('#search').addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{state.offset=0;loadEvidence();},250);});
 for(const selector of ['#ticker-filter','#role-filter'])$(selector).addEventListener('change',()=>{state.offset=0;loadEvidence();});
@@ -328,4 +362,4 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
   document.querySelectorAll('.reveal').forEach((element,index)=>{element.style.transitionDelay=`${Math.min(index%2,1)*110}ms`;observer.observe(element);});
 }
 try{renderOverview(await api('/api/overview'));}catch(error){badge('#integrity-badge','Research unavailable',true);text('#integrity-total','No integrity claim');showToast(error.message);}
-await Promise.allSettled([loadResearch(),loadEvidence(),loadLive(),initCase(),loadProof(),loadAudit(),loadSpecialists()]);scheduleLive();
+await Promise.allSettled([loadResearch(),loadEvidence(),loadLive(),initCase(),loadProof(),loadAudit(),loadSpecialists(),loadGlance()]);scheduleLive();

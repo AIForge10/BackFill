@@ -17,7 +17,8 @@ CACHE_SECONDS = 60
 CACHE_ENTRIES = 64
 DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 
-RANGE_SQL = """SELECT min(snapshot_ts) AS first, max(snapshot_ts) AS last, count(DISTINCT drug) AS drugs
+RANGE_SQL = """SELECT min(snapshot_ts) AS first, max(snapshot_ts) AS last, count(DISTINCT drug) AS drugs,
+                      count(*) AS rows
                FROM backfill_live.fda_snapshots"""
 ASOF_SQL = """
     SELECT s.drug, s.snapshot_ts, s.manufacturer, s.status, s.source_url
@@ -87,6 +88,18 @@ class FdaHistory:
     def asof(self, value):
         day = parse_date(value)
         return self._cached(("asof", day), lambda: self._asof(day))
+
+    def range(self):
+        """Archive extent for summary tiles: first/last snapshot, drugs and rows (cheap, cached)."""
+        return self._cached(("range",), self._range)
+
+    def _range(self):
+        state, message, results = self._query([(RANGE_SQL, None)])
+        if state != "connected":
+            return dict(state=state, message=message)
+        span = results[0][0] if results[0] else {}
+        return dict(state=state, message=None, first=_iso(span.get("first")), last=_iso(span.get("last")),
+                    drugs=span.get("drugs"), rows=span.get("rows"))
 
     def timeline(self, drug):
         drug = (drug or "").strip()
