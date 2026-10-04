@@ -2,20 +2,28 @@
 
 **From FDA drug-shortage notices to auditable supplier-trading research.**
 
+> [!IMPORTANT]
+> ## 📄 Research report
+>
+> **[Read the five-page research note (PDF) →](output/pdf/backfill_working_candidate_v1.pdf)**
+>
+> The main submission: hypothesis, data, method, results, robustness checks and limitations.
+> Supporting detail: [results and limitations](results/research/final_candidate_v1_20261004/RESULTS.md).
+
 Backfill reconstructs historical FDA shortage notices and supplier availability from Internet
 Archive captures, maps each supplier to its listed owner on that date, and tests whether
 manufacturers that can still supply a drug outperform a market hedge. Every rule, input and result
 is frozen and anchored on Solana, every variant we tried is published, and a live dashboard shows
 the evidence.
 
-**Live dashboard:** **https://155-138-224-207.sslip.io** ·
+**Also available:**
+[Live dashboard](https://155-138-224-207.sslip.io) ·
 [FDA Time Machine](https://155-138-224-207.sslip.io/time-machine.html) ·
-[Five-page research note](output/pdf/backfill_working_candidate_v1.pdf) ·
-[Results and limitations](results/research/final_candidate_v1_20261004/RESULTS.md) ·
 [Proof of freeze](PROOF.md)
 
 ## Contents
 
+- [Research report](output/pdf/backfill_working_candidate_v1.pdf)
 - [Hypothesis](#hypothesis)
 - [Results](#results)
 - [Architecture](#architecture)
