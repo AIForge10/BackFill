@@ -1,0 +1,48 @@
+{
+  "version": "freeze-v1",
+  "frozen_on": "2026-10-04",
+  "classification": "exploratory working candidate; selected after in-sample results were inspected; not a validated edge",
+  "rule": {
+    "name": "delay20_hold5",
+    "universe": "US-listed generic and sterile-injectable suppliers",
+    "winner": "every FDA-listed presentation for the listed parent on the selected archived formulation page is available, unallocated and nonempty",
+    "information_date": "later of first public shortage snapshot and archived supplier capture",
+    "entry_delay_sessions": 20,
+    "entry_delay_definition": "next US session close after the information date, then 20 additional US sessions; fill at that close",
+    "hold_sessions": 5,
+    "hedge": "SPY",
+    "beta_lookback": 250,
+    "event_weight": 0.05,
+    "reverify_status_before_entry": false,
+    "sma_filter": false
+  },
+  "sample": {"start": "2014-06-01", "end": "2024-09-30"},
+  "costs": {
+    "stock_bps_per_side": {"US": 10, "UK": 15, "DE": 15, "CH": 15, "IN": 25},
+    "hedge_bps_per_side": 2,
+    "hedge_carry_bps_per_year": 50,
+    "stress_multiplier": 2,
+    "cash_return": 0
+  },
+  "caps": {
+    "name": 0.08,
+    "country": 0.30,
+    "sector": 0.50,
+    "gross": 1.50,
+    "net": 0.25,
+    "foreign_long": 0.20
+  },
+  "risk": {"drawdown_trigger": 0.10, "recovery_sessions": 20, "initial_nav": 1000000},
+  "capacity": {"adv_lookback": 60, "adv_participation": 0.01},
+  "decision_gate": {
+    "applies_to": "forward paper trading of new FDA shortage events from 2026-10 onward, logged before each entry date",
+    "all_required": [
+      "at least 10 forward trades",
+      "trades span at least 3 distinct stock owners",
+      "positive mean net trade return after calibrated spread-based costs",
+      "mean stays positive after removing the largest single-company contributor",
+      "winner-minus-placebo mean above zero"
+    ],
+    "if_failed": "close the hypothesis and record the result; no re-tuning of v1"
+  }
+}
