@@ -1,0 +1,62 @@
+{
+  "gates": [
+    {
+      "vendor_policy": "reference_mix",
+      "alternative": "below_sma60_hold5",
+      "checks": {
+        "two_cost_runs_completed": true,
+        "higher_sharpe_both_costs": false,
+        "positive_winner_minus_control": true,
+        "no_worse_drawdown": false,
+        "at_least_ten_exposures": false,
+        "at_least_three_owners": true,
+        "positive_after_each_company_omission": false
+      },
+      "passed": false
+    },
+    {
+      "vendor_policy": "reference_mix",
+      "alternative": "below_sma60_disrupted_hold5",
+      "checks": {
+        "two_cost_runs_completed": true,
+        "higher_sharpe_both_costs": false,
+        "positive_winner_minus_control": true,
+        "no_worse_drawdown": true,
+        "at_least_ten_exposures": false,
+        "at_least_three_owners": false,
+        "positive_after_each_company_omission": false
+      },
+      "passed": false
+    },
+    {
+      "vendor_policy": "webull_only",
+      "alternative": "below_sma60_hold5",
+      "checks": {
+        "two_cost_runs_completed": true,
+        "higher_sharpe_both_costs": false,
+        "positive_winner_minus_control": true,
+        "no_worse_drawdown": true,
+        "at_least_ten_exposures": false,
+        "at_least_three_owners": false,
+        "positive_after_each_company_omission": false
+      },
+      "passed": false
+    },
+    {
+      "vendor_policy": "webull_only",
+      "alternative": "below_sma60_disrupted_hold5",
+      "checks": {
+        "two_cost_runs_completed": true,
+        "higher_sharpe_both_costs": false,
+        "positive_winner_minus_control": true,
+        "no_worse_drawdown": true,
+        "at_least_ten_exposures": false,
+        "at_least_three_owners": false,
+        "positive_after_each_company_omission": false
+      },
+      "passed": false
+    }
+  ],
+  "decision": "retain_delay20_hold5",
+  "label": "Exploratory working-candidate decision, never confirmation of the original hypothesis."
+}

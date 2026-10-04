@@ -1,0 +1,5 @@
+lot_id,event_id,ticker,pre_trade_car,note
+131:AMPH:placebo,131,AMPH,-0.017496500462446836,descriptive; may include post-listing days; no independent-event t-test
+131:ICUI:placebo,131,ICUI,0.006468985254176999,descriptive; may include post-listing days; no independent-event t-test
+408:AMPH:placebo,408,AMPH,-0.022651305036661816,descriptive; may include post-listing days; no independent-event t-test
+408:BAX:placebo,408,BAX,-0.05995331515710844,descriptive; may include post-listing days; no independent-event t-test

@@ -1,0 +1,8 @@
+{
+  "strategy_cells": 42,
+  "portfolio_evaluations": 168,
+  "new_mean_tests": 168,
+  "counted_prior_probes": 111,
+  "statistical_nominees": [],
+  "caveat": "Exploratory dependent comparisons on a small in-sample dataset; not independent validation."
+}

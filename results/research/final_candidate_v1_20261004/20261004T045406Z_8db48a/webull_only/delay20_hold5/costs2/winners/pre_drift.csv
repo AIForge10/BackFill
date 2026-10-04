@@ -1,0 +1,5 @@
+lot_id,event_id,ticker,pre_trade_car,note
+131:PFE:winner,131,PFE,0.006339521440177048,descriptive; may include post-listing days; no independent-event t-test
+352:BAX:winner,352,BAX,-0.04757708618052853,descriptive; may include post-listing days; no independent-event t-test
+352:ICUI:winner,352,ICUI,0.017825667898875658,descriptive; may include post-listing days; no independent-event t-test
+408:AMRX:winner,408,AMRX,0.01335354942795861,descriptive; may include post-listing days; no independent-event t-test

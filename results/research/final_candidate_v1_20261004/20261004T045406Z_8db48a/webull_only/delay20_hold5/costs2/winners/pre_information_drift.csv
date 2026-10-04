@@ -1,0 +1,5 @@
+lot_id,event_id,ticker,information_date,end_date,descriptive_pre_information_car,beta_estimation
+131:PFE:winner,131,PFE,2016-03-06,2016-03-04,-0.013151502109197091,250 returns before evidence date; descriptive only
+352:BAX:winner,352,BAX,2021-10-08,2021-10-07,-0.0060164271076643214,250 returns before evidence date; descriptive only
+352:ICUI:winner,352,ICUI,2021-10-08,2021-10-07,-0.06910985092521896,250 returns before evidence date; descriptive only
+408:AMRX:winner,408,AMRX,2022-12-28,2022-12-27,-0.12023792126822973,250 returns before evidence date; descriptive only

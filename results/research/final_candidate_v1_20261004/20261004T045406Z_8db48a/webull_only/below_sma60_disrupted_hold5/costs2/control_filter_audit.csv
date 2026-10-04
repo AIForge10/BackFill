@@ -1,0 +1,7 @@
+event_id,ticker,weight,rule,evidence_ready_date,reason,signal_close,signal_sma60
+408,AMPH,0.008333333333333333,below_sma60_hold5,2022-12-28,request_selected,,
+408,BAX,0.008333333333333333,below_sma60_hold5,2022-12-28,request_selected,,
+408,ICUI,0.008333333333333333,below_sma60_hold5,2022-12-28,preceding_close_not_below_SMA60,152.98,151.97899999999998
+408,RDY,0.008333333333333333,below_sma60_hold5,2022-12-28,request_selected,,
+408,TEVA,0.008333333333333333,below_sma60_hold5,2022-12-28,request_selected,,
+408,VTRS,0.008333333333333333,below_sma60_hold5,2022-12-28,preceding_close_not_below_SMA60,9.297712,8.848759266666667

@@ -1,0 +1,5 @@
+lot_id,event_id,ticker,reason,trade_date,exit_date,detail
+408:AMPH:placebo,408,AMPH,eligible,2022-12-29,2023-01-06,
+408:BAX:placebo,408,BAX,eligible,2022-12-29,2023-01-06,
+408:RDY:placebo,408,RDY,explicit_price_exclusion,,,Excluded by Webull-only policy; original allocation retained in cash
+408:TEVA:placebo,408,TEVA,explicit_price_exclusion,,,Excluded by Webull-only policy; original allocation retained in cash

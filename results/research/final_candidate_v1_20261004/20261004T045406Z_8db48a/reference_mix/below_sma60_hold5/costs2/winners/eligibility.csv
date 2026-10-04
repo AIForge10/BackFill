@@ -1,0 +1,7 @@
+lot_id,event_id,ticker,reason,detail,trade_date,exit_date
+84:MYL:winner,84,MYL,explicit_price_exclusion,Mylan delisted 2020 (Viatris); not on Webull or Yahoo; predecessor history not aliased by design,,
+85:MYL:winner,85,MYL,explicit_price_exclusion,Mylan delisted 2020 (Viatris); not on Webull or Yahoo; predecessor history not aliased by design,,
+131:PFE:winner,131,PFE,eligible,,2016-03-07,2016-03-14
+136:MYL:winner,136,MYL,explicit_price_exclusion,Mylan delisted 2020 (Viatris); not on Webull or Yahoo; predecessor history not aliased by design,,
+338:TEVA:winner,338,TEVA,eligible,,2021-04-12,2021-04-19
+408:AMRX:winner,408,AMRX,eligible,,2022-12-29,2023-01-06

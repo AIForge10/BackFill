@@ -1,0 +1,24 @@
+{
+  "tests": {
+    "command": "python -m unittest discover -s tests",
+    "passed": 27,
+    "context": "isolated review worktree"
+  },
+  "pdf": {
+    "pages": 5,
+    "minimum_font_points": 11,
+    "all_pages_visually_reviewed": true,
+    "text_identical_to_visually_reviewed_render": true,
+    "sha256": "555d0a414a036abce3e650f8de8f86858c74d22b20a662d78c8633b0ae8c0234"
+  },
+  "candidate_code_commit": "55a1306",
+  "accounting_verification": {
+    "baseline_reproduced": true,
+    "all_completed_lot_cashflows_reconciled": true,
+    "frozen_inputs_unchanged": true,
+    "protected_files_unchanged": true,
+    "completed_portfolio_evaluations": 24,
+    "stock_price_fetches": 0,
+    "holdout_evaluations": 0
+  }
+}

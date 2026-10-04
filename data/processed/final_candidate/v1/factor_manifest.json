@@ -1,0 +1,21 @@
+{
+  "sources": {
+    "F-F_Research_Data_Factors": {
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_CSV.zip",
+      "file": "F-F_Research_Data_Factors.zip",
+      "retrieved_at": "2026-10-04T04:34:49.571914+00:00",
+      "sha256": "593f4fbef03181bc0b22ff6292f217689dd1fb79355049ca905d95b262040a66"
+    },
+    "F-F_Momentum_Factor": {
+      "url": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Momentum_Factor_CSV.zip",
+      "file": "F-F_Momentum_Factor.zip",
+      "retrieved_at": "2026-10-04T04:34:49.942314+00:00",
+      "sha256": "c06d1c2e9a5e4f6985879722f23c6bb585f46b34eaf3fcb681d4de887e353f3e"
+    }
+  },
+  "csv_sha256": "f9f4d5faad9c0ed8c38debcf465fec6b0ffd321a0807ad1ea7acf2230f66f691",
+  "units": "decimal monthly returns",
+  "start": "2014-06-30",
+  "end": "2024-09-30",
+  "note": "Current CRSP CIZ factor vintage, acquired 2026-10-04; retrospective exposure check only, never a trading input."
+}

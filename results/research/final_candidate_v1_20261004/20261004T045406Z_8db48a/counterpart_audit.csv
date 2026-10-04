@@ -1,0 +1,19 @@
+event_id,ticker,exact_capture_listed_disrupted,disrupted_owners,evidence_scope
+80,ZYDUSLIFE.NS,False,,same formulation capture; exact SKU substitutability unverified
+84,MYL,True,ZYDUSLIFE.NS,same formulation capture; exact SKU substitutability unverified
+85,MYL,False,,same formulation capture; exact SKU substitutability unverified
+93,TEVA,False,,same formulation capture; exact SKU substitutability unverified
+131,PFE,False,,same formulation capture; exact SKU substitutability unverified
+136,APLLTD.NS,True,TEVA,same formulation capture; exact SKU substitutability unverified
+136,MYL,True,TEVA,same formulation capture; exact SKU substitutability unverified
+266,FRE.DE,False,,same formulation capture; exact SKU substitutability unverified
+267,FRE.DE,False,,same formulation capture; exact SKU substitutability unverified
+275,TORNTPHARM.NS,False,,same formulation capture; exact SKU substitutability unverified
+298,AUROPHARMA.NS,True,LUPIN.NS;TEVA,same formulation capture; exact SKU substitutability unverified
+298,NOVN.SW,True,LUPIN.NS;TEVA,same formulation capture; exact SKU substitutability unverified
+338,TEVA,False,,same formulation capture; exact SKU substitutability unverified
+352,BAX,True,FRE.DE;PFE,same formulation capture; exact SKU substitutability unverified
+352,ICUI,True,FRE.DE;PFE,same formulation capture; exact SKU substitutability unverified
+408,AMRX,True,CIPLA.NS,same formulation capture; exact SKU substitutability unverified
+413,TEVA,False,,same formulation capture; exact SKU substitutability unverified
+430,TEVA,True,AMRX;RDY;SUNPHARMA.NS,same formulation capture; exact SKU substitutability unverified

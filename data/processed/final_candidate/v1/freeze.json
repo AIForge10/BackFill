@@ -1,0 +1,26 @@
+{
+  "version": "v1",
+  "classification": "post-result exploratory candidate",
+  "frozen_files": {
+    "data/processed/final_candidate/v1/winners.csv": "672f6ce37e988a7d70bea4bc8c7a7f4215bf912c30d2ad8474b8e51ce856eeda",
+    "data/processed/final_candidate/v1/all_candidates.csv": "131b92144dc209b743b9b0325354c6124a3fe9a023e17ed908611f1a3427cee4",
+    "data/processed/final_candidate/v1/original_preparation.json": "666037f5344a51f9838e4da302e03a3edaf36fec1a3bcdc8fe4bbad19cd2be1f",
+    "data/processed/final_candidate/v1/prior_grid.csv": "638dd23c53f988837db41a8776715a64c0f8729511dc9e048f941b9f8ef71213",
+    "data/processed/final_candidate/v1/prior_omissions.csv": "225c877358d2f6839cdc72f9c84db05d479c1c0e42c581758fe32d5903148ee4",
+    "data/processed/final_candidate/v1/prior_screen.json": "3d184930a230d3fc74aa54018218edf37e1bbe21ed9c5fa592beb387f81d3701",
+    "data/processed/final_candidate/v1/qualified_evidence.csv": "ef010aa8968f94462ed7eb5019122919442d78867e3703275b68b814806a52c1",
+    "data/processed/final_candidate/v1/audit.csv": "3eefb17c6a6425c60b10f2a66c7764c5c59cba1601fea244c27f1af897956bb5"
+  },
+  "price_manifest_sha256": "3053d3883d9dc5115c1cd8f9518df1927952e2b760c9b9bbeb4ac2a81d172da3",
+  "spec_sha256": "2f7ea0845d16f5123ab55febb9d49c485534a0d262d9a7bbaee81523b09f3e6f",
+  "source_paths": {
+    "winners.csv": "/private/tmp/gator-backfill-diagnostic-review-20261003/data/processed/full_availability_refreshed/capture30/winners.csv",
+    "all_candidates.csv": "/private/tmp/gator-backfill-diagnostic-review-20261003/data/processed/full_availability_refreshed/capture30/all_candidates.csv",
+    "original_preparation.json": "/private/tmp/gator-backfill-diagnostic-review-20261003/data/processed/full_availability_refreshed/preparation.json",
+    "prior_grid.csv": "/private/tmp/gator-backfill-diagnostic-review-20261003/results/strict_timing/1b141b2d696b/summary.csv",
+    "prior_omissions.csv": "/private/tmp/gator-backfill-diagnostic-review-20261003/results/strict_timing/1b141b2d696b/diagnostics/summary.csv",
+    "prior_screen.json": "/private/tmp/gator-backfill-diagnostic-review-20261003/results/strict_timing/1b141b2d696b/screen.json",
+    "qualified_evidence.csv": "/private/tmp/gator-backfill-diagnostic-review-20261003/data/processed/full_availability_refreshed/capture30/qualified_evidence.csv",
+    "audit.csv": "/private/tmp/gator-backfill-diagnostic-review-20261003/data/processed/full_availability_refreshed/capture30/audit.csv"
+  }
+}
