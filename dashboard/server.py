@@ -49,6 +49,8 @@ def handler(repository, monitor):
                     return self.respond(repository.event(params.get("id", ""), params.get("ticker", "")))
                 if path == "/api/live":
                     return self.respond(monitor.snapshot())
+                if path == "/api/live/history":
+                    return self.respond(monitor.history(params.get("ticker", "ICUI")))
                 if path == "/api/health":
                     return self.respond(dict(ok=True, mode="read_only", time=datetime.now(timezone.utc).isoformat()))
                 if path.startswith("/api/download/"):

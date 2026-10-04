@@ -106,6 +106,50 @@ class DashboardTests(unittest.TestCase):
         self.assertEqual(live["quotes"], [])
         self.assertIsNone(live["latest_received_at"])
 
+    def test_live_history_without_a_feed_does_not_invent_prices(self):
+        with patch.dict(os.environ, {"TIGER_DATABASE_URL": ""}):
+            history = TigerMonitor().history("ICUI")
+        self.assertEqual(history["state"], "not_configured")
+        self.assertEqual(history["points"], [])
+        self.assertIsNone(history["latest_observation_at"])
+        with self.assertRaises(ValueError):
+            TigerMonitor().history("ICUI'; DROP TABLE quotes")
+
+    def test_live_history_is_parameterized_single_vendor_read_only_and_chronological(self):
+        from datetime import datetime, timedelta, timezone
+        now = datetime.now(timezone.utc)
+        newest = dict(time=now, received_at=now, price=101, source="webull")
+        oldest = dict(time=now-timedelta(minutes=1), received_at=now, price=100, source="webull")
+        connection = MagicMock()
+        connection.__enter__.return_value = connection
+        connection.execute.side_effect = [MagicMock(), MagicMock(fetchone=lambda: {"source": "webull"}),
+                                          MagicMock(fetchall=lambda: [newest, oldest])]
+        driver = types.ModuleType("psycopg")
+        driver.connect = MagicMock(return_value=connection)
+        driver.errors = types.SimpleNamespace(UndefinedTable=type("UndefinedTable", (Exception,), {}))
+        factories = types.ModuleType("psycopg.rows")
+        factories.dict_row = object()
+        with patch.dict("sys.modules", {"psycopg": driver, "psycopg.rows": factories}), \
+                patch.dict(os.environ, {"TIGER_DATABASE_URL": "postgresql://reader@db/test"}):
+            result = TigerMonitor().history("ICUI")
+        self.assertTrue(connection.read_only)
+        self.assertEqual(connection.execute.call_args_list[-1].args[1], ("ICUI", "webull"))
+        self.assertIn("LIMIT 2001", connection.execute.call_args_list[-1].args[0])
+        self.assertEqual([p["price"] for p in result["points"]], [100, 101])
+        self.assertFalse(result["stale"])
+
+    def test_live_history_error_does_not_expose_credentials(self):
+        driver = types.ModuleType("psycopg")
+        driver.connect = MagicMock(side_effect=RuntimeError("password=private-history-secret"))
+        driver.errors = types.SimpleNamespace(UndefinedTable=type("UndefinedTable", (Exception,), {}))
+        factories = types.ModuleType("psycopg.rows")
+        factories.dict_row = object()
+        with patch.dict("sys.modules", {"psycopg": driver, "psycopg.rows": factories}), \
+                patch.dict(os.environ, {"TIGER_DATABASE_URL": "postgresql://reader:private-history-secret@db/test"}):
+            result = TigerMonitor().history("FMS")
+        self.assertEqual(result["state"], "error")
+        self.assertNotIn("private-history-secret", json.dumps(result))
+
     def test_source_link_matches_actual_archive_index(self):
         repo = ResearchRepository(ROOT)
         lot = repo.scenario()["lots"][0]
