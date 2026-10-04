@@ -35,3 +35,7 @@ HANDOFF.md
 # Fetch logs are per machine; the derived FDA tables in data/processed/ are committed
 data/processed/fetch_log_*.csv
 backfill_2026.zip
+
+# Local working folders (agent scratch output); never committed
+outputs/
+tmp/
