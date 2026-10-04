@@ -1976,3 +1976,91 @@ dialog h3 {
 .sp-end {
   text-anchor:end
 }
+/* At a glance (top of page): four tiles, each a link to the section that proves it */
+.glance {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+  margin-top:30px
+}
+.glance-tile {
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  min-width:0;
+  padding:18px 18px 16px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--card);
+  color:var(--ink);
+  text-decoration:none;
+  transition:border-color .2s var(--ease),transform .2s var(--ease-out)
+}
+.glance-tile:hover,.glance-tile:focus-visible {
+  border-color:rgb(var(--ember-rgb)/.6);
+  transform:translateY(-1px)
+}
+.glance-tile .eyebrow {
+  font-size:8px
+}
+.glance-value {
+  font:400 40px/1 var(--serif);
+  margin-top:6px
+}
+.glance-value.pass {
+  color:var(--pass)
+}
+.glance-value.negative {
+  color:var(--ember)
+}
+.glance-sub {
+  font-size:11px;
+  line-height:1.5;
+  color:var(--muted)
+}
+.glance-tag {
+  margin-top:auto;
+  padding-top:8px;
+  font:9px var(--mono);
+  letter-spacing:.06em;
+  color:var(--ink-2)
+}
+.glance-tag::after {
+  content:" →"
+}
+.ai-jump {
+  margin:6px 0 4px
+}
+@media(max-width:1000px) {
+  .glance {
+    grid-template-columns:repeat(2,minmax(0,1fr))
+  }
+}
+/* Mobile header: one row that scrolls sideways instead of wrapping over the page */
+@media(max-width:700px) {
+  .nav nav {
+    flex:1;
+    min-width:0;
+    justify-content:flex-end;
+    overflow-x:auto;
+    white-space:nowrap;
+    scrollbar-width:none
+  }
+  .nav nav::-webkit-scrollbar {
+    display:none
+  }
+  .nav nav a {
+    flex:none
+  }
+  .hypothesis-intro {
+    padding-top:118px
+  }
+}
+@media(max-width:420px) {
+  .glance {
+    grid-template-columns:1fr
+  }
+  .glance-value {
+    font-size:34px
+  }
+}

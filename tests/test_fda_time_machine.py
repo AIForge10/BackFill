@@ -119,6 +119,13 @@ class FdaHistoryTests(unittest.TestCase):
                          ["Currently in Shortage + Discontinuation", "Currently in Shortage"])
         self.assertEqual(changes[0]["manufacturers"], 4)
 
+    def test_range_reports_archive_extent_and_never_crashes(self):
+        span = [dict(first=utc(2014, 7, 14), last=utc(2026, 9, 23), drugs=1042, rows=18218)]
+        result = FdaHistory(environ=ENV, connect=fake_connect([span])).range()
+        self.assertEqual((result["state"], result["drugs"], result["rows"]), ("connected", 1042, 18218))
+        self.assertEqual(result["first"], "2014-07-14T00:00:00+00:00")
+        self.assertEqual(FdaHistory(environ={}).range()["state"], "not_configured")
+
     def test_not_configured_does_not_crash(self):
         result = FdaHistory(environ={}).asof("2026-10-04")
         self.assertEqual(result["state"], "not_configured")

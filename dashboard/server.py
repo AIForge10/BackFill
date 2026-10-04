@@ -65,6 +65,8 @@ def handler(repository, monitor, proof, audit=None, fda=None, prices=None):
                     return self.respond(audit.freeze())
                 if path == "/api/fda/asof":
                     return self.respond(fda.asof(params.get("date", "")))
+                if path == "/api/fda/range":
+                    return self.respond(fda.range())
                 if path == "/api/fda/timeline":
                     return self.respond(fda.timeline(params.get("drug", "")[:300]))
                 if path == "/api/prices/specialists":
