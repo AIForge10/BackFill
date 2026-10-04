@@ -1,0 +1,25 @@
+{
+  "variant": "hold40",
+  "parameters": {
+    "hold_days": 40
+  },
+  "markets": [
+    "US"
+  ],
+  "final": false,
+  "source_hashes": {
+    "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/data/processed/shortage_events.csv": "5b1d6824ce8db884239cd42f2a60660b78c94371094e9fe5ddc137d3d04be3df",
+    "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/data/processed/suppliers.csv": "cd84344c0578434e0e6b767af2ab5126c02c3be4dbc8a5dbc1f544d1bb932dcb",
+    "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/data/company_ticker_map.csv": "d8c5c1ea94f6277751f3ace31c85c906e5e8ca7726ce9707ff05fcf554b3056b",
+    "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/data/processed/main_status.csv": "ed72d161e586ba7d927ff7adedccae0b2a88e5206ce7f302af24556c28ec712b"
+  },
+  "control_warning": "FDA-page nonlisted controls; not verified nonmanufacturers",
+  "timestamp_rule": "first observed listing known at UTC day end; next local session close",
+  "page_rule": "one page per event: latest pre-listing capture else first post-listing capture",
+  "counts": {
+    "winner_events": 24,
+    "winner_positions": 26,
+    "control_positions": 139,
+    "winner_tickers": 7
+  }
+}

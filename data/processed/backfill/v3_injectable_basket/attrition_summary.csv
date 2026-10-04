@@ -1,0 +1,6 @@
+stage,reason,rows
+event,archive_gap,15
+event,artifact_flag,69
+event,included,173
+event,left_censored,72
+event,not_injectable,147

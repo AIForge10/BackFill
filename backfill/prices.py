@@ -59,6 +59,17 @@ def normalize_yahoo(frame, symbol):
         for name in ["open", "high", "low", "close", "adj_close", "dividends"]:
             frame[name] = frame[name] / 100.0
     frame = frame[COLUMNS].sort_values("date").reset_index(drop=True)
+    # The vendor emits all-null placeholder rows on non-sessions (exchange
+    # holidays for ^GDAXI/^SSMI/^NSEI, a few FX dates). A row with no OHLC at
+    # all is not a session: it is dropped, never filled, and the dates are
+    # carried into the manifest so the dropped rows stay auditable. Rows that
+    # are only partly null still fail validate_bars below.
+    price_cols = ["open", "high", "low", "close", "adj_close"]
+    empty = frame[price_cols].isna().all(axis=1)
+    dropped = [str(pd.Timestamp(d).date()) for d in frame.loc[empty, "date"]]
+    if dropped:
+        frame = frame.loc[~empty].reset_index(drop=True)
+    frame.attrs["dropped_empty_rows"] = dropped
     validate_bars(frame, symbol)
     return frame
 
@@ -264,6 +275,7 @@ def fetch_cache(events, directory, *, start="2013-01-01", end="2024-10-01", excl
             bars.to_csv(path, index=False, date_format="%Y-%m-%d")
             entries[symbol] = dict(file=path.name, sha256=sha256(path), rows=len(bars), vendor=source,
                                    fallback_reason=fallback_reason, cross_check=check,
+                                   dropped_empty_rows=bars.attrs.get("dropped_empty_rows", []),
                                    actual_start=str(dates.min().date()), actual_end=str(dates.max().date()),
                                    retrieved_at=datetime.now(timezone.utc).isoformat())
         except Exception as exc:
@@ -281,6 +293,9 @@ def fetch_cache(events, directory, *, start="2013-01-01", end="2024-10-01", excl
                     requested_start=start, requested_end_exclusive=end,
                     adjustments=dict(yahoo=dict(auto_adjust=False, actions=True, repair=False,
                                                 lse_price_unit="GBP converted from GBp",
+                                                empty_row_policy=("all-null OHLC placeholder rows on non-sessions "
+                                                                  "are dropped and listed per symbol as "
+                                                                  "dropped_empty_rows; partial nulls still fail"),
                                                 valuation="adj_close total-return units"),
                                      webull=dict(daily_bars="forward-adjusted ('previous weight' per SDK)",
                                                  valuation="close used as adj_close",

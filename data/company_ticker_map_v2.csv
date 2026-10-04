@@ -1,0 +1,52 @@
+company_pattern,ticker,exchange,country,benchmark,listed_from,listed_to,is_generic_maker,notes,specialist
+^amphastar|international medication systems,AMPH,NASDAQ,US,XLV,2014-06-25,,1,IMS is Amphastar subsidiary,1
+^teva|^cephalon,TEVA,NYSE,US,SPY,2014-01-01,,1,,0
+^actavis,UNVERIFIED,,,,2014-01-01,2016-08-01,1,Pre-Teva owner must be researched; excluded rather than backmapped,0
+^actavis,TEVA,NYSE,US,SPY,2016-08-02,,1,Teva completed Actavis Generics acquisition August 2 2016,0
+^mylan,VTRS,NASDAQ,US,SPY,2014-01-01,2020-11-15,1,v2: Mylan history via VTRS series (1:1 share exchange Nov 2020); team-approved alias for testing,0
+^mylan|viatris,VTRS,NASDAQ,US,SPY,2020-11-16,,1,Viatris formed November 16 2020,0
+^amneal,AMRX,NYSE,US,XLV,2018-05-07,,1,,1
+^baxter,BAX,NYSE,US,XLV,2014-01-01,,1,,0
+^vantive,BAX,NYSE,US,XLV,2014-01-01,2025-01-31,1,Baxter kidney care sold Jan 2025; after that PRIVATE,0
+icu medical,ICUI,NASDAQ,US,XLV,2014-01-01,,1,Otsuka ICU Medical is a JV; decide and note,1
+^pfizer,PFE,NYSE,US,SPY,2014-01-01,,0,Diversified; small exposure,0
+^hospira,HSP,NYSE,US,SPY,2014-01-01,2015-09-02,1,Historical Hospira security; delisted prices require verified source,0
+^hospira,PFE,NYSE,US,SPY,2015-09-03,,0,Pfizer completed acquisition September 3 2015,0
+reddy,RDY,NYSE,US,XLV,2014-01-01,,1,ADR,1
+^hikma,HIK.L,LSE,UK,^FTSE,2014-01-01,,1,,1
+fresenius kabi,FRE.DE,XETRA,DE,^GDAXI,2014-01-01,,1,Parent Fresenius SE,0
+^sandoz,NOVN.SW,SIX,CH,^SSMI,2014-01-01,2023-10-03,0,Sandoz owned by Novartis before spin-off; parent exposure,0
+^sandoz,SDZ.SW,SIX,CH,^SSMI,2023-10-04,,1,Sandoz independent listing; require its own beta history,0
+^sun pharm|^taro,SUNPHARMA.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,,0
+^eugia|^aurobindo,AUROPHARMA.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,,0
+^lupin,LUPIN.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,,0
+^torrent,TORNTPHARM.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,,0
+^gland,GLAND.NS,NSE,IN,^CNXPHARMA,2020-11-20,,1,,1
+^granules,GRANULES.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,,1
+^alembic,APLLTD.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,,1
+^caplin,CAPLIPOINT.NS,NSE,IN,^CNXPHARMA,2014-06-23,,1,,1
+^piramal,PPLPHARMA.NS,NSE,IN,^CNXPHARMA,2022-10-19,,1,,1
+^zydus|^cadila,ZYDUSLIFE.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,verify ticker,0
+^cipla,CIPLA.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,,0
+^strides,STAR.NS,NSE,IN,^CNXPHARMA,2014-01-01,,1,verify ticker,1
+^b\. braun,PRIVATE,,,,,,1,,0
+^apotex,PRIVATE,,,,,,1,,0
+^meitheal,PRIVATE,,,,,,1,,0
+^american regent,PRIVATE,,,,,,1,Daiichi Sankyo subsidiary; decide,0
+^sagent,SGNT,NASDAQ,US,,2014-01-01,2016-08-31,1,v2: listed until Nichi-Iko acquisition (verify date),1
+^sagent,PRIVATE,,,,2016-09-01,,1,Nichi-Iko subsidiary,0
+^lannett,LCI,NYSE,US,,2014-01-01,2023-05-31,1,v2: delisted in 2023 Chapter 11 (verify date),1
+^lannett,PRIVATE,,,,2023-06-01,,1,post-bankruptcy private,0
+^par |^par pharm|^par health|^endo,ENDP,NASDAQ,US,,2015-09-28,2022-08-31,1,v2: Endo owned Par from Sep 2015; delisted after Aug 2022 Chapter 11 (verify),1
+^par |^par pharm|^par health|^endo,PRIVATE,,,,2022-09-01,,1,post-bankruptcy,0
+^akorn,AKRX,NASDAQ,US,,2014-01-01,2020-05-31,1,v2: delisted in 2020 Chapter 11 (verify date),1
+^akorn,PRIVATE,,,,2020-06-01,,1,"post-bankruptcy private, liquidated 2023",0
+^teligent,TLGT,NASDAQ,US,,2014-01-01,2021-10-31,1,v2: delisted 2021 (verify date),1
+^impax,IPXL,NASDAQ,US,,2014-01-01,2018-05-04,1,v2: Impax until Amneal combination,1
+^impax,AMRX,NYSE,US,,2018-05-07,,1,v2: Impax Laboratories became Amneal subsidiary,1
+^ani pharm,ANIP,NASDAQ,US,,2014-01-01,,1,v2,1
+^perrigo,PRGO,NYSE,US,,2014-01-01,,1,"v2; revenue ~US$4-5B+, not specialist",0
+grifols,GRFS,NASDAQ,US,,2014-01-01,,0,"v2: ADR; plasma, not generic maker",0
+^west-ward,HIK.L,LSE,UK,,2014-01-01,,1,v2: West-Ward is Hikma US,1
+^auromedics,AUROPHARMA.NS,NSE,IN,,2014-01-01,,1,v2: Aurobindo subsidiary,0
+^invagen,CIPLA.NS,NSE,IN,,2016-02-01,,1,v2: Cipla subsidiary from 2016,0

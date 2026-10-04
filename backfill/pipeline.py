@@ -16,7 +16,7 @@ from backfill.guardrails import (fingerprint, finish_holdout, log_run, require_o
                                 reserve_holdout)
 from backfill.prices import load_cache, required_symbols, sha256
 from backfill.settings import Settings
-from strategies.backfill import select
+from strategies.backfill import expand_specialist_basket, select
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -28,10 +28,52 @@ PRIMARY_MARKETS = ("US",)
 VARIANTS = {
     "primary": {}, "capture60": {"window_days": 60},
     "allocation": {"include_allocation": True}, "certain_dates": {"exclude_uncertain": True},
-    "all_flags": {"include_flags": True}, "hold20": {"hold_days": 20},
+    "all_flags": {"include_flags": True}, "hold10": {"hold_days": 10}, "hold20": {"hold_days": 20},
     "hold40": {"hold_days": 40}, "hold120": {"hold_days": 120},
     "all_markets": {"markets": tuple(config.MARKET_INDEX)},
+    # Coverage fixes, declared 2026-10-03 before any new evaluation. Both extend
+    # axes that were already predeclared: capture60 already widened the forward
+    # supplier window, and all_markets was declared but never acquired prices.
+    # 180d recovers events whose only archived page sits later in the crawl;
+    # 180d+all markets is the coverage-complete version of the same claim.
+    "capture180": {"window_days": 180},
+    "capture180_markets": {"window_days": 180, "markets": tuple(config.MARKET_INDEX)},
+    # v2 research branch (declared before evaluation; run with --mapping
+    # data/company_ticker_map_v2.csv). Each keeps primary rules otherwise.
+    "v2_expanded": {}, "v2_specialist": {"specialist_only": True},
+    "v2_injectables": {"injectables_only": True},
+    "v2_primary": {"specialist_only": True, "injectables_only": True},
+    # Sterile-injectable shortages only. Long the US specialist complex (the
+    # firms for which a shortage is material) at the 8% name cap, 60 sessions.
+    "v2_specialist_basket": {"injectables_only": True, "specialist_basket": True,
+                             "event_weight": 0.40, "max_gap_days": 60, "hold_days": 60},
+    # docs/PREREG_v3_injectable_basket.md (committed before implementation).
+    "v3_injectable_basket": {"date_only_events": True, "event_weight": 0.10,
+                             "max_gap_days": 60, "hold_days": 60},
+    # docs/PREREG_v4_disrupted_short.md (committed before implementation).
+    "v4_disrupted": {"disrupted_book": True},
 }
+
+
+def fund_priced_names(frame, exclusions, event_weight):
+    """Split event capital only across names the cache can actually trade.
+
+    Delisted specialists are disclosed price exclusions. Leaving them in the
+    winner count reserves capital that never gets a fill.
+    """
+    if frame.empty:
+        return frame
+    kept = frame.loc[~frame.ticker.isin(exclusions)].copy()
+    if kept.empty:
+        return kept.reset_index(drop=True)
+    count = kept.groupby("event_id").ticker.transform("nunique")
+    kept["weight"] = event_weight / count
+    if "winner_count" in kept.columns:
+        kept["winner_count"] = count.astype(int)
+    return kept.reset_index(drop=True)
+
+# A sterile injectable is named as such on the FDA list; decided before evaluation.
+INJECTABLE_PATTERN = r"inject|infusion|intravenous"
 
 
 def prepare(events_path, suppliers_path, mapping_path, directory, *, variant="primary", final=False, status_path=None):
@@ -58,15 +100,49 @@ def prepare(events_path, suppliers_path, mapping_path, directory, *, variant="pr
         events["rename_match"] = events.event_id.map(suspects)
         events["rename_suspect"] = events.rename_match.notna()
     params = VARIANTS[variant]
-    ledger, audit = build_candidates(events, suppliers, mapping, final=final,
-                                    **{k: v for k, v in params.items()
-                                       if k in {"window_days", "include_allocation", "exclude_uncertain", "include_flags"}})
-    markets = tuple(params.get("markets", PRIMARY_MARKETS))
+    if params.get("date_only_events"):
+        from backfill.date_events import build_date_events
+        ledger, audit = build_date_events(events, mapping, pattern=INJECTABLE_PATTERN,
+                                          max_gap_days=params["max_gap_days"], final=final)
+        params = {k: v for k, v in params.items() if k != "max_gap_days"}  # applied inside
+    else:
+        ledger, audit = build_candidates(events, suppliers, mapping, final=final,
+                                        **{k: v for k, v in params.items()
+                                           if k in {"window_days", "include_allocation", "exclude_uncertain", "include_flags"}})
+        if params.get("disrupted_book"):
+            from backfill.date_events import build_disrupted_book
+            ledger, book_audit = build_disrupted_book(ledger, suppliers, mapping)
+            audit = pd.concat([audit, book_audit], ignore_index=True)
+    markets =tuple(params.get("markets", PRIMARY_MARKETS))
     removed = ledger[~ledger.country.isin(markets)]
     if not removed.empty:
         audit = pd.concat([audit, removed[["event_id", "ticker"]].assign(stage="subset", reason="outside_markets")],
                           ignore_index=True)
     ledger = ledger[ledger.country.isin(markets)].copy()
+    # v2 filters apply to winners and controls alike, so the comparison stays like-for-like.
+    if params.get("specialist_only"):
+        if "specialist" not in mapping:
+            raise ValueError("specialist_only needs a mapping with a 'specialist' column.")
+        specialists = set(mapping.loc[mapping.specialist.map(lambda v: str(v).strip() == "1"), "ticker"])
+        removed = ledger[~ledger.ticker.isin(specialists)]
+        audit = pd.concat([audit, removed[["event_id", "ticker"]].assign(stage="subset", reason="not_specialist")],
+                          ignore_index=True)
+        ledger = ledger[ledger.ticker.isin(specialists)].copy()
+    if params.get("injectables_only"):
+        injectable = ledger["product"].str.contains(INJECTABLE_PATTERN, case=False, regex=True)
+        audit = pd.concat([audit, ledger.loc[~injectable, ["event_id", "ticker"]].assign(
+            stage="subset", reason="not_injectable")], ignore_index=True)
+        ledger = ledger[injectable].copy()
+    if params.get("max_gap_days"):
+        # A long hole between archived pages is not a new posting date. The
+        # January 2026 restart sat 492 days after the previous page.
+        gaps = events.groupby("event_id").prev_snapshot_gap_days.first()
+        stale = ledger.event_id.map(gaps)
+        audit = pd.concat([audit, ledger.loc[stale > params["max_gap_days"], ["event_id", "ticker"]].assign(
+            stage="subset", reason="archive_gap")], ignore_index=True)
+        ledger = ledger.loc[~(stale > params["max_gap_days"])].copy()
+    if params.get("specialist_basket"):
+        ledger = expand_specialist_basket(ledger, mapping)
     # Event capital is split across the in-scope winners only.
     winners = ledger[ledger.role == "winner"].groupby("event_id").ticker.nunique()
     ledger["winner_count"] = ledger.event_id.map(winners).fillna(0).astype(int)
@@ -156,7 +232,11 @@ def main(argv=None):
     try:
         factors = pd.read_csv(args.factors, index_col="date") if args.factors else None
         for variant in variants:
-            variant_settings = replace(settings, hold_days=VARIANTS[variant].get("hold_days", settings.hold_days))
+            variant_settings = replace(
+                settings,
+                hold_days=VARIANTS[variant].get("hold_days", settings.hold_days),
+                event_weight=VARIANTS[variant].get("event_weight", settings.event_weight),
+            )
             ledger = prepare(*sources[:3], bundle / variant / "inputs", variant=variant, final=args.final,
                              status_path=args.status_source)
             if ledger.empty or not (ledger.role == "winner").any():
@@ -168,6 +248,9 @@ def main(argv=None):
             exclusions = manifest.get("exclusions", {})
             requests = {role: select(ledger, settings=variant_settings, role=role)
                         for role in ["winner", "placebo"]}
+            if VARIANTS[variant].get("specialist_basket"):
+                requests = {role: fund_priced_names(frame, exclusions, variant_settings.event_weight)
+                            for role, frame in requests.items()}
             if args.leave_out:
                 requests = {role: frame[frame.ticker != args.leave_out].copy() for role, frame in requests.items()}
             role_results = {}

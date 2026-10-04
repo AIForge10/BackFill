@@ -1,0 +1,27 @@
+{
+  "variant": "v3_injectable_basket",
+  "parameters": {
+    "date_only_events": true,
+    "event_weight": 0.1,
+    "hold_days": 60
+  },
+  "markets": [
+    "US"
+  ],
+  "final": false,
+  "source_hashes": {
+    "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/data/processed/shortage_events.csv": "5b1d6824ce8db884239cd42f2a60660b78c94371094e9fe5ddc137d3d04be3df",
+    "data/processed/suppliers_with2022.csv": "b9fccf4fdd4e949957aeb46ebd3b0cecfc7dc515a86c9587f278d10551c43d35",
+    "data/company_ticker_map_v2.csv": "630305179486a0d9092dd26cae0251b4d12aeaf4205b52697d3e037afaa2189e",
+    "/Users/satyabrata557/Desktop/Hackathon/Gator_Hacks/data/processed/main_status.csv": "ed72d161e586ba7d927ff7adedccae0b2a88e5206ce7f302af24556c28ec712b"
+  },
+  "control_warning": "FDA-page nonlisted controls; not verified nonmanufacturers",
+  "timestamp_rule": "first observed listing known at UTC day end; next local session close",
+  "page_rule": "one page per event: latest pre-listing capture else first post-listing capture",
+  "counts": {
+    "winner_events": 173,
+    "winner_positions": 1247,
+    "control_positions": 711,
+    "winner_tickers": 10
+  }
+}

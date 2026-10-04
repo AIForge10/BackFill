@@ -34,3 +34,4 @@ HANDOFF.md
 *.ipynb_checkpoints
 # Fetch logs are per machine; the derived FDA tables in data/processed/ are committed
 data/processed/fetch_log_*.csv
+backfill_2026.zip

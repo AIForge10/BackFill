@@ -1,0 +1,12 @@
+stage,reason,rows
+event,artifact_flag,69
+event,capture_not_current_shortage,8
+event,future_revision_in_capture,1
+event,included,32
+event,left_censored,72
+event,no_capture_in_window,194
+event,no_listed_available_winner,100
+subset,not_injectable,165
+subset,outside_markets,111
+supplier,private,52
+supplier,unmapped,399

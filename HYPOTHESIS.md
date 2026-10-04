@@ -35,3 +35,7 @@ Long each winner on the trade date, hedged with its local index (beta from the p
 - **Costs per side:** US 10 bps, UK/Germany/Switzerland 15 bps, India 25 bps. Also reported with costs doubled.
 - **Signals** are traded at the next session.
 - **Every variant tried** is logged and disclosed in the note.
+
+## Revision (2026-10-03, local, not a new pre-registration)
+
+The named parent on the FDA page is usually a diversified company, so the traded book is the **listed US sterile-injectable specialist basket**, hedged with the local index for **60 sessions**. Capital is split only across specialists that have a price history. ADRs are not in the book: a diversified foreign parent does not pick up a single US shortage the way a US specialist does. A page that appears more than **60 days** after the previous archived page is not a new posting date (the 2024-09 to 2026-01 Wayback hole).

@@ -45,8 +45,8 @@ def build_candidates(events, suppliers, mapping, *, window_days=30,
     subsequent capture. Ties use ai_key, avoiding future knowledge of winners
     on other pages. ai_key retains formulation; coarse_key is never a supplier join.
     """
-    if window_days not in (30, 60):
-        raise ValueError("Only predeclared 30/60-day supplier windows are supported.")
+    if window_days not in (30, 60, 180):
+        raise ValueError("Only predeclared 30/60/180-day supplier windows are supported.")
     events, suppliers = events.copy(), suppliers.copy()
     mapping = mapping.fillna("").copy()
     events["public_date"] = pd.to_datetime(events.public_date)

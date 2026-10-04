@@ -66,5 +66,5 @@ TIMEZONE = {"US": "America/New_York", "UK": "Europe/London", "DE": "Europe/Berli
 
 # Vendor series sometimes contain predecessor history. These new securities
 # must establish their own beta history; an ownership change is not an IPO.
-SECURITY_START = {"AMPH": "2014-06-25", "AMRX": "2018-05-07", "VTRS": "2020-11-16",
+SECURITY_START = {"AMPH": "2014-06-25", "AMRX": "2018-05-07",  # v2 branch: VTRS carries Mylan history (1:1 exchange)
                   "SDZ.SW": "2023-10-04", "GLAND.NS": "2020-11-20", "PPLPHARMA.NS": "2022-10-19"}
