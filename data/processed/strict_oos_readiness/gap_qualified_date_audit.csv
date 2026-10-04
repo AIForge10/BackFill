@@ -1,0 +1,34 @@
+event_id,ticker,product,observed_public_date,capture_date,fda_date_first_posted,posted_date_unique_count,days_from_posted_to_capture
+480,AMPH,Atropine Sulfate Injection,2025-09-06,2025-08-12,2012-01-01,1,4972
+481,RDY,Azacitidine Injection,2025-09-06,2025-10-06,2020-12-18,1,1753
+486,PFE,Carboplatin Injection,2025-09-06,2025-08-14,2023-04-28,1,839
+491,VTRS,Cromolyn Sodium Concentrate,2025-09-06,2025-08-11,2023-11-03,1,647
+493,VTRS,Dexamethasone Sodium Phosphate Injection,2025-09-06,2025-08-27,2019-02-08,1,2392
+494,AMRX,Dexmedetomidine Hydrochloride Injection,2025-09-06,2025-08-10,2020-04-10,1,1948
+494,VTRS,Dexmedetomidine Hydrochloride Injection,2025-09-06,2025-08-10,2020-04-10,1,1948
+495,BAX,Dextrose Monohydrate 10% Injection,2025-09-06,2025-10-06,2022-03-01,1,1315
+495,ICUI,Dextrose Monohydrate 10% Injection,2025-09-06,2025-10-06,2022-03-01,1,1315
+496,BAX,Dobutamine Hydrochloride Injection,2025-09-06,2025-08-10,2017-11-06,1,2834
+499,PFE,"Epinephrine Bitartrate, Lidocaine Hydrochloride Injection",2025-09-06,2025-08-14,2012-02-22,1,4922
+500,PFE,Etomidate Injection,2025-09-06,2025-08-13,2022-10-05,1,1043
+500,VTRS,Etomidate Injection,2025-09-06,2025-08-13,2022-10-05,1,1043
+501,PFE,Fentanyl Citrate Injection,2025-09-06,2025-08-13,2012-01-01,1,4973
+504,PFE,Heparin Sodium Injection,2025-09-06,2025-08-15,2017-11-14,1,2831
+506,TEVA,Hydromorphone Hydrochloride Injection,2025-09-06,2025-08-14,2017-10-31,1,2844
+509,BAX,Ketorolac Tromethamine Injection,2025-09-06,2025-08-14,2018-03-23,1,2701
+509,PFE,Ketorolac Tromethamine Injection,2025-09-06,2025-08-14,2018-03-23,1,2701
+511,AMPH,Lidocaine Hydrochloride Injection,2025-09-06,2025-08-15,2012-02-22,1,4923
+511,BAX,Lidocaine Hydrochloride Injection,2025-09-06,2025-08-15,2012-02-22,1,4923
+513,VTRS,Lisdexamfetamine Dimesylate Capsule,2025-09-06,2025-08-31,2023-07-14,1,779
+516,RDY,Methamphetamine Hydrochloride Tablet,2025-09-06,2025-10-06,2023-03-17,1,934
+518,VTRS,"Methylphenidate Film, Extended Release",2025-09-06,2025-10-06,2025-02-28,1,220
+520,AMRX,Methylprednisolone Acetate Injection,2025-09-06,2025-08-15,2021-12-15,1,1339
+521,BAX,Metronidazole Injection,2025-09-06,2025-10-06,2022-01-13,1,1362
+523,AMPH,Morphine Sulfate Injection,2025-09-06,2025-08-14,2017-10-31,1,2844
+533,VTRS,Remifentanil Hydrochloride Injection,2025-09-06,2025-10-06,2022-06-28,1,1196
+534,VTRS,Rifampin Capsule,2025-09-06,2025-08-14,2021-02-17,1,1639
+537,BAX,Rocuronium Bromide Injection,2025-09-06,2025-08-14,2023-02-15,1,911
+537,PFE,Rocuronium Bromide Injection,2025-09-06,2025-08-14,2023-02-15,1,911
+537,VTRS,Rocuronium Bromide Injection,2025-09-06,2025-08-14,2023-02-15,1,911
+539,PFE,Sodium Acetate Injection,2025-09-06,2025-08-14,2016-02-03,1,3480
+540,AMPH,Sodium Bicarbonate Injection,2025-09-06,2025-08-11,2017-03-01,1,3085

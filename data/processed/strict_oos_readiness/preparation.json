@@ -1,0 +1,23 @@
+{
+  "stage": "FDA signal preparation only; no prices or returns loaded",
+  "oos_list_pages": 55,
+  "oos_first_list_date": "2025-09-06",
+  "supplier_pages": 8189,
+  "supplier_rows": 49579,
+  "primary_events": 39,
+  "primary_positions": 61,
+  "strict_events": 0,
+  "strict_positions": 0,
+  "strict_by_ticker": {},
+  "strict_gap_exclusion_dates": [
+    "2025-09-06"
+  ],
+  "gap_warning": "Primary retains registered date-uncertain events; strict study excludes first observations after >=180-day list gaps.",
+  "files": {
+    "/private/tmp/gator-strict-oos-20261003/data/raw/oos/signals/shortage_events.csv": "d683ce213d7aa71c2ef116a263e3840bf428c2ebbd141feb4462f9b66d52c0b2",
+    "/private/tmp/gator-strict-oos-20261003/data/raw/oos/signals/suppliers.csv": "c19d9f1e45171ed912f1b755b1d6cf87fc6df6efe5a3306ef6c53dcc7755901a",
+    "/private/tmp/gator-strict-oos-20261003/data/raw/oos/signals/primary.csv": "9caff67234798a78130b26267eccc6498a08e0125188d2cc18a79ff11318e070",
+    "/private/tmp/gator-strict-oos-20261003/data/raw/oos/signals/strict.csv": "c26b92cf2c3da6af35ab7514fae7199548dd4ff89846297841f5b4b764073abe",
+    "/private/tmp/gator-strict-oos-20261003/data/company_ticker_map.csv": "d8c5c1ea94f6277751f3ace31c85c906e5e8ca7726ce9707ff05fcf554b3056b"
+  }
+}
