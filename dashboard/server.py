@@ -36,6 +36,8 @@ def handler(repository, monitor):
             try:
                 if path == "/api/overview":
                     return self.respond(repository.overview())
+                if path == "/api/case":
+                    return self.respond(repository.case_study())
                 if path == "/api/research":
                     return self.respond(repository.scenario(params.get("strategy", "candidate"),
                         int(params.get("costs", 1)), params.get("vendor", "reference_mix")))

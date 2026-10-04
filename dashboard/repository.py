@@ -130,6 +130,14 @@ class ResearchRepository:
                              "FDA-page absence does not prove a control cannot manufacture the product.",
                              "ADV capacity is a participation bound; market impact is not calibrated."])
 
+    def case_study(self):
+        """Previously evaluated case, never an instruction to unlock or rerun OOS."""
+        path = Path(__file__).parent / "data/helene_case.json"
+        result = document(path)
+        if not result:
+            raise KeyError("Case study is not supplied")
+        return dict(result, bundle_sha256=digest(path))
+
     def evidence(self, query="", ticker="", role="", offset=0, limit=15):
         data = rows(self.frozen / "all_candidates.csv")
         data = [r for r in data if (not query or query.casefold() in
@@ -160,6 +168,7 @@ class ResearchRepository:
             raise ValueError("Unknown scenario")
         folder = self.run / vendor / "delay20_hold5" / f"costs{costs}"
         allowed = {"events.csv": self.frozen / "all_candidates.csv",
+                   "helene_case.json": Path(__file__).parent / "data/helene_case.json",
                    "manifest.json": self.frozen / "price_manifest.json",
                    "summary.csv": self.run / "summary.csv", "freeze.json": self.frozen / "freeze.json",
                    "lots.csv": folder / "winners/lots.csv", "equity.csv": folder / "winners/equity.csv",

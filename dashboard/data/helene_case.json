@@ -1,0 +1,1250 @@
+{
+  "schema_version": 1,
+  "case": {
+    "schema_version": 2,
+    "case": "Hurricane Helene IV/PD supply disruption",
+    "evidence_date": "2024-10-10",
+    "announcement_date": "2024-10-11",
+    "period_start": "2024-10-01",
+    "period_end": "2026-10-01",
+    "classification": "Exploratory later-period theory illustration; previously evaluated",
+    "blind_oos_claim": false,
+    "strict_strategy_eligible": false,
+    "shock_identifier": {
+      "ticker": "BAX",
+      "role": "disrupted manufacturer; identifies shock only",
+      "portfolio_weight": 0
+    },
+    "beneficiary_universe": [
+      "FMS",
+      "ICUI"
+    ],
+    "selection_note": "Beneficiary-only correction excludes the disrupted manufacturer by economic role. Saved results were already known; original diagnostics and all three previously evaluated horizons are retained for provenance only.",
+    "theory_expectation": {
+      "tickers": [
+        "FMS",
+        "ICUI"
+      ],
+      "direction": "positive aggregate net hedged return",
+      "rationale": "Other capable suppliers may capture demand displaced by the disrupted manufacturer. The expectation concerns the beneficiary basket, not every stock individually.",
+      "expected_return": null,
+      "probability_of_rise": null,
+      "status": "Qualitative economic inference, not a recorded numerical backtest forecast"
+    },
+    "frozen_strategy_action": {
+      "action": "NO_TRADE",
+      "reason": "No contemporaneous all-presentations-available, unallocated FDA-page evidence for this supplier."
+    },
+    "illustrative_accounting": {
+      "entry_delay_sessions": 20,
+      "holding_sessions": 5,
+      "hedge": "SPY; beta estimated using 250 prior returns",
+      "stock_cost_per_side_bps": 10,
+      "hedge_cost_per_side_bps": 2,
+      "hedge_carry_bps_per_year": 50,
+      "individual_diagnostic_weight": 0.05,
+      "basket_total_weight": 0.05,
+      "beneficiary_weights": {
+        "FMS": 0.025,
+        "ICUI": 0.025,
+        "BAX": 0
+      },
+      "note": "Hypothetical beneficiary-only positions, not executed strict-strategy trades; lot returns are not whole-portfolio returns. Basket recombines half of each saved 5% diagnostic."
+    },
+    "actual": [
+      {
+        "ticker": "FMS",
+        "gross_stock_return": 0.0341281967632638,
+        "net_hedged_lot_return": 0.0413352561359706,
+        "doubled_cost_net_hedged_lot_return": 0.039037664816971,
+        "net_portfolio_pnl_fraction": 0.002066762806798535,
+        "beta": 0.5363811963418826,
+        "entry_date": "2024-11-11",
+        "exit_date": "2024-11-18",
+        "spy_same_window_return": -0.017719955055337522,
+        "gross_stock_excess_over_spy": 0.05184815181860132
+      },
+      {
+        "ticker": "ICUI",
+        "gross_stock_return": -0.0465024962136086,
+        "net_hedged_lot_return": -0.020070737016424,
+        "doubled_cost_net_hedged_lot_return": -0.0228334885581465,
+        "net_portfolio_pnl_fraction": -0.0010035368508212032,
+        "beta": 1.6475499315734874,
+        "entry_date": "2024-11-11",
+        "exit_date": "2024-11-18",
+        "spy_same_window_return": -0.017719955055337522,
+        "gross_stock_excess_over_spy": -0.02878254115827108
+      },
+      {
+        "ticker": "beneficiary_basket",
+        "constituents": [
+          "FMS",
+          "ICUI"
+        ],
+        "constituent_weights": [
+          0.5,
+          0.5
+        ],
+        "gross_stock_return": -0.006187149725172401,
+        "net_hedged_lot_return": 0.010632259559773299,
+        "doubled_cost_net_hedged_lot_return": 0.008102088129412249,
+        "net_portfolio_pnl_fraction": 0.0005316129779886657,
+        "entry_date": "2024-11-11",
+        "exit_date": "2024-11-18",
+        "spy_same_window_return": -0.017719955055337522,
+        "gross_stock_excess_over_spy": 0.011532805330165121
+      }
+    ],
+    "strict_later_period_audit": {
+      "period_start": "2024-10-01",
+      "period_end": "2026-10-01",
+      "classification": "retrospective later-period event audit; blind status not certified",
+      "economic_events": 76,
+      "events_excluded_archive_gap": 72,
+      "events_after_gap_exclusion": 4,
+      "eligible_lots": 0,
+      "exclusion_counts": {
+        "first_observation_after_long_archive_gap": 72,
+        "no_capture_in_window": 3,
+        "capture_not_current_shortage": 1
+      },
+      "metrics": {
+        "annualized_return": null,
+        "annualized_volatility": null,
+        "sharpe": null,
+        "max_drawdown": null,
+        "annualized_turnover": null
+      },
+      "equity_curve": [],
+      "status": "NO_ELIGIBLE_TRADES",
+      "interpretation": "The available archive cannot test this strict trading rule in the later period. No eligible trades is not evidence of profitable performance."
+    },
+    "sources": [
+      {
+        "title": "Fresenius Medical Care statement, October 10, 2024",
+        "url": "https://freseniusmedicalcare.com/en/media/newsroom/ramping-up-supply-of-iv-fluids-and-pd-products-post-hurricane-helene-and-ensuring-safety-of-patients-and-employees-in-the-face-of-hurricane-milton/"
+      }
+    ]
+  },
+  "entry_date": "2024-11-11",
+  "exit_date": "2024-11-18",
+  "chart_start": "2024-10-10",
+  "chart_end": "2024-11-22",
+  "prices": {
+    "webull_only": {
+      "provenance": {
+        "FMS": {
+          "vendor": "webull",
+          "sha256": "11050b43f75420776c48205e133406c58a677933dab340182b937151099d85ff",
+          "retrieved_at": "2026-10-04T01:08:34.962652+00:00",
+          "fallback_reason": null,
+          "actual_start": "2023-01-03",
+          "actual_end": "2026-10-01"
+        },
+        "ICUI": {
+          "vendor": "webull",
+          "sha256": "b5f557ebe73c33ebb66e5e3d816fbe37182e4e5dc0820be6bd5eb921182f89f2",
+          "retrieved_at": "2026-10-04T01:08:35.715102+00:00",
+          "fallback_reason": null,
+          "actual_start": "2023-01-03",
+          "actual_end": "2026-10-01"
+        },
+        "SPY": {
+          "vendor": "webull",
+          "sha256": "5eb6106fb9463f02bc996600c5dbc2f5e8487aeaab395a54b146d2cdfb631c7b",
+          "retrieved_at": "2026-10-04T01:08:36.639646+00:00",
+          "fallback_reason": null,
+          "actual_start": "2023-01-03",
+          "actual_end": "2026-10-01"
+        }
+      },
+      "adjustments": {
+        "yahoo": {
+          "auto_adjust": false,
+          "actions": true,
+          "repair": false,
+          "lse_price_unit": "GBP converted from GBp",
+          "valuation": "adj_close total-return units"
+        },
+        "webull": {
+          "daily_bars": "forward-adjusted ('previous weight' per SDK)",
+          "valuation": "close used as adj_close",
+          "dividends": "inclusion measured by cross_check annualized_log_return_gap",
+          "actions": "not provided; stored as zero"
+        }
+      },
+      "points": [
+        {
+          "date": "2024-10-10",
+          "FMS": -0.07059375741376628,
+          "ICUI": -0.006955741291299722,
+          "SPY": -0.0377947766867921,
+          "basket": -0.038774749352533
+        },
+        {
+          "date": "2024-10-11",
+          "FMS": -0.08368399322604292,
+          "ICUI": 0.0025242609524878112,
+          "SPY": -0.03203286765275548,
+          "basket": -0.040579866136777554
+        },
+        {
+          "date": "2024-10-14",
+          "FMS": -0.06685366860659803,
+          "ICUI": 0.011387221630111632,
+          "SPY": -0.024116507309925428,
+          "basket": -0.027733223488243197
+        },
+        {
+          "date": "2024-10-15",
+          "FMS": -0.0649836492072845,
+          "ICUI": 0.006899646603466536,
+          "SPY": -0.0316988439158743,
+          "basket": -0.029042001301908982
+        },
+        {
+          "date": "2024-10-16",
+          "FMS": -0.0635811096535287,
+          "ICUI": 0.03118864643518271,
+          "SPY": -0.02749014722329135,
+          "basket": -0.016196231609172995
+        },
+        {
+          "date": "2024-10-17",
+          "FMS": -0.06311362980797108,
+          "ICUI": 0.01256521007460587,
+          "SPY": -0.027406640007577865,
+          "basket": -0.025274209866682606
+        },
+        {
+          "date": "2024-10-18",
+          "FMS": -0.041608256690242706,
+          "ICUI": 0.014977281651427532,
+          "SPY": -0.023665575521434445,
+          "basket": -0.013315487519407587
+        },
+        {
+          "date": "2024-10-21",
+          "FMS": -0.017765334319101544,
+          "ICUI": 0.003702249396982049,
+          "SPY": -0.02526888911673264,
+          "basket": -0.007031542461059748
+        },
+        {
+          "date": "2024-10-22",
+          "FMS": -0.023375442525583323,
+          "ICUI": 0.008414203174959223,
+          "SPY": -0.025786625994331458,
+          "basket": -0.00748061967531205
+        },
+        {
+          "date": "2024-10-23",
+          "FMS": -0.016362794765345856,
+          "ICUI": -0.003197397206484709,
+          "SPY": -0.03468835712985685,
+          "basket": -0.009780095985915283
+        },
+        {
+          "date": "2024-10-24",
+          "FMS": -0.0009350597081979606,
+          "ICUI": -0.01565041790542443,
+          "SPY": -0.03260070920151381,
+          "basket": -0.008292738806811195
+        },
+        {
+          "date": "2024-10-25",
+          "FMS": -0.021505373117728488,
+          "ICUI": -0.015201660402759942,
+          "SPY": -0.032934732938394995,
+          "basket": -0.018353516760244215
+        },
+        {
+          "date": "2024-10-28",
+          "FMS": -0.024777932070797593,
+          "ICUI": -0.025971840466707974,
+          "SPY": -0.029945221433069658,
+          "basket": -0.025374886268752783
+        },
+        {
+          "date": "2024-10-29",
+          "FMS": -0.046750835042625116,
+          "ICUI": -0.017950300106580053,
+          "SPY": -0.028375308673667887,
+          "basket": -0.032350567574602584
+        },
+        {
+          "date": "2024-10-30",
+          "FMS": -0.1065919058975272,
+          "ICUI": -0.01587479665675673,
+          "SPY": -0.03131471721649093,
+          "basket": -0.06123335127714197
+        },
+        {
+          "date": "2024-10-31",
+          "FMS": -0.08648902232501299,
+          "ICUI": -0.04229539462612897,
+          "SPY": -0.050303962130245794,
+          "basket": -0.06439220847557098
+        },
+        {
+          "date": "2024-11-01",
+          "FMS": -0.07620386562024783,
+          "ICUI": -0.041790542435631406,
+          "SPY": -0.04629567899632869,
+          "basket": -0.05899720402793962
+        },
+        {
+          "date": "2024-11-04",
+          "FMS": -0.06264609995387205,
+          "ICUI": -0.03517136927133002,
+          "SPY": -0.04834992438011787,
+          "basket": -0.048908734612601035
+        },
+        {
+          "date": "2024-11-05",
+          "FMS": -0.04955586414159541,
+          "ICUI": -0.02737420766253451,
+          "SPY": -0.03684280843865051,
+          "basket": -0.03846503590206496
+        },
+        {
+          "date": "2024-11-06",
+          "FMS": -0.014025245511933404,
+          "ICUI": 0.0041510068996464256,
+          "SPY": -0.012893313851494503,
+          "basket": -0.004937119306143489
+        },
+        {
+          "date": "2024-11-07",
+          "FMS": -0.002805079107511488,
+          "ICUI": 0.0015706512593256505,
+          "SPY": -0.005260872574386011,
+          "basket": -0.0006172139240929186
+        },
+        {
+          "date": "2024-11-08",
+          "FMS": -0.004207618661267287,
+          "ICUI": -0.008302013799293295,
+          "SPY": -0.0009519682481415881,
+          "basket": -0.006254816230280291
+        },
+        {
+          "date": "2024-11-11",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "SPY": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-11-12",
+          "FMS": -0.008415187313993155,
+          "ICUI": -0.001458461883659723,
+          "SPY": -0.003106421265592463,
+          "basket": -0.004936824598826439
+        },
+        {
+          "date": "2024-11-13",
+          "FMS": -0.015427785065689092,
+          "ICUI": -0.019408761990239554,
+          "SPY": -0.002622086932547618,
+          "basket": -0.017418273527964323
+        },
+        {
+          "date": "2024-11-14",
+          "FMS": -0.0032725589530691046,
+          "ICUI": -0.03539574802266221,
+          "SPY": -0.009035339605083514,
+          "basket": -0.019334153487865657
+        },
+        {
+          "date": "2024-11-15",
+          "FMS": 0.03693310817487627,
+          "ICUI": -0.058394570034217774,
+          "SPY": -0.021728238189254734,
+          "basket": -0.010730730929670751
+        },
+        {
+          "date": "2024-11-18",
+          "FMS": 0.034128079075906204,
+          "ICUI": -0.04650249621360869,
+          "SPY": -0.017719955055337633,
+          "basket": -0.0061872085688512435
+        },
+        {
+          "date": "2024-11-19",
+          "FMS": 0.03319306937624966,
+          "ICUI": -0.04807314747293445,
+          "SPY": -0.014129201165357652,
+          "basket": -0.007440039048342395
+        },
+        {
+          "date": "2024-11-20",
+          "FMS": 0.018700294010217,
+          "ICUI": -0.05990912660571046,
+          "SPY": -0.01379517742847658,
+          "basket": -0.02060441629774673
+        },
+        {
+          "date": "2024-11-21",
+          "FMS": 0.027582961169767772,
+          "ICUI": -0.052897290626577664,
+          "SPY": -0.008500902309536595,
+          "basket": -0.012657164728404946
+        },
+        {
+          "date": "2024-11-22",
+          "FMS": 0.03599809847521951,
+          "ICUI": -0.05502888876423406,
+          "SPY": -0.0054278852971553215,
+          "basket": -0.009515395144507277
+        }
+      ]
+    },
+    "reference_mix": {
+      "provenance": {
+        "FMS": {
+          "vendor": "yfinance",
+          "sha256": "e867c04351fa2e524183dcd7079c1733bf96650d434f23f2c240b6110c4d74f5",
+          "retrieved_at": "2026-10-04T01:11:10.137426+00:00",
+          "fallback_reason": "Webull FMS total-return adjustment differs from Yahoo explicit dividend-adjusted series (annualized log gap -0.0048); use Yahoo for consistent total-return accounting. Original Webull comparison retained in announcement_oos_webull_v1.",
+          "actual_start": "2023-01-03",
+          "actual_end": "2026-10-01"
+        },
+        "ICUI": {
+          "vendor": "webull",
+          "sha256": "b5f557ebe73c33ebb66e5e3d816fbe37182e4e5dc0820be6bd5eb921182f89f2",
+          "retrieved_at": "2026-10-04T01:08:35.715102+00:00",
+          "fallback_reason": null,
+          "actual_start": "2023-01-03",
+          "actual_end": "2026-10-01"
+        },
+        "SPY": {
+          "vendor": "webull",
+          "sha256": "5eb6106fb9463f02bc996600c5dbc2f5e8487aeaab395a54b146d2cdfb631c7b",
+          "retrieved_at": "2026-10-04T01:08:36.639646+00:00",
+          "fallback_reason": null,
+          "actual_start": "2023-01-03",
+          "actual_end": "2026-10-01"
+        }
+      },
+      "adjustments": {
+        "yahoo": {
+          "auto_adjust": false,
+          "actions": true,
+          "repair": false,
+          "lse_price_unit": "GBP converted from GBp",
+          "valuation": "adj_close total-return units"
+        },
+        "webull": {
+          "daily_bars": "forward-adjusted ('previous weight' per SDK)",
+          "valuation": "close used as adj_close",
+          "dividends": "inclusion measured by cross_check annualized_log_return_gap",
+          "actions": "not provided; stored as zero"
+        }
+      },
+      "points": [
+        {
+          "date": "2024-10-10",
+          "FMS": -0.07059374257233775,
+          "ICUI": -0.006955741291299722,
+          "SPY": -0.0377947766867921,
+          "basket": -0.038774741931818735
+        },
+        {
+          "date": "2024-10-11",
+          "FMS": -0.08368388957170769,
+          "ICUI": 0.0025242609524878112,
+          "SPY": -0.03203286765275548,
+          "basket": -0.04057981430960994
+        },
+        {
+          "date": "2024-10-14",
+          "FMS": -0.06685365967926904,
+          "ICUI": 0.011387221630111632,
+          "SPY": -0.024116507309925428,
+          "basket": -0.027733219024578704
+        },
+        {
+          "date": "2024-10-15",
+          "FMS": -0.06498357052394466,
+          "ICUI": 0.006899646603466536,
+          "SPY": -0.0316988439158743,
+          "basket": -0.02904196196023906
+        },
+        {
+          "date": "2024-10-16",
+          "FMS": -0.06358102751184636,
+          "ICUI": 0.03118864643518271,
+          "SPY": -0.02749014722329135,
+          "basket": -0.016196190538331823
+        },
+        {
+          "date": "2024-10-17",
+          "FMS": -0.06311348136862016,
+          "ICUI": 0.01256521007460587,
+          "SPY": -0.027406640007577865,
+          "basket": -0.025274135647007145
+        },
+        {
+          "date": "2024-10-18",
+          "FMS": -0.041608171714240805,
+          "ICUI": 0.014977281651427532,
+          "SPY": -0.023665575521434445,
+          "basket": -0.013315445031406636
+        },
+        {
+          "date": "2024-10-21",
+          "FMS": -0.01776532217889093,
+          "ICUI": 0.003702249396982049,
+          "SPY": -0.02526888911673264,
+          "basket": -0.00703153639095444
+        },
+        {
+          "date": "2024-10-22",
+          "FMS": -0.02337539880970385,
+          "ICUI": 0.008414203174959223,
+          "SPY": -0.025786625994331458,
+          "basket": -0.007480597817372314
+        },
+        {
+          "date": "2024-10-23",
+          "FMS": -0.01636268374921246,
+          "ICUI": -0.003197397206484709,
+          "SPY": -0.03468835712985685,
+          "basket": -0.009780040477848584
+        },
+        {
+          "date": "2024-10-24",
+          "FMS": -0.0009349014512918252,
+          "ICUI": -0.01565041790542443,
+          "SPY": -0.03260070920151381,
+          "basket": -0.008292659678358127
+        },
+        {
+          "date": "2024-10-25",
+          "FMS": -0.021505309654379356,
+          "ICUI": -0.015201660402759942,
+          "SPY": -0.032934732938394995,
+          "basket": -0.01835348502856965
+        },
+        {
+          "date": "2024-10-28",
+          "FMS": -0.02477784640422187,
+          "ICUI": -0.025971840466707974,
+          "SPY": -0.029945221433069658,
+          "basket": -0.025374843435464922
+        },
+        {
+          "date": "2024-10-29",
+          "FMS": -0.0467507976194077,
+          "ICUI": -0.017950300106580053,
+          "SPY": -0.028375308673667887,
+          "basket": -0.03235054886299388
+        },
+        {
+          "date": "2024-10-30",
+          "FMS": -0.10659174223818535,
+          "ICUI": -0.01587479665675673,
+          "SPY": -0.03131471721649093,
+          "basket": -0.06123326944747104
+        },
+        {
+          "date": "2024-10-31",
+          "FMS": -0.08648888017832401,
+          "ICUI": -0.04229539462612897,
+          "SPY": -0.050303962130245794,
+          "basket": -0.06439213740222649
+        },
+        {
+          "date": "2024-11-01",
+          "FMS": -0.07620381920315056,
+          "ICUI": -0.041790542435631406,
+          "SPY": -0.04629567899632869,
+          "basket": -0.05899718081939098
+        },
+        {
+          "date": "2024-11-04",
+          "FMS": -0.06264603064297425,
+          "ICUI": -0.03517136927133002,
+          "SPY": -0.04834992438011787,
+          "basket": -0.048908699957152135
+        },
+        {
+          "date": "2024-11-05",
+          "FMS": -0.049555883643604304,
+          "ICUI": -0.02737420766253451,
+          "SPY": -0.03684280843865051,
+          "basket": -0.03846504565306941
+        },
+        {
+          "date": "2024-11-06",
+          "FMS": -0.014025143868242052,
+          "ICUI": 0.0041510068996464256,
+          "SPY": -0.012893313851494503,
+          "basket": -0.004937068484297813
+        },
+        {
+          "date": "2024-11-07",
+          "FMS": -0.00280499060661632,
+          "ICUI": 0.0015706512593256505,
+          "SPY": -0.005260872574386011,
+          "basket": -0.0006171696736453347
+        },
+        {
+          "date": "2024-11-08",
+          "FMS": -0.004207533618714621,
+          "ICUI": -0.008302013799293295,
+          "SPY": -0.0009519682481415881,
+          "basket": -0.006254773709003958
+        },
+        {
+          "date": "2024-11-11",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "SPY": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-11-12",
+          "FMS": -0.008415067237429241,
+          "ICUI": -0.001458461883659723,
+          "SPY": -0.003106421265592463,
+          "basket": -0.004936764560544482
+        },
+        {
+          "date": "2024-11-13",
+          "FMS": -0.015427686880340352,
+          "ICUI": -0.019408761990239554,
+          "SPY": -0.002622086932547618,
+          "basket": -0.017418224435289953
+        },
+        {
+          "date": "2024-11-14",
+          "FMS": -0.0032724413322622325,
+          "ICUI": -0.03539574802266221,
+          "SPY": -0.009035339605083514,
+          "basket": -0.01933409467746222
+        },
+        {
+          "date": "2024-11-15",
+          "FMS": 0.03693318736988016,
+          "ICUI": -0.058394570034217774,
+          "SPY": -0.021728238189254734,
+          "basket": -0.010730691332168807
+        },
+        {
+          "date": "2024-11-18",
+          "FMS": 0.03412819676326384,
+          "ICUI": -0.04650249621360869,
+          "SPY": -0.017719955055337633,
+          "basket": -0.006187149725172425
+        },
+        {
+          "date": "2024-11-19",
+          "FMS": 0.033193199894391734,
+          "ICUI": -0.04807314747293445,
+          "SPY": -0.014129201165357652,
+          "basket": -0.007439973789271359
+        },
+        {
+          "date": "2024-11-20",
+          "FMS": 0.018700414465343318,
+          "ICUI": -0.05990912660571046,
+          "SPY": -0.01379517742847658,
+          "basket": -0.02060435607018357
+        },
+        {
+          "date": "2024-11-21",
+          "FMS": 0.027583027845998753,
+          "ICUI": -0.052897290626577664,
+          "SPY": -0.008500902309536595,
+          "basket": -0.012657131390289456
+        },
+        {
+          "date": "2024-11-22",
+          "FMS": 0.035998190501008054,
+          "ICUI": -0.05502888876423406,
+          "SPY": -0.0054278852971553215,
+          "basket": -0.009515349131613005
+        }
+      ]
+    }
+  },
+  "accounting": {
+    "1": {
+      "breakdown": [
+        {
+          "ticker": "FMS",
+          "stock": 0.034128196763263986,
+          "hedge": 0.009504650691706338,
+          "fees": -0.0022975913189996334,
+          "net": 0.041335256135970694,
+          "beta": 0.5363811963418826
+        },
+        {
+          "ticker": "ICUI",
+          "stock": -0.046502496213608684,
+          "hedge": 0.029194510738906974,
+          "fees": -0.0027627515417224975,
+          "net": -0.02007073701642406,
+          "beta": 1.6475499315734874
+        },
+        {
+          "ticker": "basket",
+          "stock": -0.006187149725172349,
+          "hedge": 0.019349580715306656,
+          "fees": -0.0025301714303610657,
+          "net": 0.010632259559773316,
+          "beta": 1.091965563957685
+        }
+      ],
+      "points": [
+        {
+          "date": "2024-10-10",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-11",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-14",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-15",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-16",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-17",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-18",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-21",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-22",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-23",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-24",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-25",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-28",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-29",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-30",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-31",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-11-01",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-11-04",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-11-05",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-11-06",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-11-07",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-11-08",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-11-11",
+          "FMS": -0.001107276239269413,
+          "ICUI": -0.0013295099863153883,
+          "basket": -0.0012183931127924008
+        },
+        {
+          "date": "2024-11-12",
+          "FMS": -0.007863460180321708,
+          "ICUI": 0.002307458544205874,
+          "basket": -0.002778000818057917
+        },
+        {
+          "date": "2024-11-13",
+          "FMS": -0.015143187501234934,
+          "ICUI": -0.016463290227642282,
+          "basket": -0.015803238864438608
+        },
+        {
+          "date": "2024-11-14",
+          "FMS": 0.000444682782466989,
+          "ICUI": -0.021906616849810816,
+          "basket": -0.010730967033671913
+        },
+        {
+          "date": "2024-11-15",
+          "FMS": 0.047451267297242306,
+          "ICUI": -0.024015604616326746,
+          "basket": 0.01171783134045778
+        },
+        {
+          "date": "2024-11-18",
+          "FMS": 0.04133525613596896,
+          "ICUI": -0.020070737016424537,
+          "basket": 0.010632259559772211
+        },
+        {
+          "date": "2024-11-19",
+          "FMS": 0.04133525613596896,
+          "ICUI": -0.020070737016424537,
+          "basket": 0.010632259559772211
+        },
+        {
+          "date": "2024-11-20",
+          "FMS": 0.04133525613596896,
+          "ICUI": -0.020070737016424537,
+          "basket": 0.010632259559772211
+        },
+        {
+          "date": "2024-11-21",
+          "FMS": 0.04133525613596896,
+          "ICUI": -0.020070737016424537,
+          "basket": 0.010632259559772211
+        },
+        {
+          "date": "2024-11-22",
+          "FMS": 0.04133525613596896,
+          "ICUI": -0.020070737016424537,
+          "basket": 0.010632259559772211
+        }
+      ],
+      "vendor_policy": "reference_mix",
+      "basket_weight": 0.05
+    },
+    "2": {
+      "breakdown": [
+        {
+          "ticker": "FMS",
+          "stock": 0.034128196763263986,
+          "hedge": 0.009504650691706338,
+          "fees": -0.004595182637999267,
+          "net": 0.03903766481697106,
+          "beta": 0.5363811963418826
+        },
+        {
+          "ticker": "ICUI",
+          "stock": -0.046502496213608684,
+          "hedge": 0.029194510738906974,
+          "fees": -0.005525503083444995,
+          "net": -0.02283348855814656,
+          "beta": 1.6475499315734874
+        },
+        {
+          "ticker": "basket",
+          "stock": -0.006187149725172349,
+          "hedge": 0.019349580715306656,
+          "fees": -0.005060342860722131,
+          "net": 0.00810208812941225,
+          "beta": 1.091965563957685
+        }
+      ],
+      "points": [
+        {
+          "date": "2024-10-10",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-11",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-14",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-15",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-16",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-17",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-18",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-21",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-22",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-23",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-24",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-25",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-28",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-29",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-30",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-10-31",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-11-01",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-11-04",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-11-05",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-11-06",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-11-07",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-11-08",
+          "FMS": 0.0,
+          "ICUI": 0.0,
+          "basket": 0.0
+        },
+        {
+          "date": "2024-11-11",
+          "FMS": -0.0022145524785364976,
+          "ICUI": -0.0026590199726307766,
+          "basket": -0.002436786225583637
+        },
+        {
+          "date": "2024-11-12",
+          "FMS": -0.00897807907799026,
+          "ICUI": 0.0009553948285058141,
+          "basket": -0.004011342124742223
+        },
+        {
+          "date": "2024-11-13",
+          "FMS": -0.016265126247915904,
+          "ICUI": -0.017837837611341383,
+          "basket": -0.017051481929628645
+        },
+        {
+          "date": "2024-11-14",
+          "FMS": -0.000684579369528219,
+          "ICUI": -0.0233036588250543,
+          "basket": -0.01199411909729126
+        },
+        {
+          "date": "2024-11-15",
+          "FMS": 0.0463147288302565,
+          "ICUI": -0.02543499654035084,
+          "basket": 0.010439866144952832
+        },
+        {
+          "date": "2024-11-18",
+          "FMS": 0.039037664816973267,
+          "ICUI": -0.022833488558148964,
+          "basket": 0.008102088129412151
+        },
+        {
+          "date": "2024-11-19",
+          "FMS": 0.039037664816973267,
+          "ICUI": -0.022833488558148964,
+          "basket": 0.008102088129412151
+        },
+        {
+          "date": "2024-11-20",
+          "FMS": 0.039037664816973267,
+          "ICUI": -0.022833488558148964,
+          "basket": 0.008102088129412151
+        },
+        {
+          "date": "2024-11-21",
+          "FMS": 0.039037664816973267,
+          "ICUI": -0.022833488558148964,
+          "basket": 0.008102088129412151
+        },
+        {
+          "date": "2024-11-22",
+          "FMS": 0.039037664816973267,
+          "ICUI": -0.022833488558148964,
+          "basket": 0.008102088129412151
+        }
+      ],
+      "vendor_policy": "reference_mix",
+      "basket_weight": 0.05
+    }
+  },
+  "sources": [
+    {
+      "file": "case.json",
+      "sha256": "04ca0c818cb5c2cf0c01678e6c737a55e192ec7bf2c7d169806f0a09bf7c65d0"
+    },
+    {
+      "file": "beneficiary_basket_all_timings.csv",
+      "sha256": "7c7db5ab60ac54366ddd0f98ad677db5d1996894d64714defeac12b6e7f8b6a0"
+    },
+    {
+      "file": "FMS_costs1_lots.csv",
+      "sha256": "6c23dda00919a58d7faa4da6571c6cb44b7bd784056b5b4c079c1de6f9b5981b"
+    },
+    {
+      "file": "FMS_costs1_trades.csv",
+      "sha256": "768a3221da30630c099108ab7a6413f47263eccf72d2a784e10233f98305bdc3"
+    },
+    {
+      "file": "FMS_costs1_equity.csv",
+      "sha256": "03efbdd1d62a9ffc7f7a43de42c1b29b080fa62b651a0c35b653bf9d2877818a"
+    },
+    {
+      "file": "ICUI_costs1_lots.csv",
+      "sha256": "b4653b3d14e05cb5985e393c1059eddb9fe7abb78b51054cf86ad99a54457b2b"
+    },
+    {
+      "file": "ICUI_costs1_trades.csv",
+      "sha256": "aa712da216f20669b596e8c69657aab8146ae85dae640da520eb959c6eedcab7"
+    },
+    {
+      "file": "ICUI_costs1_equity.csv",
+      "sha256": "09bf44a1ab8d19eb477c74161015a8daabd0238f85a8f9122d909ad86fea9043"
+    },
+    {
+      "file": "FMS_costs2_lots.csv",
+      "sha256": "d5b9781c38f1e3f9efba69023d470e79a156e566de995fa5bdbd4b5e25c5f98f"
+    },
+    {
+      "file": "FMS_costs2_trades.csv",
+      "sha256": "9c7dec657b14ad8a8aa2597ab0bab98fd243f5fd15c869b2ada13e9b52390d40"
+    },
+    {
+      "file": "FMS_costs2_equity.csv",
+      "sha256": "c883c9aae293daa1551e3a8f0eaceca25afc66502f7b961e2f2ea68d104a53ac"
+    },
+    {
+      "file": "ICUI_costs2_lots.csv",
+      "sha256": "d19ffb7b5f571d37779de6a5cb4179b7e549c2562baf9aab180b6278d27175a2"
+    },
+    {
+      "file": "ICUI_costs2_trades.csv",
+      "sha256": "ca6368e4e735c66823a5718a6743dd1583c0649ba3a7708c243d0b6b2797eef5"
+    },
+    {
+      "file": "ICUI_costs2_equity.csv",
+      "sha256": "c959371d501dbf2fa9619625ee28ce2e3a7c69bc4b1b07b9ae46ae79dfc69138"
+    }
+  ],
+  "previously_inspected_timings": [
+    {
+      "timing": "immediate_hold250",
+      "cost_multiplier": "1.0",
+      "ticker": "beneficiary_basket",
+      "buy_date": "2024-10-14",
+      "sell_date": "2025-10-14",
+      "beneficiary_count": "2",
+      "gross_stock_return": "0.03131611771827339",
+      "net_lot_return": "-0.14286000754485417",
+      "net_portfolio_pnl_fraction": "-0.007143000377242709"
+    },
+    {
+      "timing": "immediate_hold250",
+      "cost_multiplier": "2.0",
+      "ticker": "beneficiary_basket",
+      "buy_date": "2024-10-14",
+      "sell_date": "2025-10-14",
+      "beneficiary_count": "2",
+      "gross_stock_return": "0.03131611771827339",
+      "net_lot_return": "-0.1512004816014526",
+      "net_portfolio_pnl_fraction": "-0.00756002408007263"
+    },
+    {
+      "timing": "registered_horizon",
+      "cost_multiplier": "1.0",
+      "ticker": "beneficiary_basket",
+      "buy_date": "2024-10-14",
+      "sell_date": "2025-01-10",
+      "beneficiary_count": "2",
+      "gross_stock_return": "-0.008586659124594803",
+      "net_lot_return": "-0.0087845516986189",
+      "net_portfolio_pnl_fraction": "-0.00043922758493094443"
+    },
+    {
+      "timing": "registered_horizon",
+      "cost_multiplier": "2.0",
+      "ticker": "beneficiary_basket",
+      "buy_date": "2024-10-14",
+      "sell_date": "2025-01-10",
+      "beneficiary_count": "2",
+      "gross_stock_return": "-0.008586659124594803",
+      "net_lot_return": "-0.012603023285490449",
+      "net_portfolio_pnl_fraction": "-0.0006301511642745217"
+    },
+    {
+      "timing": "wait20_hold5",
+      "cost_multiplier": "1.0",
+      "ticker": "beneficiary_basket",
+      "buy_date": "2024-11-11",
+      "sell_date": "2024-11-18",
+      "beneficiary_count": "2",
+      "gross_stock_return": "-0.006187149725172401",
+      "net_lot_return": "0.010632259559773299",
+      "net_portfolio_pnl_fraction": "0.0005316129779886657"
+    },
+    {
+      "timing": "wait20_hold5",
+      "cost_multiplier": "2.0",
+      "ticker": "beneficiary_basket",
+      "buy_date": "2024-11-11",
+      "sell_date": "2024-11-18",
+      "beneficiary_count": "2",
+      "gross_stock_return": "-0.006187149725172401",
+      "net_lot_return": "0.008102088129412249",
+      "net_portfolio_pnl_fraction": "0.00040510440647061253"
+    }
+  ]
+}

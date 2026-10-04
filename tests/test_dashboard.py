@@ -15,6 +15,45 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class DashboardTests(unittest.TestCase):
+    def test_case_keeps_strict_audit_and_exploration_separate(self):
+        case = ResearchRepository(ROOT).case_study()
+        self.assertFalse(case["case"]["blind_oos_claim"])
+        self.assertEqual(case["case"]["frozen_strategy_action"]["action"], "NO_TRADE")
+        self.assertEqual(case["case"]["strict_later_period_audit"]["eligible_lots"], 0)
+        self.assertIsNone(case["case"]["strict_later_period_audit"]["metrics"]["sharpe"])
+        self.assertEqual(case["case"]["shock_identifier"]["portfolio_weight"], 0)
+        json.dumps(case, allow_nan=False)
+
+    def test_case_webull_prices_are_distinct_from_mixed_vendor_accounting(self):
+        case = ResearchRepository(ROOT).case_study()
+        self.assertTrue(all(r["vendor"] == "webull" for r in case["prices"]["webull_only"]["provenance"].values()))
+        self.assertEqual(case["prices"]["reference_mix"]["provenance"]["FMS"]["vendor"], "yfinance")
+        self.assertTrue(all(r["vendor_policy"] == "reference_mix" for r in case["accounting"].values()))
+        self.assertNotIn("nav", case["prices"]["webull_only"]["points"][0])
+
+    def test_case_cashflows_and_curve_reconcile_without_recreating_a_backtest(self):
+        case = ResearchRepository(ROOT).case_study()
+        for costs in ("1", "2"):
+            data = case["accounting"][costs]
+            for row in data["breakdown"]:
+                self.assertAlmostEqual(row["stock"] + row["hedge"] + row["fees"], row["net"], places=10)
+            end = next(r for r in data["points"] if r["date"] == case["exit_date"])
+            basket = next(r for r in data["breakdown"] if r["ticker"] == "basket")
+            self.assertAlmostEqual(end["basket"], basket["net"], places=10)
+            self.assertAlmostEqual(end["basket"], (end["FMS"] + end["ICUI"]) / 2, places=10)
+        self.assertGreater(case["accounting"]["1"]["breakdown"][-1]["net"],
+                           case["accounting"]["2"]["breakdown"][-1]["net"])
+
+    def test_case_export_rejects_changed_price_cache(self):
+        from dashboard.export_case import verified_prices
+        with tempfile.TemporaryDirectory() as temp:
+            base = Path(temp)
+            (base / "FMS.csv").write_text("date,adj_close\n2024-11-11,20\n")
+            (base / "manifest.json").write_text(json.dumps({"symbols": {"FMS":
+                {"file": "FMS.csv", "sha256": "incorrect", "vendor": "webull"}}}))
+            with self.assertRaisesRegex(ValueError, "hash mismatch"):
+                verified_prices(base)
+
     def test_saved_candidate_does_not_fabricate_a_basket_curve(self):
         repo = ResearchRepository(ROOT)
         candidate = repo.scenario()
