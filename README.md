@@ -63,6 +63,17 @@ exceed the frozen cost assumption, so execution-cost calibration remains open.
 
 ## Run or review
 
+For the interactive research and Tiger Data monitor:
+
+```bash
+uv sync --extra dashboard
+uv run python -m dashboard.server
+```
+
+Open [localhost:8080](http://127.0.0.1:8080). Inspect saved results, FDA evidence,
+cashflows and source hashes. [Dashboard setup](dashboard/README.md) explains
+the live database connection and ingestion; historical views work without it.
+
 From the repository root:
 
 ```bash
