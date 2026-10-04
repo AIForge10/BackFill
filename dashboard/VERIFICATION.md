@@ -27,11 +27,18 @@ holdout evaluation was triggered by this UI work.
 | Hedge accounting reconciles | Saved cashflows and daily curve endpoints equal the basket net result at both costs |
 | Portfolio denominator is clear | $100,000 NAV and 5% long allocation produce about $53 net, not $1,060 |
 | Strict later-period audit stays visible | 76 economic events, zero eligible trades, unavailable Sharpe; no blind OOS claim |
+| First chart is market movement | Short hypothesis → actual Webull daily price-index chart, right axis and crosshair |
+| Market date controls are truthful | Preset/custom ranges use recorded sessions; a weekend-only range shows no data |
+| Tiger history preserves source and state | Parameterized read-only query, one vendor, chronological order, bounded history and credential-safe errors |
 
-Automated checks: 27 existing synthetic research tests plus 16 dashboard tests
-(43 total, passed). The case update's browser checks exercised localhost:8081,
+Automated checks: 27 existing synthetic research tests plus 19 dashboard tests
+(46 total, passed). The case update's browser checks exercised localhost:8081,
 including light/dark, 768px tablet and 390px mobile. Screenshots and browser
 check results are at `/private/tmp/gator-case-ui-qa/` in this workspace.
+The market-first layout, custom ranges and Tiger history states were also checked
+in the browser; screenshots are at `/private/tmp/gator-market-ui-qa/`. The live
+price rendering check used an explicitly labeled temporary QA fixture, not real
+cloud connectivity. No fixture prices are saved or displayed in the delivered site.
 The headless browser check exercised localhost:8080 and saved screenshots under
 the gitignored `outputs/dashboard-qa/` directory. Browser images were visually
 inspected in both themes.

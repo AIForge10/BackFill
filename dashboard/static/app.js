@@ -1,5 +1,5 @@
 import { drawIntegrity } from './dial.js';
-import { initCase } from './case.js';
+import { initCase, loadMarketHistory } from './case.js';
 
 const $ = selector => document.querySelector(selector);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -169,6 +169,7 @@ async function loadLive() {
   $('#refresh-live').disabled=true;
   try{
     const data=await api('/api/live');
+    if(data.state==='connected'&&!state.liveOpened){$('#live-details').open=true;state.liveOpened=true;}
     badge('#live-badge',{not_configured:'Not connected',driver_missing:'Driver not installed',schema_missing:'Schema not ready',error:'Connection unavailable',empty:'Connected · awaiting data',connected:'Connected'}[data.state]??data.state,false,data.state==='connected');
     text('#live-checked',`Last checked: ${new Date(data.checked_at).toLocaleTimeString('en-US',{hour12:false})}`);
     text('#live-received',`Latest ingestion: ${data.latest_received_at?new Date(data.latest_received_at).toLocaleString():'No observations received'}`);
@@ -178,6 +179,7 @@ async function loadLive() {
     state.lastReceipt=data.latest_received_at;
   }catch(error){badge('#live-badge','Connection unavailable');$('#live-quotes').innerHTML=empty('Live monitor unavailable',error.message);}
   finally{$('#refresh-live').disabled=false;}
+  await loadMarketHistory();
 }
 
 function scheduleLive() {
@@ -198,6 +200,7 @@ $('#next').addEventListener('click',()=>{state.offset+=state.limit;loadEvidence(
 $('#close-dialog').addEventListener('click',()=>$('#event-dialog').close());
 $('#event-dialog').addEventListener('click',event=>{if(event.target===$('#event-dialog')){const rect=event.target.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)event.target.close();}});
 $('#refresh-live').addEventListener('click',async()=>{await loadLive();scheduleLive();});
+$('#live-instrument').addEventListener('change',loadMarketHistory);
 $('#auto-refresh').addEventListener('change',scheduleLive);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&$('#auto-refresh').checked)loadLive();scheduleLive();});
 $('#copy-command').addEventListener('click',async()=>{try{await navigator.clipboard.writeText($('#reproduce-command').textContent);showToast('Reproduction command copied');}catch{showToast('Clipboard unavailable. Select and copy the command.');}});

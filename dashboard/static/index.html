@@ -11,34 +11,32 @@
   <script type="module" src="/app.js"></script>
 </head>
 <body>
-<a class="skip-link" href="#research">Skip to research</a>
+<a class="skip-link" href="#market">Skip to market chart</a>
 <header class="nav">
   <a href="#" class="wordmark" aria-label="Backfill home"><span class="brand-mark">b</span>backfill<span class="edition">OBSERVATORY / 01</span></a>
-  <nav aria-label="Main navigation"><a href="#hypothesis">Hypothesis</a><a href="#research">Results</a><a href="#case-study">Case study</a><a href="#audit">Verify</a></nav>
+  <nav aria-label="Main navigation"><a href="#hypothesis">Hypothesis</a><a href="#market">Market chart</a><a href="#research">Results</a><a href="#audit">Verify</a></nav>
   <a class="nav-repo" href="https://github.com/AIForge10/Gator_Hacks" target="_blank" rel="noopener">View repository <span>↗</span></a>
 </header>
 <main class="framed">
-  <section id="hypothesis" class="hero section" aria-labelledby="hero-title">
-    <div class="hero-copy reveal"><p class="eyebrow"><span class="tiny-square"></span> FDA SHORTAGES · SYSTEMATIC RESEARCH</p>
-      <h1 id="hero-title">When supply breaks,<br><em>who fills the gap?</em></h1>
-      <p class="hero-description"><strong>Our hypothesis:</strong> when a drug enters shortage, listed manufacturers with confirmed available supply may capture displaced demand. Our refined test buys 20 sessions after the first eligible close, holds for five, and uses a beta-sized short-SPY hedge to reduce market exposure.</p>
-      <p class="hypothesis-status mono">REFINED AFTER IN-SAMPLE RESEARCH · CONFIRMATION STILL NEEDED</p>
-      <div class="hero-actions"><a href="#research" class="button">Explore the results <span>↘</span></a><a href="#case-study" class="text-link">See the SPY comparison <span>↗</span></a></div>
-      <div class="hero-meta mono"><span>GATOR QUANT HACKS / 2026</span><span>HISTORICAL + LIVE OBSERVATIONS</span></div>
-    </div>
-    <div class="instrument reveal">
-      <div class="instrument-label eyebrow">INSTRUMENT 01 / SOURCE INTEGRITY</div>
-      <div class="dial-wrap"><canvas id="integrity-dial" aria-label="Frozen source file integrity"></canvas><div class="dial-reading"><span id="integrity-count" class="dial-number">—</span><span class="mono">MATCHING SOURCE HASHES</span></div></div>
-      <div class="instrument-footer"><span class="badge" id="integrity-badge">Checking files</span><span class="mono" id="integrity-total">SHA-256</span></div>
-      <p class="instrument-note">File identity is verifiable. A matching hash does not prove a trading edge.</p>
+  <section id="hypothesis" class="section hypothesis-intro" aria-labelledby="hero-title">
+    <div class="hero-copy"><p class="eyebrow">BACKFILL / FDA SHORTAGE RESEARCH</p>
+      <h1 id="hero-title">Our hypothesis</h1>
+      <p class="hypothesis-summary"><strong>When a drug enters shortage, manufacturers that can still supply it may capture demand from disrupted competitors.</strong> We test buying confirmed available suppliers after a 20-session wait, holding five sessions, and shorting SPY in proportion to each stock's prior beta to reduce broad market exposure.</p>
+      <p class="hypothesis-status mono">EXPLORATORY REFINEMENT · NET OF COSTS · FULL RESULTS BELOW</p>
     </div>
   </section>
 
-  <div class="hypothesis-flow" aria-label="Refined strategy rules"><div><span>01 / OBSERVE</span><strong>FDA shortage notice</strong><p>Wait until public and supplier evidence are both available.</p></div><div><span>02 / QUALIFY</span><strong>Every presentation available</strong><p>Listed owner on that date; no allocation or empty supply record.</p></div><div><span>03 / ENTER</span><strong>Wait 20 sessions</strong><p>Buy at the close; estimate beta using 250 prior returns.</p></div><div><span>04 / MEASURE</span><strong>Hold five · hedge SPY</strong><p>Account for both legs, transaction costs and hedge carry.</p></div></div>
+  <section id="market" class="section market-section" aria-labelledby="market-title">
+    <span class="rule"></span><div class="section-index">01 · MARKET / ACTUAL WEBULL DAILY OBSERVATIONS</div>
+    <div class="section-heading"><div><p class="eyebrow">HELENE BENEFICIARY CASE / OCTOBER–NOVEMBER 2024</p><h2 id="market-title">Actual stock movement</h2></div><a href="#case-study" class="text-link">Open the trade accounting <span>↘</span></a></div>
+    <div class="controls-row"><label class="select-field"><span>INSTRUMENT</span><select id="market-instrument"><option value="all">FMS + ICUI + SPY</option><option value="ICUI">ICUI</option><option value="FMS">FMS</option><option value="SPY">SPY</option></select></label><label class="select-field"><span>VISIBLE RANGE</span><select id="market-range"><option value="context">Oct 10 → Nov 22</option><option value="trade">Nov 11 → Nov 18 trade window</option><option value="custom">Custom range</option></select></label><label class="select-field"><span>FROM</span><input id="market-from" type="date" min="2024-10-10" max="2024-11-22" value="2024-10-10"></label><label class="select-field"><span>TO</span><input id="market-to" type="date" min="2024-10-10" max="2024-11-22" value="2024-11-22"></label><fieldset id="market-style" class="segmented"><legend>CHART</legend><button data-style="line" aria-pressed="true">Line</button><button data-style="bar" aria-pressed="false">Bars</button></fieldset><span class="badge">Webull · historical cache</span></div>
+    <article class="panel market-panel"><p class="eyebrow market-axis-label">ADJUSTED PRICE INDEX / NOVEMBER 11 = 100 · NOT DOLLAR PRICES</p><div class="market-quote-strip" id="market-prices"></div><div id="market-legend" class="case-legend" aria-label="Toggle market series"></div><div id="market-chart" class="case-chart"><div class="empty-state">Loading verified Webull observations…</div></div><p id="market-readout" class="mono chart-readout" aria-live="polite"></p><div class="market-footer mono"><span id="market-record">Checking price provenance…</span><a href="/api/download/helene_case.json">Source record ↓</a></div></article>
+    <p class="footnote">Adjusted daily prices indexed to 100 at the November 11 entry close, so stocks with different dollar prices can be compared. Every point is an observed trading session; no simulated intraday ticks or smoothed prices. This is the previously inspected case, not a new blind test.</p>
+  </section>
 
   <section id="research" class="section research-section" aria-labelledby="research-title">
-    <span class="rule"></span><div class="section-index">01 · RESEARCH / SAVED IN-SAMPLE RESULTS</div>
-    <div class="section-heading reveal"><div><p class="eyebrow">FROM HYPOTHESIS TO EVIDENCE</p><h2 id="research-title">Every return has <em>a receipt.</em></h2></div><a class="text-link" href="/api/download/summary.csv">Download comparisons <span>↓</span></a></div>
+    <span class="rule"></span><div class="section-index">02 · RESEARCH / SAVED IN-SAMPLE RESULTS</div>
+    <div class="section-heading"><div><p class="eyebrow">MEASURE THE FULL STRATEGY</p><h2 id="research-title">Strategy results</h2></div><a class="text-link" href="/api/download/summary.csv">Download comparisons <span>↓</span></a></div>
     <div class="controls-row">
       <label class="select-field"><span>STRATEGY</span><select id="strategy"><option value="candidate">Strict supplier · delayed entry</option><option value="primary">Historical supplier primary</option><option value="basket">Injectable specialist basket</option></select></label>
       <label class="select-field"><span>PRICE POLICY</span><select id="vendor"><option value="reference_mix">Recorded vendor mix</option><option value="webull_only">Webull only</option></select></label>
@@ -67,8 +65,8 @@
   </section>
 
   <section id="case-study" class="section" aria-labelledby="case-title">
-    <span class="rule"></span><div class="section-index">02 · LATER PERIOD / EXPECTATION &amp; OBSERVED MOVEMENT</div>
-    <div class="section-heading reveal"><div><p class="eyebrow">BAXTER DISRUPTION → OTHER SUPPLIERS</p><h2 id="case-title">Follow the shock.<br><em>Separate the hedge.</em></h2></div><a href="/api/download/helene_case.json" class="text-link">Case evidence <span>↓</span></a></div>
+    <span class="rule"></span><div class="section-index">03 · LATER PERIOD / EXPECTATION &amp; OBSERVED MOVEMENT</div>
+    <div class="section-heading"><div><p class="eyebrow">BAXTER DISRUPTION → OTHER SUPPLIERS</p><h2 id="case-title">The trade and SPY hedge</h2></div><a href="/api/download/helene_case.json" class="text-link">Case evidence <span>↓</span></a></div>
     <div id="case-error" class="notice" hidden></div>
     <div class="case-context"><span class="badge attention">Exploratory · previously inspected</span><span class="mono">OCT 2024 — OCT 2026 / LATER-PERIOD AUDIT</span></div>
     <div class="expectation-grid"><article class="panel"><span class="eyebrow">WHAT WE EXPECTED</span><h3>Demand finds another supplier.</h3><p>Available competitors may capture displaced demand and earn positive aggregate returns after a market hedge and costs. This is a qualitative hypothesis; no numerical price forecast was recorded.</p><div class="case-timeline"><span>Oct 10 · supplier statement</span><span>Oct 11 · announcement date used</span><span>Nov 11 · illustrative entry</span><span>Nov 18 · illustrative exit</span></div><div id="case-source"></div></article><article class="panel"><span class="eyebrow">WHAT THE FROZEN RULE DID</span><h3>No qualifying trade.</h3><p id="case-eligibility">Loading the evidence audit…</p><div id="case-audit" class="audit-funnel"></div><p class="small-note">Zero eligible trades means performance is unavailable. This case illustrates the economic idea; it does not validate the strict strategy out of sample.</p></article></div>
@@ -85,7 +83,7 @@
   </section>
 
   <section id="evidence" class="section" aria-labelledby="evidence-title">
-    <span class="rule"></span><div class="section-index">03 · EVIDENCE / THE OBSERVATION LEDGER</div>
+    <span class="rule"></span><div class="section-index">04 · EVIDENCE / THE OBSERVATION LEDGER</div>
     <div class="section-heading reveal"><div><p class="eyebrow">A SOURCE BEHIND EVERY ROW</p><h2 id="evidence-title">Trace the <em>shortage.</em></h2></div><a href="/api/download/events.csv" class="text-link">Full ledger <span>↓</span></a></div>
     <div class="evidence-toolbar"><label class="search-field"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search a drug, company, or ticker" aria-label="Search evidence"></label><label class="sr-only" for="ticker-filter">Filter by ticker</label><select id="ticker-filter"><option value="">All tickers</option></select><label class="sr-only" for="role-filter">Filter by role</label><select id="role-filter"><option value="">All supplier roles</option><option value="winner">Available suppliers</option><option value="disrupted">Disrupted suppliers</option><option value="placebo">Page-absent controls</option><option value="nonwinner">Other listed suppliers</option></select></div>
     <div class="table-scroll"><table class="evidence-table"><thead><tr><th>Observed</th><th>Drug / product</th><th>Listed owner</th><th>Supplier evidence</th><th>Timing</th><th><span class="sr-only">Inspect record</span></th></tr></thead><tbody id="evidence-rows"><tr><td colspan="6">Loading the frozen ledger…</td></tr></tbody></table></div>
@@ -94,24 +92,27 @@
   </section>
 
   <section id="live" class="section" aria-labelledby="live-title">
-    <span class="rule"></span><div class="section-index">04 · LIVE / TIGER DATA</div>
+    <span class="rule"></span><div class="section-index">05 · LIVE / TIGER DATA</div>
     <div class="section-heading reveal"><div><p class="eyebrow">OBSERVE THE NEXT CHAPTER</p><h2 id="live-title">Fresh information.<br><em>Visible provenance.</em></h2></div><div class="live-heading-actions"><span class="badge" id="live-badge">Checking connection</span><button class="quiet-button" id="refresh-live">Refresh ↻</button></div></div>
+    <details id="live-details" class="details-panel"><summary>Open live quotes, supply notices &amp; market history <span>+</span></summary><div class="details-content">
     <div class="live-meta mono"><span id="live-checked">Last checked: —</span><span id="live-received">Latest ingestion: —</span><label><input type="checkbox" id="auto-refresh" checked> Refresh every 15s</label></div>
     <div class="live-layout"><article class="panel live-quotes"><div class="panel-top"><div><span class="eyebrow">MARKET OBSERVATIONS</span><h3>Supplier watchlist</h3></div><span class="mono small">SOURCE-TIMESTAMPED</span></div><div id="live-quotes" class="live-body"></div></article><article class="panel"><div class="panel-top"><div><span class="eyebrow">SUPPLY OBSERVATIONS</span><h3>Latest notices</h3></div></div><div id="live-events" class="live-body"></div></article></div>
+    <article class="panel live-history-panel"><div class="panel-top"><div><span class="eyebrow">TIGER DATA / ACTUAL STORED QUOTES</span><h3>Live market history</h3></div><label class="select-field"><span>INSTRUMENT</span><select id="live-instrument"><option value="ICUI">ICUI</option><option value="FMS">FMS</option><option value="SPY">SPY</option></select></label></div><p id="live-history-meta" class="mono chart-readout">No sourced observations received.</p><div id="live-history" class="case-chart"><div class="empty-state">Awaiting a configured market feed.</div></div><p id="live-history-readout" class="mono chart-readout"></p><p class="small-note">Latest seven days from one recorded vendor. The chart updates only when actual sourced quotes are received; the historical research stays frozen.</p></article>
     <p class="footnote">Tiger Data stores incoming observations. Quote vendors and FDA notices remain the original sources. A database connection alone does not establish a live market feed.</p>
+    </div></details>
   </section>
 
   <section id="risk" class="section" aria-labelledby="risk-title">
-    <span class="rule"></span><div class="section-index">05 · RISK / CONCENTRATION &amp; CAPACITY</div>
+    <span class="rule"></span><div class="section-index">06 · RISK / CONCENTRATION &amp; CAPACITY</div>
     <div class="section-heading reveal"><div><p class="eyebrow">UNDERSTAND THE EXPOSURE</p><h2 id="risk-title">An edge needs <em>boundaries.</em></h2></div><a id="capacity-download" href="/api/download/capacity.csv" class="text-link">Capacity observations <span>↓</span></a></div>
     <div class="risk-grid"><article class="panel"><span class="eyebrow">FIXED LIMITS</span><h3>Capital discipline</h3><div id="risk-limits" class="risk-limits"></div><p class="small-note">Reduce gross after a 10% drawdown; restore after 20 sessions. Caps constrain entry allocations; closing prices can subsequently drift.</p></article><article class="panel"><span class="eyebrow">WHO DRIVES THE RESULT?</span><h3>Company contribution</h3><div id="concentration"></div><p class="small-note" id="concentration-note"></p></article><article class="panel"><span class="eyebrow">LIQUIDITY, BEFORE THE ORDER</span><h3>Capacity estimate</h3><strong class="capacity-number" id="capacity-number">—</strong><p id="capacity-note">Minimum order-based capacity at 1% of lagged ADV.</p><div id="factor-exposures" class="factor-list"></div><p class="small-note">Participation capacity only. Spreads are estimates; market impact is not calibrated.</p></article></div>
   </section>
 
   <section id="audit" class="section" aria-labelledby="audit-title">
-    <span class="rule"></span><div class="section-index">06 · VERIFY / OPEN THE RECEIPTS</div>
+    <span class="rule"></span><div class="section-index">07 · VERIFY / OPEN THE RECEIPTS</div>
     <div class="section-heading reveal"><div><p class="eyebrow">MAKE THE RESULT REPRODUCIBLE</p><h2 id="audit-title">Inspect. Download.<br><em>Reproduce.</em></h2></div><span class="mono small">READ-ONLY RESEARCH VIEW</span></div>
     <div class="audit-grid"><article class="panel"><span class="eyebrow">PRICE PROVENANCE</span><h3>The recorded vendor mix</h3><div id="price-provenance"></div><a class="text-link" href="/api/download/manifest.json">Download price manifest <span>↓</span></a></article><article class="panel"><span class="eyebrow">REPLAY THE SAVED CANDIDATE</span><h3>Run the same accounting</h3><div class="terminal"><code id="reproduce-command">uv run python -m research.final_candidate.run</code><button id="copy-command" class="quiet-button" aria-label="Copy reproduction command">Copy</button></div><p class="small-note">Requires the exact frozen licensed price cache. A new vendor download is a different data vintage. This view never launches a backtest.</p><div class="download-links"><a id="lots-download" href="/api/download/lots.csv">Lots ↓</a><a id="trades-download" href="/api/download/trades.csv">Cashflows ↓</a><a href="/api/download/freeze.json">Frozen identity ↓</a><a href="https://github.com/AIForge10/Gator_Hacks" target="_blank" rel="noopener">Source code ↗</a></div></article></div>
-    <details class="details-panel"><summary>SHA-256 source checks <span>+</span></summary><div id="hash-records" class="details-content"></div></details>
+    <details class="details-panel"><summary>Source integrity &amp; SHA-256 checks <span>+</span></summary><div class="integrity-layout"><div class="instrument"><div class="instrument-label eyebrow">FROZEN SOURCE INTEGRITY</div><div class="dial-wrap"><canvas id="integrity-dial" aria-label="Frozen source file integrity"></canvas><div class="dial-reading"><span id="integrity-count" class="dial-number">—</span><span class="mono">MATCHING SOURCE HASHES</span></div></div><div class="instrument-footer"><span class="badge" id="integrity-badge">Checking files</span><span class="mono" id="integrity-total">SHA-256</span></div></div><div id="hash-records" class="details-content"></div></div></details>
     <details class="details-panel"><summary>Full research comparisons &amp; declared limitations <span>+</span></summary><div class="details-content"><ul id="limitations"></ul><div class="table-scroll"><table><thead><tr><th>Rule</th><th>Price policy</th><th>Costs</th><th>Sharpe</th><th>Positions</th><th>HAC p</th></tr></thead><tbody id="variant-rows"></tbody></table></div></div></details>
   </section>
   <footer><a class="wordmark" href="#">backfill<em>.</em></a><p>FDA shortage research, with the uncertainty left in.</p><span class="mono">GQH 2026 / SYSTEMATIC TRADING</span></footer>

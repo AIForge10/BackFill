@@ -6,31 +6,34 @@ const money = v => new Intl.NumberFormat('en-US', {style:'currency',currency:'US
 const names = {FMS:'FMS',ICUI:'ICUI',basket:'Beneficiary basket',SPY:'SPY'};
 const colors = {FMS:'fms',ICUI:'icui',basket:'basket',SPY:'spy'};
 let data;
+const market = {instrument:'all', range:'context', style:'line', visible:new Set(['FMS','ICUI','SPY'])};
 const state = {mode:'net',vendor:'reference_mix',range:'trade',style:'line',costs:1,
   visible:new Set(['FMS','ICUI','basket','SPY'])};
 
-function chart(container, points, keys, {style='line', readout, label, markers=true}={}) {
+function chart(container, points, keys, {style='line', readout, label, markers=true, indexed=false, usd=false}={}) {
   if (!points.length || !keys.length) {
     container.innerHTML='<div class="empty-state"><strong>No series selected</strong><p>Select a series above to inspect its real daily records.</p></div>';
     if(readout)readout.textContent='';
     return;
   }
-  const W=Math.max(320,Math.min(840,container.clientWidth||840)),H=280,L=50,R=15,T=35,B=42;
+  const W=Math.max(320,Math.min(1000,container.clientWidth||840)),H=indexed?340:280,L=usd||indexed?15:50,R=usd||indexed?62:15,T=35,B=42;
+  const fmt=v=>usd?`$${v.toFixed(2)}`:indexed?(100+v*100).toFixed(2):pct(v);
   const values=points.flatMap(p=>keys.map(k=>p[k])).filter(Number.isFinite);
-  const min=Math.min(0,...values),max=Math.max(0,...values),pad=Math.max((max-min)*.14,.004);
+  const min=usd?Math.min(...values):Math.min(0,...values),max=usd?Math.max(...values):Math.max(0,...values),pad=Math.max((max-min)*.14,.004);
   const low=min-pad,high=max+pad;
   const x=i=>L+(i+.5)/points.length*(W-L-R),y=v=>T+(high-v)/(high-low)*(H-T-B);
   let svg=`<svg viewBox="0 0 ${W} ${H}" role="img" tabindex="0" aria-label="${esc(label)}. Arrow keys inspect actual sessions."><title>${esc(label)}</title>`;
   for(let i=0;i<5;i++) {
     const v=low+(high-low)*i/4;
-    svg+=`<line class="chart-grid" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text class="chart-label" x="${L-8}" y="${y(v)+3}" text-anchor="end">${(v*100).toFixed(1)}%</text>`;
+    svg+=`<line class="chart-grid" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text class="chart-label" x="${usd||indexed?W-R+8:L-8}" y="${y(v)+3}" text-anchor="${usd||indexed?'start':'end'}">${usd||indexed?fmt(v):(v*100).toFixed(1)+'%'}</text>`;
   }
-  svg+=`<line class="chart-zero" x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}"/>`;
+  if(!usd)svg+=`<line class="chart-zero" x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}"/>`;
   const tickIndices=[...new Set([0,Math.round((points.length-1)/3),Math.round((points.length-1)*2/3),points.length-1])];
-  for(const i of tickIndices)svg+=`<text class="chart-label" x="${x(i)}" y="${H-12}" text-anchor="middle">${esc(points[i].date.slice(5))}</text>`;
+  const sameDay=points[0].date.slice(0,10)===points.at(-1).date.slice(0,10);
+  for(const i of tickIndices)svg+=`<text class="chart-label" x="${x(i)}" y="${H-12}" text-anchor="${i===0?'start':i===points.length-1?'end':'middle'}">${esc(usd?(sameDay?points[i].date.slice(11,16):points[i].date.slice(5,10)):points[i].date.slice(5))}</text>`;
   if(markers)for(const [date,name] of [[data.case.announcement_date,'ANNOUNCEMENT'],[data.entry_date,'ENTRY'],[data.exit_date,'EXIT']]) {
     const i=points.findIndex(p=>p.date===date);
-    if(i>=0)svg+=`<line class="case-marker-line" x1="${x(i)}" x2="${x(i)}" y1="${T}" y2="${H-B}"/><text class="chart-label" x="${x(i)}" y="17" text-anchor="middle">${name}</text>`;
+    if(i>=0)svg+=`<line class="case-marker-line" x1="${x(i)}" x2="${x(i)}" y1="${T}" y2="${H-B}"/><text class="chart-label" x="${x(i)}" y="${W<500&&points.length>15&&name==='EXIT'?29:17}" text-anchor="middle">${name}</text>`;
   }
   keys.forEach((key,ki)=>{
     if(style==='bar') {
@@ -41,21 +44,57 @@ function chart(container, points, keys, {style='line', readout, label, markers=t
       let segment=[];
       const flush=()=>{if(segment.length)svg+=`<polyline class="case-line ${colors[key]}" points="${segment.join(' ')}"/>`;segment=[];};
       points.forEach((p,i)=>{if(Number.isFinite(p[key]))segment.push(`${x(i)},${y(p[key])}`);else flush();});flush();
-      points.forEach((p,i)=>{if(Number.isFinite(p[key]))svg+=`<circle class="case-dot ${colors[key]}" cx="${x(i)}" cy="${y(p[key])}" r="${points.length>12?1.7:3}"/>`;});
+      points.forEach((p,i)=>{if(Number.isFinite(p[key])&&(!indexed||i===points.length-1))svg+=`<circle class="case-dot ${colors[key]}" cx="${x(i)}" cy="${y(p[key])}" r="${points.length>12?1.7:3}"/>`;});
     }
   });
-  svg+=`<line class="chart-zero case-cursor" x1="${L}" x2="${L}" y1="${T}" y2="${H-B}" visibility="hidden"/></svg>`;
+  svg+=`<line class="chart-zero case-cursor" x1="${L}" x2="${L}" y1="${T}" y2="${H-B}" visibility="hidden"/><line class="chart-zero price-cursor" x1="${L}" x2="${W-R}" y1="${T}" y2="${T}" visibility="hidden"/></svg>`;
   container.innerHTML=svg;
   const element=container.querySelector('svg'),cursor=element.querySelector('.case-cursor');
   let index=points.length-1;
   const inspect=i=>{
     index=Math.max(0,Math.min(points.length-1,i));
     cursor.setAttribute('visibility','visible');cursor.setAttribute('x1',x(index));cursor.setAttribute('x2',x(index));
-    if(readout)readout.textContent=`${points[index].date} · ${keys.map(k=>`${names[k]} ${Number.isFinite(points[index][k])?pct(points[index][k]):'Unavailable'}`).join(' · ')}`;
+    const horizontal=element.querySelector('.price-cursor');
+    if(indexed||usd){horizontal.setAttribute('visibility','visible');horizontal.setAttribute('y1',y(points[index][keys[0]]));horizontal.setAttribute('y2',y(points[index][keys[0]]));}
+    if(readout)readout.textContent=`${points[index].date} · ${keys.map(k=>`${names[k]} ${Number.isFinite(points[index][k])?fmt(points[index][k]):'Unavailable'}`).join(' · ')}${indexed?' · PRICE INDEX (NOV 11 = 100)':''}`;
   };
   element.addEventListener('pointermove',e=>{const box=element.getBoundingClientRect();inspect(Math.floor(((e.clientX-box.left)/box.width*W-L)/(W-L-R)*points.length));});
   element.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();inspect(index+(e.key==='ArrowLeft'?-1:1));}});
-  inspect(points.length-1);cursor.setAttribute('visibility','hidden');
+  inspect(points.length-1);cursor.setAttribute('visibility','hidden');element.querySelector('.price-cursor').setAttribute('visibility','hidden');
+}
+
+function renderMarket() {
+  const records=data.prices.webull_only;
+  const from=$('#market-from').value,to=$('#market-to').value;
+  const points=records.points.filter(p=>p.date>=from&&p.date<=to);
+  const keys=market.instrument==='all'?['FMS','ICUI','SPY']:[market.instrument];
+  $('#market-legend').innerHTML=keys.map(k=>`<button class="series-toggle ${colors[k]}" data-series="${k}" aria-pressed="${market.visible.has(k)}">${names[k]}</button>`).join('');
+  $('#market-legend').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{market.visible.has(b.dataset.series)?market.visible.delete(b.dataset.series):market.visible.add(b.dataset.series);renderMarket();}));
+  $('#market-style').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.style===market.style)));
+  if(!points.length) {
+    $('#market-chart').innerHTML='<div class="empty-state"><strong>No observed sessions in this range</strong><p>Choose dates within the recorded October 10–November 22 window. Missing sessions are not invented.</p></div>';
+    $('#market-prices').innerHTML='';$('#market-readout').textContent='';$('#market-record').textContent='0 OBSERVED SESSIONS IN SELECTED RANGE';return;
+  }
+  $('#market-prices').innerHTML=keys.map(k=>{const first=points[0][k],last=points.at(-1)[k],change=(1+last)/(1+first)-1;return `<div><span>${names[k]} / WEBULL</span><strong>${(100+last*100).toFixed(2)}</strong><small>${pct(change)} visible-range movement</small></div>`;}).join('');
+  chart($('#market-chart'),points,keys.filter(k=>market.visible.has(k)),{style:market.style,indexed:true,readout:$('#market-readout'),label:'Actual Webull daily adjusted price index for FMS, ICUI and SPY'});
+  const retrieved=records.provenance.ICUI.retrieved_at.slice(0,10);
+  $('#market-record').textContent=`${points.length} ACTUAL SESSIONS · ${points[0].date} → ${points.at(-1).date} · RETRIEVED ${retrieved} · FROZEN CACHE`;
+}
+
+export async function loadMarketHistory() {
+  const ticker=$('#live-instrument').value;
+  const request=loadMarketHistory.request=(loadMarketHistory.request??0)+1;
+  try {
+    const response=await fetch(`/api/live/history?ticker=${encodeURIComponent(ticker)}`,{cache:'no-store'});
+    if(!response.ok)throw new Error('Stored history is unavailable.');
+    const history=await response.json();
+    if(request!==loadMarketHistory.request)return;
+    if(!history.points?.length){$('#live-history').innerHTML=`<div class="empty-state"><strong>Live history unavailable</strong><p>${esc(history.message)}</p></div>`;$('#live-history-readout').textContent='No generated or historical substitute quotes.';$('#live-history-meta').textContent='No sourced observations received.';return;}
+    const points=history.points.map(p=>({date:p.time,[ticker]:Number(p.price)}));
+    chart($('#live-history'),points,[ticker],{markers:false,usd:true,readout:$('#live-history-readout'),label:`Actual stored ${ticker} quotes from ${history.source}`});
+    $('#live-history-meta').textContent=`${history.source} · LAST OBSERVATION ${history.latest_observation_at??points.at(-1).date} · ${history.stale?'STALE':'FRESH'}${history.truncated?' · MOST RECENT 2,000 RECORDS':''}`;
+    $('#live-history-readout').textContent+=` · ${history.source} · ${history.stale?'STALE OBSERVATION':'FRESH OBSERVATION'}${history.truncated?' · MOST RECENT 2,000 RECORDS':''}`;
+  }catch(error){if(request!==loadMarketHistory.request)return;$('#live-history').innerHTML=`<div class="empty-state">${esc(error.message)}</div>`;$('#live-history-readout').textContent='No simulated market data.';}
 }
 
 function renderMoney() {
@@ -116,6 +155,17 @@ export async function initCase() {
     const response=await fetch('/api/case',{cache:'no-store'});
     if(!response.ok)throw new Error('Saved case data unavailable.');
     data=await response.json();
+    $('#market-instrument').addEventListener('change',e=>{market.instrument=e.target.value;market.visible.add(e.target.value);renderMarket();});
+    $('#market-range').addEventListener('change',e=>{
+      market.range=e.target.value;
+      if(market.range!=='custom'){
+        $('#market-from').value=market.range==='trade'?data.entry_date:data.chart_start;
+        $('#market-to').value=market.range==='trade'?data.exit_date:data.chart_end;
+      }
+      renderMarket();
+    });
+    for(const id of ['market-from','market-to'])$('#'+id).addEventListener('change',()=>{market.range='custom';$('#market-range').value='custom';renderMarket();});
+    $('#market-style').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{market.style=b.dataset.style;renderMarket();}));
     const timingNames={immediate_hold250:'Immediate / 250 sessions',registered_horizon:'Immediate / 60 sessions',wait20_hold5:'Delay 20 / hold 5 sessions'};
     $('#case-other-timings').innerHTML=(data.previously_inspected_timings??[]).map(r=>`<tr><td>${esc(timingNames[r.timing]??r.timing)}</td><td>${esc(r.buy_date)} → ${esc(r.sell_date)}</td><td>×${Number(r.cost_multiplier)}</td><td>${pct(Number(r.gross_stock_return))}</td><td>${pct(Number(r.net_lot_return))}</td></tr>`).join('');
     $('#case-eligibility').textContent=data.case.frozen_strategy_action.reason;
@@ -138,12 +188,15 @@ export async function initCase() {
     let resizeTimer;
     window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{
       renderCase();
+      renderMarket();
       if(!$('#case-outcome').hidden)chart($('#outcome-chart'),data.accounting['1'].points.filter(p=>p.date>=data.entry_date&&p.date<=data.exit_date),['FMS','ICUI','basket'],{readout:$('#outcome-readout'),label:'Previously evaluated beneficiary net hedged movement'});
     },120);});
     renderCase();
+    renderMarket();
   } catch(error) {
     $('#case-error').hidden=false;$('#case-error').textContent=error.message;
     $('#reveal-case').disabled=true;
     $('#case-chart').innerHTML='<div class="empty-state">The saved case could not be loaded. No substitute curve is displayed.</div>';
+    $('#market-chart').innerHTML='<div class="empty-state">Verified Webull chart data is unavailable. No substitute prices are displayed.</div>';
   }
 }

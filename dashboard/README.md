@@ -25,9 +25,12 @@ reverse proxy before exposing database observations on a public deployment.
 
 ## What judges can inspect
 
-- Hypothesis first: the refined supplier mechanism, exact 20-session delay /
-  five-session hold, strict availability rule and beta-sized short-SPY hedge.
-  The page explicitly labels the refinement as formed after in-sample research.
+- A short hypothesis explanation first, followed directly by an actual Webull
+  daily-market chart. Select FMS/ICUI/SPY, line/bars, a preset or custom date range,
+  series visibility and keyboard/hover inspection. Prices are indexed to 100 at
+  November 11 (not dollar quotes), with right-side axes, a crosshair and actual
+  announcement/entry/exit markers. No synthetic intraday ticks are inserted.
+  The refined supplier rule and post-inspection status remain explicit.
 - Three explicitly labeled strategies: the historical supplier primary,
   the exploratory strict-supplier delayed-entry candidate, and the reported
   exploratory specialist basket. The basket snapshot was exported from
@@ -88,6 +91,10 @@ The dashboard reads those observations and shows their source timestamps,
 ingestion timestamps and freshness. Market quotes older than five minutes are
 labeled stale; daily or closed-market quotes may therefore be correctly stale.
 Automatic polling runs every 15 seconds and pauses in a hidden browser tab.
+The live-history chart reads the last seven days of actual stored quotes for
+FMS, ICUI or SPY, capped at the most recent 2,000 observations. It selects one
+recorded vendor per chart and keeps freshness/source labels visible. It never
+modifies the frozen historical chart or substitutes historical data as live.
 
 1. Provision the service and use its connection details. Set
    `TIGER_DATABASE_URL` in the root `.env` or process environment; do not paste
