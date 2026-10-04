@@ -1,0 +1,9 @@
+lot_id,event_id,ticker,information_date,end_date,descriptive_pre_information_car,beta_estimation
+131:AMPH:placebo,131,AMPH,2016-03-06,2016-03-04,-0.017496500462446836,250 returns before evidence date; descriptive only
+131:ICUI:placebo,131,ICUI,2016-03-06,2016-03-04,0.006468985254176999,250 returns before evidence date; descriptive only
+131:TEVA:placebo,131,TEVA,2016-03-06,2016-03-04,-0.09853203793394776,250 returns before evidence date; descriptive only
+338:AMPH:placebo,338,AMPH,2021-04-11,2021-04-09,-0.093725326979394,250 returns before evidence date; descriptive only
+338:ICUI:placebo,338,ICUI,2021-04-11,2021-04-09,-0.025866805718998402,250 returns before evidence date; descriptive only
+408:AMPH:placebo,408,AMPH,2022-12-28,2022-12-27,-0.013955382187337306,250 returns before evidence date; descriptive only
+408:BAX:placebo,408,BAX,2022-12-28,2022-12-27,-0.054064297166978595,250 returns before evidence date; descriptive only
+408:RDY:placebo,408,RDY,2022-12-28,2022-12-27,-0.0460909323919684,250 returns before evidence date; descriptive only

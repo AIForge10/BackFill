@@ -1,0 +1,9 @@
+{
+  "baseline_reproduced": true,
+  "all_completed_lot_cashflows_reconciled": true,
+  "frozen_inputs_unchanged": true,
+  "protected_files_unchanged": true,
+  "completed_portfolio_evaluations": 24,
+  "stock_price_fetches": 0,
+  "holdout_evaluations": 0
+}

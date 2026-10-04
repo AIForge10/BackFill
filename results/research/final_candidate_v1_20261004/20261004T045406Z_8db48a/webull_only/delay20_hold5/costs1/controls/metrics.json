@@ -1,0 +1,85 @@
+{
+  "annualized_return": 1.2917940589884935e-05,
+  "annualized_volatility": 0.00031802788173469944,
+  "sharpe": 0.04083249354246568,
+  "max_drawdown": -0.0005548394950343205,
+  "annualized_turnover": 0.026722815489314173,
+  "turnover_definition": "both-leg absolute buys+sells / average NAV / elapsed years",
+  "skew": 10.239564742934483,
+  "active_days": 15,
+  "sessions": 2601,
+  "events": 3,
+  "positions": 9,
+  "transaction_cost": 181.37032328401503,
+  "hedge_carry_cost": 5.697012509187597,
+  "risk_free_assumption": "zero cash return; Sharpe above zero; explicit hedge carry separate",
+  "accounting_currency": "USD; US-only listings, no FX conversion",
+  "inference": {
+    "mean_daily": 5.153123582244503e-08,
+    "hac_t": 0.25247522889171153,
+    "p_value": 0.8006937156970763,
+    "ci_daily": [
+      -3.4869181170675284e-07,
+      4.517542833516429e-07
+    ],
+    "hac_lags": 60
+  },
+  "worst_month": -0.0001757156610682209,
+  "returns_by_year": {
+    "2014": 0.0,
+    "2015": 0.0,
+    "2016": -9.076668728003057e-05,
+    "2017": 0.0,
+    "2018": 0.0,
+    "2019": 0.0,
+    "2020": 0.0,
+    "2021": 0.000430846129395146,
+    "2022": 0.0,
+    "2023": -0.00020645017195686233,
+    "2024": 0.0
+  },
+  "factor_regression": {
+    "months": 124,
+    "first_month": "2014-06",
+    "last_month": "2024-09",
+    "coefficients": {
+      "const": -0.0012508140067871265,
+      "Mkt-RF": 9.778976539823875e-05,
+      "HML": 0.003275617043088632,
+      "Mom": 0.0006048367822148962
+    },
+    "t_stats": {
+      "const": -4.7799804458598985,
+      "Mkt-RF": 0.0337370307036941,
+      "HML": 0.8425008466576528,
+      "Mom": 0.14658912126953844
+    },
+    "note": "provided USD factor proxy; regional/currency suitability must be disclosed"
+  },
+  "classification": "post-result exploratory, not blind OOS",
+  "mean_pre_information_car": 0.019540103022691824,
+  "lot_cluster_interval": {
+    "information_date_clusters": 3,
+    "resamples": 5000,
+    "percentile_95_ci_mean_lot": [
+      -0.0061935051586994175,
+      0.02154230646976089
+    ],
+    "note": "Descriptive selected-sample interval; few clusters and timing searches prevent confirmatory interpretation."
+  },
+  "company_omission_mean_lot_returns": {
+    "AMPH": -0.010913540523537442,
+    "AMRX": 0.002985590717782142,
+    "BAX": 0.0020347658807716223,
+    "ICUI": 0.005307046596904647,
+    "VTRS": 0.002484773672450169
+  },
+  "risk_exposures": {
+    "max_name_marked_fraction": 0.01066996365410543,
+    "max_long_market_sector_fraction": 0.034408249063571705,
+    "max_gross_fraction": 0.05838028101225816,
+    "max_absolute_net_fraction": 0.01058368180921934,
+    "reduced_risk_days": 0,
+    "note": "Closing marked exposures; caps constrain new entries against preceding NAV, so prices can subsequently drift."
+  }
+}
