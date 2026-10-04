@@ -1,4 +1,5 @@
 import { drawIntegrity } from './dial.js';
+import { initCase } from './case.js';
 
 const $ = selector => document.querySelector(selector);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -206,4 +207,4 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
   document.querySelectorAll('.reveal').forEach((element,index)=>{element.style.transitionDelay=`${Math.min(index%2,1)*110}ms`;observer.observe(element);});
 }
 try{renderOverview(await api('/api/overview'));}catch(error){badge('#integrity-badge','Research unavailable',true);text('#integrity-total','No integrity claim');showToast(error.message);}
-await Promise.allSettled([loadResearch(),loadEvidence(),loadLive()]);scheduleLive();
+await Promise.allSettled([loadResearch(),loadEvidence(),loadLive(),initCase()]);scheduleLive();

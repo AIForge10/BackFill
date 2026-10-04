@@ -25,6 +25,9 @@ reverse proxy before exposing database observations on a public deployment.
 
 ## What judges can inspect
 
+- Hypothesis first: the refined supplier mechanism, exact 20-session delay /
+  five-session hold, strict availability rule and beta-sized short-SPY hedge.
+  The page explicitly labels the refinement as formed after in-sample research.
 - Three explicitly labeled strategies: the historical supplier primary,
   the exploratory strict-supplier delayed-entry candidate, and the reported
   exploratory specialist basket. The basket snapshot was exported from
@@ -40,6 +43,36 @@ reverse proxy before exposing database observations on a public deployment.
   frozen-source hash checks and CSV/JSON downloads.
 - The inspected 2024–2026 period is labeled as previously inspected. This
   dashboard makes no newly blind holdout claim.
+- A separate Helene beneficiary case: expectation / saved-outcome reveal,
+  actual session line/bar charts, source and date-range selectors, series
+  toggles, keyboard/hover inspection, doubled costs, reconciled hedge waterfall
+  and an illustrative capital slider. BAX has zero investment weight. All
+  three previously inspected horizons are disclosed, including negative ones.
+
+The November 11–18 case shows +1.06% saved net hedged return, distinct from
+the −0.62% stock-only return and +1.15 percentage-point advantage over SPY.
+These are returns on invested stock capital, not whole-account returns.
+FMS's **saved accounting uses a Yahoo dividend-adjustment fallback**; ICUI and
+SPY use Webull. The Webull-only price chart contains actual verified Webull
+daily bars for all three instruments. It never substitutes mixed-vendor net
+accounting into a Webull-only net view.
+
+The strict later-period audit has 76 events and zero eligible trades; its
+performance is unavailable. The case does not meet the frozen FDA availability
+rule and is labeled an exploratory hypothetical illustration, not a successful
+blind holdout. Revealing saved outcomes does not evaluate anything again.
+
+`dashboard/data/helene_case.json` packages indexed price changes and saved
+accounting, with source hashes. To refresh it from existing files only:
+
+```bash
+python -m dashboard.export_case --case-dir /path/to/saved_case --webull-cache /path/to/original_webull_cache --accounting-cache /path/to/recorded_accounting_cache
+```
+
+This verifies source price hashes and cashflow/curve reconciliation; it does
+not fetch prices, launch an engine, change rules or consume a holdout attempt.
+The capital slider scales the saved result linearly; it is not a new capacity
+or market-impact estimate.
 
 The default overview uses saved candidate outputs at
 `results/research/final_candidate_v1_20261004/latest.json`. The original primary
@@ -103,6 +136,9 @@ Reference: [Tiger Data Python/PostgreSQL integration](https://www.tigerdata.com/
 | `static/app.css` | Responsive page and instrument geometry |
 | `static/app.js` | API-driven UI, filtering, source drawer and live polling |
 | `static/dial.js` | Actual source-hash coverage; draws only when needed |
+| `static/case.js` | Saved case charts, source policies, hedge decomposition and capital illustration |
+| `export_case.py` | Verify existing files and package derived case observations without a backtest |
+| `data/helene_case.json` | Derived session curves, saved cashflows and case provenance |
 | `data/reported_basket.json` | Reported teammate metrics with provenance, not a new rerun |
 
 Change colors/fonts in `tokens.css`; add sections in `index.html`; keep derived

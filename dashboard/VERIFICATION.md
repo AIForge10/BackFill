@@ -18,8 +18,20 @@ holdout evaluation was triggered by this UI work.
 | Errors preserve credentials | Simulated driver exception containing a secret does not expose it in JSON |
 | Rezt rendering works | Desktop light/dark, tablet 768px and mobile 390px, reduced motion |
 | Browser runs cleanly | No console errors; no external fonts or asset requests; no page overflow |
+| Hypothesis appears first | Hero precedes research; refined strategy and trading rules are explicit |
+| Saved outcome reveal | Shows the actual case daily curve; no new evaluation request |
+| Case return measures stay separate | +1.06% net hedged, −0.62% stock-only, +1.15 pp versus SPY |
+| Case stress and chart controls work | Doubled costs show +0.81%; line/bar, series visibility, range and keyboard inspection pass |
+| Webull-only is actual Webull data | All three price-series source hashes verified against the Webull manifest |
+| Vendor mismatch stays visible | FMS Yahoo fallback disclosed; unsupported Webull-only net view is unavailable |
+| Hedge accounting reconciles | Saved cashflows and daily curve endpoints equal the basket net result at both costs |
+| Portfolio denominator is clear | $100,000 NAV and 5% long allocation produce about $53 net, not $1,060 |
+| Strict later-period audit stays visible | 76 economic events, zero eligible trades, unavailable Sharpe; no blind OOS claim |
 
-Automated checks: 27 existing synthetic research tests plus 12 dashboard tests.
+Automated checks: 27 existing synthetic research tests plus 16 dashboard tests
+(43 total, passed). The case update's browser checks exercised localhost:8081,
+including light/dark, 768px tablet and 390px mobile. Screenshots and browser
+check results are at `/private/tmp/gator-case-ui-qa/` in this workspace.
 The headless browser check exercised localhost:8080 and saved screenshots under
 the gitignored `outputs/dashboard-qa/` directory. Browser images were visually
 inspected in both themes.
